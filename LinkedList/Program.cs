@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedList
 {
@@ -16,11 +12,12 @@ namespace LinkedList
             value = itemValue;
         }
 
-        public int getValue()
+        public int GetValue()
         {
             return value;
         }
     }
+
 
     class LinkedList
     {
@@ -41,37 +38,65 @@ namespace LinkedList
                 tail.next = item;
             tail = item;
         }
+
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+        }
+
         public void RemoveNode(int val)
         {
             Node node = head;
+            Node previousNode = head;
             while (node != null)
             {
-                if (node.getValue() == val)
+                if (node.GetValue() == val)
                 {
-                    node = node.next;
+                    previousNode.next = node.next;
                     return;
                 }
+                previousNode = node;
+                node = node.next;
             }
         }
 
         public void RemoveAll(int val)
         {
+            Node previousNode = null;
             Node node = head;
             while (node != null)
             {
-                if (node.getValue() == val)
+                if (node.GetValue() == val)
                 {
-                    node = node.next;
-
+                    previousNode.next = node.next;
                 }
+                previousNode = node;
+                node = node.next;
             }
         }
+
+        public String PrintList()
+        {
+            Node node = head;
+            String res = "";
+            while (node != null)
+            {
+                res += node.GetValue() + " ";
+                node = node.next;
+            }
+
+            return res;
+        }
+
     }
+
 
     class Program
     {
         static void Main(string[] args)
         {
+
             Node n1 = new Node(12);
             Node n2 = new Node(55);
             n1.next = n2;
@@ -82,11 +107,12 @@ namespace LinkedList
             sList.AddInTail(new Node(196));
             sList.AddInTail(new Node(205));
             sList.AddInTail(new Node(55));
-            sList.RemoveNode(196);
-            sList.RemoveAll(55);
-            Console.WriteLine(19071988);
-            Console.WriteLine(sList.ToString());
-            return;
+            Console.WriteLine(sList.PrintList());
+            //sList.RemoveAll(55);
+            sList.RemoveNode(12);
+            Console.WriteLine(sList.PrintList());
+            Console.Write("Press any key to continue...");
+            Console.ReadKey(true);
         }
     }
 }
