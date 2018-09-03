@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace LinkedList
-{
+{   
+    
     class Node
     {
         private int value;
@@ -18,11 +19,16 @@ namespace LinkedList
         }
     }
 
-
     class LinkedList
     {
         private Node head;
         private Node tail;
+        
+        // Написать функцию суммирования элементов списков, если равны их длины
+        static LinkedList ReduceLinkedLists()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public LinkedList()
         {
@@ -43,6 +49,32 @@ namespace LinkedList
         {
             head = null;
             tail = null;
+        }
+
+        public LinkedList findAll(int value)
+        {
+            Node node = head;
+            LinkedList resList = new LinkedList();
+
+            while (node != null)
+            {
+                if (node.GetValue() == value)
+                    resList.AddInTail(node);
+                node = node.next;
+            }
+            return resList;
+        }
+
+        // Реализовать метод возвращения длины списка
+        public int GetLength()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        // Реализовать метод вставки узла по сле заданного узла
+        public void addNode(int value)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void RemoveNode(int val)
@@ -91,7 +123,6 @@ namespace LinkedList
 
     }
 
-
     class Program
     {
         static void Main(string[] args)
@@ -111,6 +142,7 @@ namespace LinkedList
             //sList.RemoveAll(55);
             sList.RemoveNode(12);
             Console.WriteLine(sList.PrintList());
+
             Console.Write("Press any key to continue...");
             Console.ReadKey(true);
         }
