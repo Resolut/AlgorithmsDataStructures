@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace LinkedList
-{   
-    
+{
+
     class Node
     {
         private int value;
@@ -23,11 +23,25 @@ namespace LinkedList
     {
         private Node head;
         private Node tail;
-        
+
         // Написать функцию суммирования элементов списков, если равны их длины
-        static LinkedList ReduceLinkedLists()
+        static LinkedList ReduceLinkedLists(LinkedList oneList, LinkedList anotherList)
         {
-            throw new System.NotImplementedException();
+            LinkedList resList = new LinkedList();
+            if (oneList.GetLength() == anotherList.GetLength())
+            {
+                Node nodeOneList = oneList.head;
+                Node nodeAnotherList = anotherList.head;
+
+                while (nodeOneList != null)
+                {
+                    resList.AddInTail(new Node(nodeOneList.GetValue() + nodeAnotherList.GetValue()));
+                    nodeOneList = nodeOneList.next;
+                }
+                return resList;
+            }
+            else
+                return null;
         }
 
         public LinkedList()
@@ -68,10 +82,17 @@ namespace LinkedList
         // Реализовать метод возвращения длины списка
         public int GetLength()
         {
-            throw new System.NotImplementedException();
+            int count = 0;
+            Node node = head;
+            while (node != null)
+            {
+                node = node.next;
+                count++;
+            }
+            return count;
         }
 
-        // Реализовать метод вставки узла по сле заданного узла
+        // Реализовать метод вставки узла после заданного узла
         public void addNode(int value)
         {
             throw new System.NotImplementedException();
@@ -139,6 +160,7 @@ namespace LinkedList
             sList.AddInTail(new Node(205));
             sList.AddInTail(new Node(55));
             Console.WriteLine(sList.PrintList());
+            Console.WriteLine(sList.GetLength());
             //sList.RemoveAll(55);
             sList.RemoveNode(12);
             Console.WriteLine(sList.PrintList());
