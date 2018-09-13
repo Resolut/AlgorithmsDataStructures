@@ -3,7 +3,7 @@
 namespace LinkedList
 {
 
-    class Node
+    public class Node
     {
         private int value;
         public Node next;
@@ -19,7 +19,7 @@ namespace LinkedList
         }
     }
 
-    class LinkedList
+    public class LinkedList
     {
         private Node head;
         private Node tail;
@@ -64,7 +64,7 @@ namespace LinkedList
             tail = null;
         }
 
-        public LinkedList findAll(int value)
+        public LinkedList FindAll(int value)
         {
             Node node = head;
             LinkedList resList = new LinkedList();
