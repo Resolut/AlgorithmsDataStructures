@@ -24,7 +24,6 @@ namespace LinkedList
         private Node head;
         private Node tail;
 
-        // Написать функцию суммирования элементов списков, если равны их длины
         static LinkedList ReduceLinkedLists(LinkedList oneList, LinkedList anotherList)
         {
             LinkedList resList = new LinkedList();
@@ -79,7 +78,6 @@ namespace LinkedList
             return resList;
         }
 
-        // Реализовать метод возвращения длины списка
         public int GetLength()
         {
             int count = 0;
@@ -92,10 +90,32 @@ namespace LinkedList
             return count;
         }
 
-        // Реализовать метод вставки узла после заданного узла
-        public void addNode(int value)
+        public void AddNode(Node item, int target)
         {
-            throw new System.NotImplementedException();
+            Node node = head;
+            if (head != null)
+            {
+                if (node != tail)
+                {
+                    while (node != null)
+                    {
+                        if (node.GetValue() == target)
+                        {
+                            item.next = node.next;
+                            node.next = item;
+                            return;
+                        }
+                        node = node.next;
+                    }
+                }
+                else
+                {
+                    tail.next = item;
+                    tail = item;
+                }
+            }
+            else
+                head = item;
         }
 
         public void RemoveNode(int val)
@@ -158,15 +178,15 @@ namespace LinkedList
             sList.AddInTail(n2);
             sList.AddInTail(new Node(196));
             sList.AddInTail(new Node(205));
-            sList.AddInTail(new Node(55));
+            sList.AddInTail(new Node(54));
             Console.WriteLine(sList.PrintList());
-            Console.WriteLine(sList.GetLength());
+            Console.WriteLine("Длина списка : " + sList.GetLength());
             //sList.RemoveAll(55);
-            sList.RemoveNode(12);
+            //sList.RemoveNode(12);
+            sList.AddNode(new Node(2319), 12);
             Console.WriteLine(sList.PrintList());
-
-            Console.Write("Press any key to continue...");
-            Console.ReadKey(true);
+            sList.AddNode(new Node(2320), 50);
+            Console.WriteLine(sList.PrintList());
         }
     }
 }
