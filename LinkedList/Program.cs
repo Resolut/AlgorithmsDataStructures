@@ -5,7 +5,7 @@ namespace LinkedList
 
     public class Node
     {
-        private int value;
+        private readonly int value;
         public Node next;
 
         public Node(int itemValue)
@@ -24,7 +24,7 @@ namespace LinkedList
         private Node head;
         private Node tail;
 
-        static LinkedList ReduceLinkedLists(LinkedList oneList, LinkedList anotherList)
+        public static LinkedList ReduceLinkedLists(LinkedList oneList, LinkedList anotherList)
         {
             LinkedList resList = new LinkedList();
             if (oneList.GetLength() == anotherList.GetLength())
@@ -36,11 +36,11 @@ namespace LinkedList
                 {
                     resList.AddInTail(new Node(nodeOneList.GetValue() + nodeAnotherList.GetValue()));
                     nodeOneList = nodeOneList.next;
+                    nodeAnotherList = nodeAnotherList.next;
                 }
-                return resList;
+                
             }
-            else
-                return null;
+            return resList;
         }
 
         public LinkedList()
@@ -114,8 +114,6 @@ namespace LinkedList
                     tail = item;
                 }
             }
-            else
-                head = item;
         }
 
         public void RemoveNode(int val)
@@ -126,10 +124,14 @@ namespace LinkedList
             {
                 if (node.GetValue() == val)
                 {
-                    previousNode.next = node.next;
+                    if (node == head)
+                        head = node.next;
+                    else
+                        previousNode.next = node.next;
                     return;
-                }
-                previousNode = node;
+                } else
+                    previousNode = node;
+
                 node = node.next;
             }
         }
@@ -142,9 +144,13 @@ namespace LinkedList
             {
                 if (node.GetValue() == val)
                 {
-                    previousNode.next = node.next;
-                }
-                previousNode = node;
+                    if (node == head)
+                        head = node.next;
+                    else
+                        previousNode.next = node.next;
+                } else
+                    previousNode = node;
+
                 node = node.next;
             }
         }
@@ -158,7 +164,7 @@ namespace LinkedList
                 res += node.GetValue() + " ";
                 node = node.next;
             }
-
+            if (res.Length == 0) return "[]";
             return res;
         }
 
@@ -168,25 +174,7 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
-
-            Node n1 = new Node(12);
-            Node n2 = new Node(55);
-            n1.next = n2;
-
-            LinkedList sList = new LinkedList();
-            sList.AddInTail(n1);
-            sList.AddInTail(n2);
-            sList.AddInTail(new Node(196));
-            sList.AddInTail(new Node(205));
-            sList.AddInTail(new Node(54));
-            Console.WriteLine(sList.PrintList());
-            Console.WriteLine("Длина списка : " + sList.GetLength());
-            //sList.RemoveAll(55);
-            //sList.RemoveNode(12);
-            sList.AddNode(new Node(2319), 12);
-            Console.WriteLine(sList.PrintList());
-            sList.AddNode(new Node(2320), 50);
-            Console.WriteLine(sList.PrintList());
+            Console.ReadKey(true);
         }
     }
 }
