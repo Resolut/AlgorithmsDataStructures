@@ -11,6 +11,7 @@ namespace LinkedList
         public Node(int itemValue)
         {
             value = itemValue;
+            next = null;
         }
 
         public int GetValue()
@@ -174,6 +175,22 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
+
+
+            LinkedList testList = new LinkedList();
+            testList.AddInTail(new Node(1));
+            testList.AddInTail(new Node(2));
+            testList.AddInTail(new Node(3));
+            testList.AddInTail(new Node(4));
+            testList.AddInTail(new Node(5));
+            testList.AddInTail(new Node(4));
+            int expected = 6;
+            testList.AddNode(new Node(4), 2);
+            Console.WriteLine(testList.PrintList());
+            int actual = testList.GetLength();
+
+            //Console.WriteLine(expected == actual);
+            Console.WriteLine(testList.FindAll(4).PrintList());
             Console.ReadKey(true);
         }
     }
