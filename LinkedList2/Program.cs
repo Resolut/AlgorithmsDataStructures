@@ -72,7 +72,30 @@ namespace LinkedList2
 
         public void AddNode(Node item, int target)
         {
-            throw new NotImplementedException();
+            Node node = head;
+            if (head != null)
+            {
+                if (node != tail)
+                {
+                    while (node != null)
+                    {
+                        if (node.GetValue() == target)
+                        {
+                            item.next = node.next;
+                            item.prev = node;
+                            node.next = item;
+                            return;
+                        }
+                        node = node.next;
+                    }
+                }
+                else
+                {
+                    tail.next = item;
+                    item.prev = tail;
+                    tail = item;
+                }
+            }
         }
 
         public void AddInHead(Node item)
