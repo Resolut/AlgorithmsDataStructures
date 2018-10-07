@@ -189,7 +189,7 @@ namespace LinkedList
             Console.WriteLine(testList.PrintList());
             int actual = testList.GetLength();
 
-            //Console.WriteLine(expected == actual);
+            Console.WriteLine(expected == actual);
             Console.WriteLine(testList.FindAll(4).PrintList());
             Console.ReadKey(true);
         }

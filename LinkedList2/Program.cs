@@ -59,7 +59,7 @@ namespace LinkedList2
             {
                 head = item;
                 item.prev = null;
-                //item.next = null;
+                item.next = null;
             }
             else
             {
