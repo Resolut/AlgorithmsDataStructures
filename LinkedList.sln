@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList2", "LinkedList2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList2Tests", "LinkedList2Tests\LinkedList2Tests.csproj", "{C62CF6FA-ADBA-4C5E-880A-0A1193F42000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynArray", "DynArray\DynArray.csproj", "{6F1C829D-4024-4A83-AFDF-60682D36A075}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C62CF6FA-ADBA-4C5E-880A-0A1193F42000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C62CF6FA-ADBA-4C5E-880A-0A1193F42000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C62CF6FA-ADBA-4C5E-880A-0A1193F42000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F1C829D-4024-4A83-AFDF-60682D36A075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1C829D-4024-4A83-AFDF-60682D36A075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1C829D-4024-4A83-AFDF-60682D36A075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1C829D-4024-4A83-AFDF-60682D36A075}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
