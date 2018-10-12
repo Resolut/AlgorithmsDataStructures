@@ -137,10 +137,10 @@ namespace LinkedList2
             while (node != null)
             {
                 if (node.GetValue() == value)
-                    resList.AddInTail(node);
+                    resList.AddInTail(new Node(node.GetValue()));
                 node = node.next;
             }
-            
+
             return resList;
         }
 
