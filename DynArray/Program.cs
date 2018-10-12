@@ -42,6 +42,7 @@ namespace DynArray
 
         public void MakeArray(int newCapacity)
         {
+            SetCapacity(newCapacity);
             object[] resArr = new object[newCapacity];
 
             for (int i = 0; i < array.Length; i++)
@@ -101,7 +102,28 @@ namespace DynArray
             ChangeCount('+');
         }
 
-        public void Delete(int index) { }
+        public void Delete(int index)
+        {
+            object[] tempArray = new object[array.Length - 1];
+
+            for (int i = 0; i < tempArray.Length; i++)
+            {
+                if (i < index)
+                    tempArray[i] = array[i];
+                else if (i >= index)
+                    tempArray[i + 1] = array[i];
+            }
+            array = tempArray;
+
+            if (array.Length <= GetCapacity() / 2 && GetCapacity() >=16)
+            {
+                SetCapacity((int)Math.Round(GetCapacity() / 1.5));
+                if (GetCapacity() < 16)
+                    SetCapacity(16);
+            }
+
+            ChangeCount('-');
+        }
 
     }
 
