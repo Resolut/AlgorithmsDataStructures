@@ -4,7 +4,7 @@
 namespace DynArray
 {
 
-    class DynArray
+    public class DynArray
     {
         private int count = 0;
         private int capacity;
@@ -34,7 +34,7 @@ namespace DynArray
         }
 
 
-        DynArray()
+        public DynArray()
         {
             capacity = 16;
             array = new object[capacity];
@@ -67,7 +67,7 @@ namespace DynArray
         public void AppEnd(object item)
         {
             MakeArray(array.Length + 1);
-            if (array.Length >= GetCapacity())
+            if (array.Length > GetCapacity())
             {
                 SetCapacity(GetCapacity() * 2);
             }
@@ -79,7 +79,7 @@ namespace DynArray
         public void Insert(int index, object item)
         {
             object[] tempArray = new object[array.Length + 1];
-            
+
             for (int i = 0; i < array.Length; i++)
             {
                 if (i < index)
@@ -115,7 +115,7 @@ namespace DynArray
             }
             array = tempArray;
 
-            if (array.Length <= GetCapacity() / 2 && GetCapacity() >=16)
+            if (array.Length <= GetCapacity() / 2 && GetCapacity() >= 16)
             {
                 SetCapacity((int)Math.Round(GetCapacity() / 1.5));
                 if (GetCapacity() < 16)
@@ -131,6 +131,14 @@ namespace DynArray
     {
         static void Main(string[] args)
         {
+            DynArray testDynArr = new DynArray();
+            int item = 1;
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            Console.WriteLine("Размерность буфера дин.массива:\t {0}",  testDynArr.GetCapacity());
+            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
+            Console.ReadKey();
         }
     }
 }
