@@ -123,14 +123,11 @@ namespace DynArray
 
         public void Print()
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == null)
-                    Console.Write("null ");
-
-                else
-                    Console.Write("{0} ", array[i]);
+            for (int i = 0; i < GetCount(); i++)
+            { 
+                Console.Write("{0} ", array[i]);
             }
+            Console.WriteLine();
         }
 
     }
