@@ -91,9 +91,9 @@ namespace DynArray
             }
             array = tempArray;
 
-            if (array.Length >= GetCapacity())
+            if (GetCount() == GetCapacity())
             {
-                SetCapacity(GetCapacity() * 2);
+                MakeArray(GetCapacity() * 2);
             }
 
             ChangeCount('+');
@@ -148,12 +148,14 @@ namespace DynArray
             Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
             Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
             testDynArr.AppEnd(item++);
+            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
+            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
             Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
             Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
             Console.WriteLine("Первый элемент: {0}", testDynArr.GetItem(0));
-            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(31));
+            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(testDynArr.GetCount()-1));
             Console.ReadKey();
         }
     }
