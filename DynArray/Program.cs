@@ -75,7 +75,12 @@ namespace DynArray
 
         public void Insert(int index, object item)
         {
-            object[] tempArray = new object[array.Length + 1];
+            if (GetCount() == GetCapacity())
+            {
+                MakeArray(GetCapacity() * 2);
+            }
+
+            object[] tempArray = new object[GetCapacity()];
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -90,12 +95,6 @@ namespace DynArray
                     tempArray[i + 1] = array[i];
             }
             array = tempArray;
-
-            if (GetCount() == GetCapacity())
-            {
-                MakeArray(GetCapacity() * 2);
-            }
-
             ChangeCount('+');
         }
 
