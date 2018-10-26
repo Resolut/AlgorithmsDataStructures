@@ -33,7 +33,6 @@ namespace DynArray
                 count--;
         }
 
-
         public DynArray()
         {
             capacity = 16;
@@ -66,13 +65,11 @@ namespace DynArray
 
         public void AppEnd(object item)
         {
-            MakeArray(array.Length + 1);
-            if (array.Length > GetCapacity())
+            if (GetCount() == GetCapacity())
             {
-                SetCapacity(GetCapacity() * 2);
+                MakeArray(GetCapacity() * 2);
             }
-
-            array[array.Length - 1] = item;
+            array[GetCount()] = item;
             ChangeCount('+');
         }
 
@@ -136,8 +133,27 @@ namespace DynArray
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
-            Console.WriteLine("Размерность буфера дин.массива:\t {0}",  testDynArr.GetCapacity());
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
             Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            testDynArr.AppEnd(item++);
+            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
+            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
+            Console.WriteLine("Первый элемент: {0}", testDynArr.GetItem(0));
+            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(31));
             Console.ReadKey();
         }
     }
