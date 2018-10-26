@@ -122,6 +122,18 @@ namespace DynArray
             ChangeCount('-');
         }
 
+        public void Print()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == null)
+                    Console.Write("null ");
+
+                else
+                    Console.Write("{0} ", array[i]);
+            }
+        }
+
     }
 
     class Program
@@ -155,7 +167,8 @@ namespace DynArray
             Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
             Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
             Console.WriteLine("Первый элемент: {0}", testDynArr.GetItem(0));
-            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(testDynArr.GetCount()-1));
+            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(testDynArr.GetCount() - 1));
+            testDynArr.Print();
             Console.ReadKey();
         }
     }
