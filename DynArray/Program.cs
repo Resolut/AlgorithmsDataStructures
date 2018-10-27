@@ -8,7 +8,7 @@ namespace DynArray
     {
         private int count = 0;
         private int capacity;
-        object[] array;
+        private object[] array;
 
         public int GetCapacity()
         {
@@ -53,14 +53,10 @@ namespace DynArray
 
         public object GetItem(int i)
         {
-            try
-            {
+            if (i < GetCount())
                 return array[i];
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                return new IndexOutOfRangeException("Недопустимый индекс массива!", e);
-            }
+            else
+                return new IndexOutOfRangeException("Введён Недопустимый индекс массива!");
         }
 
         public void AppEnd(object item)
@@ -75,14 +71,16 @@ namespace DynArray
 
         public void Insert(int index, object item)
         {
+            if (index < 0 || index >= GetCount())
+                throw new IndexOutOfRangeException("Введён недопустимый индекс массива!");
             if (GetCount() == GetCapacity())
             {
                 MakeArray(GetCapacity() * 2);
             }
 
             object[] tempArray = new object[GetCapacity()];
-
-            for (int i = 0; i < array.Length; i++)
+            Console.WriteLine(tempArray.Length);
+            for (int i = 0; i < GetCount(); i++)
             {
                 if (i < index)
                     tempArray[i] = array[i];
@@ -100,6 +98,13 @@ namespace DynArray
 
         public void Delete(int index)
         {
+            if (GetCount() <= GetCapacity() / 2 && GetCapacity() >= 16)
+            {
+                SetCapacity((int)Math.Round(GetCapacity() / 1.5));
+                if (GetCapacity() < 16)
+                    SetCapacity(16);
+            }
+
             object[] tempArray = new object[array.Length - 1];
 
             for (int i = 0; i < tempArray.Length; i++)
@@ -111,12 +116,7 @@ namespace DynArray
             }
             array = tempArray;
 
-            if (array.Length <= GetCapacity() / 2 && GetCapacity() >= 16)
-            {
-                SetCapacity((int)Math.Round(GetCapacity() / 1.5));
-                if (GetCapacity() < 16)
-                    SetCapacity(16);
-            }
+
 
             ChangeCount('-');
         }
@@ -124,7 +124,7 @@ namespace DynArray
         public void Print()
         {
             for (int i = 0; i < GetCount(); i++)
-            { 
+            {
                 Console.Write("{0} ", array[i]);
             }
             Console.WriteLine();
@@ -136,35 +136,15 @@ namespace DynArray
     {
         static void Main(string[] args)
         {
+
             DynArray testDynArr = new DynArray();
             int item = 1;
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
             testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
-            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
-            testDynArr.AppEnd(item++);
-            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
-            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            Console.WriteLine("Размерность буфера дин.массива:\t {0}", testDynArr.GetCapacity());
-            Console.WriteLine("Количество элементов дин.массива: {0}", testDynArr.GetCount());
-            Console.WriteLine("Первый элемент: {0}", testDynArr.GetItem(0));
-            Console.WriteLine("Последний элемент: {0}", testDynArr.GetItem(testDynArr.GetCount() - 1));
-            testDynArr.Print();
+
+            testDynArr.Insert(4, 315);
             Console.ReadKey();
         }
     }
