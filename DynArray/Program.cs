@@ -136,16 +136,6 @@ namespace DynArray
     {
         static void Main(string[] args)
         {
-
-            DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-
-            testDynArr.Insert(4, 315);
-            Console.ReadKey();
         }
     }
 }
