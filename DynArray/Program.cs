@@ -79,7 +79,7 @@ namespace DynArray
             }
 
             object[] tempArray = new object[GetCapacity()];
-            Console.WriteLine(tempArray.Length);
+
             for (int i = 0; i < GetCount(); i++)
             {
                 if (i < index)
@@ -105,19 +105,18 @@ namespace DynArray
                     SetCapacity(16);
             }
 
-            object[] tempArray = new object[array.Length - 1];
+            object[] tempArray = new object[GetCapacity()];
 
-            for (int i = 0; i < tempArray.Length; i++)
+            for (int i = 0; i < GetCount(); i++)
             {
                 if (i < index)
                     tempArray[i] = array[i];
-                else if (i >= index)
-                    tempArray[i + 1] = array[i];
+                else if (i == index)
+                    tempArray[i] = array[i + 1];
+                else
+                    tempArray[i] = array[i - 1];
             }
             array = tempArray;
-
-
-
             ChangeCount('-');
         }
 
@@ -136,6 +135,52 @@ namespace DynArray
     {
         static void Main(string[] args)
         {
+            DynArray testDyn = new DynArray();
+            int item = 1;
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.AppEnd(item++);
+            testDyn.Print();
+            Console.WriteLine("Емкость {0}", testDyn.GetCapacity());
+            testDyn.Delete(15);
+            testDyn.Print();
+            Console.WriteLine("Емкость после удаления одного элемента {0}", testDyn.GetCapacity());
+            testDyn.Print();
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления второго элемента {0}", testDyn.GetCapacity());
+            testDyn.Print();
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 3 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 4 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 5 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 6 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 7 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 8 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 9 элемента {0}", testDyn.GetCapacity());
+            testDyn.Delete(16);
+            Console.WriteLine("Емкость после удаления 10 элемента {0}", testDyn.GetCapacity());
+            testDyn.Print();
+            Console.ReadKey();
+
         }
     }
 }
