@@ -98,6 +98,8 @@ namespace DynArray
 
         public void Delete(int index)
         {
+            if (index < 0 || index >= GetCount())
+                throw new IndexOutOfRangeException("Введён недопустимый индекс массива!");
             if (GetCount() <= GetCapacity() / 2 && GetCapacity() >= 16)
             {
                 SetCapacity((int)Math.Round(GetCapacity() / 1.5));
@@ -158,26 +160,25 @@ namespace DynArray
             Console.WriteLine("Емкость {0}", testDyn.GetCapacity());
             testDyn.Delete(15);
             testDyn.Print();
-            Console.WriteLine("Емкость после удаления одного элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления одного элемента: {0}", testDyn.GetCapacity());
+            testDyn.Delete(15);
             testDyn.Print();
+            Console.WriteLine("Емкость после удаления второго элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления второго элемента {0}", testDyn.GetCapacity());
-            testDyn.Print();
+            Console.WriteLine("Емкость после удаления 3 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 3 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 4 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 4 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 5 элемента: {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 6 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 5 элемента {0}", testDyn.GetCapacity());
-            Console.WriteLine("Емкость после удаления 6 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 7 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 7 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 8 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 8 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 9 элемента: {0}", testDyn.GetCapacity());
             testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 9 элемента {0}", testDyn.GetCapacity());
-            testDyn.Delete(16);
-            Console.WriteLine("Емкость после удаления 10 элемента {0}", testDyn.GetCapacity());
+            Console.WriteLine("Емкость после удаления 10 элемента: {0}", testDyn.GetCapacity());
             testDyn.Print();
             Console.ReadKey();
 
