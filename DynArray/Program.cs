@@ -152,7 +152,7 @@ namespace DynArray
                 Console.WriteLine($"После удаления\nЕмкость буфера: {testDynArr.GetCapacity()}");
                 Console.WriteLine($"Количество элементов: {testDynArr.GetCount()}");
                 testDynArr.Print();
-                Console.WriteLine("==============================================="); 
+                Console.WriteLine("===============================================");
             }
             Console.WriteLine(testDynArr.GetItem(4).ToString());
 

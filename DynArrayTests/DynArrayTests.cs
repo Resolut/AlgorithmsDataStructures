@@ -15,12 +15,15 @@ namespace DynArray.Tests
         public void AppEndTest_if_Buffer_Is_not_Resized()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+            
+            for (int item = 1; item < 4; item++)
+            {
+                testDynArr.AppEnd(item);
+            }
+
             int expected = 3;
             int actual = testDynArr.GetCount();
+
             Assert.AreEqual(expected, actual);
             Assert.IsTrue(testDynArr.GetCapacity() == 16);
         }
@@ -29,29 +32,15 @@ namespace DynArray.Tests
         public void AppEndTest_if_Buffer_Changed()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+            
+            for (int item = 1; item < 19; item++)
+            {
+                testDynArr.AppEnd(item); 
+            }
 
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
             int expected = 18;
             int actual = testDynArr.GetCount();
+
             Assert.AreEqual(expected, actual);
             Assert.IsTrue(testDynArr.GetCapacity() == 32);
         }
@@ -68,10 +57,11 @@ namespace DynArray.Tests
         public void InsertTest_if_Buffer_Has_not_Changed()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+
+            for (int item = 1; item < 4; item++)
+            {
+                testDynArr.AppEnd(item);
+            }
             testDynArr.Insert(1, 19);
 
             int expectedCount = 4;
@@ -88,27 +78,12 @@ namespace DynArray.Tests
         public void InsertTest_if_Buffer_Changed()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+           
+            for (int item = 1; item < 17; item++)
+            {
+                testDynArr.AppEnd(item);
+            }
 
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            Console.WriteLine("Емкость буфера: {0}", testDynArr.GetCapacity());
             testDynArr.Insert(3, 315);
 
             int expectedCount = 17;
@@ -126,11 +101,11 @@ namespace DynArray.Tests
         public void InsertTest_If_Index_is_Out_of_Range()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+
+            for (int item = 1; item < 5; item++)
+            {
+                testDynArr.AppEnd(item);
+            }
 
             testDynArr.Insert(4, 315);
         }
@@ -147,11 +122,11 @@ namespace DynArray.Tests
         public void DeleteTest_Buffer_Did_not_Change()
         {
             DynArray testDynArr = new DynArray();
-            int item = 1;
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
-            testDynArr.AppEnd(item++);
+
+            for (int item = 1; item < 5; item++)
+            {
+                testDynArr.AppEnd(item);
+            }
 
             testDynArr.Delete(1);
 
