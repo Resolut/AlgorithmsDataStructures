@@ -4,6 +4,11 @@ namespace Challenges
 {
     class Program
     {
+        /// <summary>
+        /// Метод создает числовой массив случайной длины в диапазлне  [1 - 127], 
+        /// заполненный случайными неповторяющимися числами в диапазоне [0 -255]  
+        /// </summary>
+        /// <returns>непустой массив типа int</returns>
         static int[] GenerateArray()
         {
             DateTime time = DateTime.Now;
@@ -13,8 +18,9 @@ namespace Challenges
             const int MaxValue = 256;                          // Максимальное значение для элемента массива 
             int[] resArr = new int[rand.Next(MaxSizeArray)];   // Генерируем массив случайной длины в диапазоне [0 - MaxSizeArray), MaxSizeArray в диапазон не входит
 
+            // Формируем непустой массив нечётной длины
             while (resArr.GetLength(0) % 2 == 0)
-                resArr = new int[rand.Next(MaxSizeArray)]; 
+                resArr = new int[rand.Next(MaxSizeArray)];     
 
             // Заполняем массив случайными значениями в диапазоне [0 - MaxValue), MaxValue в диапазон не входит
             for (int i = 0; i < resArr.GetLength(0); i++)
@@ -31,7 +37,11 @@ namespace Challenges
             }
             return resArr;
         }
-
+        /// <summary>
+        /// Метод принимает несортированный числовой массив в качестве аргумента и возвращает сортированнывй числовой массив
+        /// </summary>
+        /// <param name="inArray">Массив типа int, длиной от 1 до 127 элементов</param>
+        /// <returns>Непустой массив типа int, 1-я половина отсортирована по возрастанию, 2-я по убыванию</returns>
         static int[] ConvertToStartPulse(int[] inArray)
         {
             // Копируем массив
