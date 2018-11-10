@@ -5,8 +5,8 @@ namespace Challenges
     class Program
     {
         /// <summary>
-        /// Метод создает числовой массив случайной длины в диапазлне  [1 - 127], 
-        /// заполненный случайными неповторяющимися числами в диапазоне [0 -255]  
+        /// Метод создает числовой массив случайной длины в диапазлне  [1 : 127], 
+        /// заполненный случайными неповторяющимися числами в диапазоне [0 : 255]  
         /// </summary>
         /// <returns>непустой массив типа int</returns>
         static int[] GenerateArray()
@@ -16,11 +16,13 @@ namespace Challenges
             Random rand = new Random(seed);
             const int MaxSizeArray = 128;                      // Максимальное количество элементов массива 
             const int MaxValue = 256;                          // Максимальное значение для элемента массива 
-            int[] resArr = new int[rand.Next(MaxSizeArray)];   // Генерируем массив случайной длины в диапазоне [0 - MaxSizeArray), MaxSizeArray в диапазон не входит
+
+            // Генерируем массив случайной длины в диапазоне [0 : MaxSizeArray), MaxSizeArray в диапазон не входит
+            int[] resArr = new int[rand.Next(MaxSizeArray)];
 
             // Формируем непустой массив нечётной длины
             while (resArr.GetLength(0) % 2 == 0)
-                resArr = new int[rand.Next(MaxSizeArray)];     
+                resArr = new int[rand.Next(MaxSizeArray)];
 
             // Заполняем массив случайными значениями в диапазоне [0 - MaxValue), MaxValue в диапазон не входит
             for (int i = 0; i < resArr.GetLength(0); i++)
@@ -139,8 +141,8 @@ namespace Challenges
                     isFault = true;
                     Console.WriteLine("Ошибка 004! Минимум и максимум расставлены некорректно!");
                 }
-
             }
+
             Console.WriteLine($"Общее количество тестов: {countArrays}");
 
             if (isFault)
