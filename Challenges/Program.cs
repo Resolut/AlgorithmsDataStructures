@@ -33,7 +33,7 @@ namespace Challenges
             for (int i = 0; i < resArr.GetLength(0); i++)
             {
                 //resArr[i] = rand.Next(MaxValue);
-                resArr[i] = 16;
+                resArr[i] = 15; // для теста вставлять число 0 - 19 попытка отследить есть ли стабильное равенство генерации первого и последнего значений
                 for (int j = 0; j < i; j++)
                 {
                     //while (resArr[i] == resArr[j])
