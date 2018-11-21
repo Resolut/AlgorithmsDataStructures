@@ -1,18 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace LinkedList
+namespace AlgorithmsDataStructures
 {
 
     public class Node
     {
-        private readonly int value;
+        public int value;
         public Node next;
-
-        public Node(int itemValue)
-        {
-            value = itemValue;
-            next = null;
-        }
+        public Node(int _value) { value = _value; }
 
         public int GetValue()
         {
@@ -22,27 +18,8 @@ namespace LinkedList
 
     public class LinkedList
     {
-        private Node head;
-        private Node tail;
-
-        public static LinkedList ReduceLinkedLists(LinkedList oneList, LinkedList anotherList)
-        {
-            LinkedList resList = new LinkedList();
-            if (oneList.GetLength() == anotherList.GetLength())
-            {
-                Node nodeOneList = oneList.head;
-                Node nodeAnotherList = anotherList.head;
-
-                while (nodeOneList != null)
-                {
-                    resList.AddInTail(new Node(nodeOneList.GetValue() + nodeAnotherList.GetValue()));
-                    nodeOneList = nodeOneList.next;
-                    nodeAnotherList = nodeAnotherList.next;
-                }
-                
-            }
-            return resList;
-        }
+        public Node head;
+        public Node tail;
 
         public LinkedList()
         {
@@ -50,13 +27,77 @@ namespace LinkedList
             tail = null;
         }
 
-        public void AddInTail(Node item)
+        public void AddInTail(Node _item)
         {
-            if (head == null)
-                head = item;
-            else
-                tail.next = item;
-            tail = item;
+            if (head == null) head = _item;
+            else tail.next = _item;
+            tail = _item;
+        }
+
+        public Node Find(int _value)
+        {
+            Node node = head;
+            while (node != null)
+            {
+                if (node.value == _value) return node;
+                node = node.next;
+            }
+            return null;
+        }
+
+        public List<Node> FindAll(int _value)
+        {
+            List<Node> nodes = new List<Node>();
+            Node node = head;
+            while (node != null)
+            {
+                if (node.GetValue() == _value)
+                    nodes.Add(node);
+                node = node.next;
+            }
+            return nodes;
+        }
+
+        public bool Remove(int _value)
+        {
+            Node node = head;
+            Node previousNode = head;
+            while (node != null)
+            {
+                if (node.GetValue() == _value)
+                {
+                    if (node == head)
+                        head = node.next;
+                    else
+                        previousNode.next = node.next;
+                    return true;
+                }
+                else
+                    previousNode = node;
+
+                node = node.next;
+            }
+            return false;
+        }
+
+        public void RemoveAll(int _value)
+        {
+            Node previousNode = null;
+            Node node = head;
+            while (node != null)
+            {
+                if (node.GetValue() == _value)
+                {
+                    if (node == head)
+                        head = node.next;
+                    else
+                        previousNode.next = node.next;
+                }
+                else
+                    previousNode = node;
+
+                node = node.next;
+            }
         }
 
         public void Clear()
@@ -65,21 +106,7 @@ namespace LinkedList
             tail = null;
         }
 
-        public LinkedList FindAll(int value)
-        {
-            Node node = head;
-            LinkedList resList = new LinkedList();
-
-            while (node != null)
-            {
-                if (node.GetValue() == value)
-                    resList.AddInTail(node);
-                node = node.next;
-            }
-            return resList;
-        }
-
-        public int GetLength()
+        public int Count()
         {
             int count = 0;
             Node node = head;
@@ -91,69 +118,40 @@ namespace LinkedList
             return count;
         }
 
-        public void AddNode(Node item, int target)
+        public bool InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
             Node node = head;
+
             if (head != null)
             {
                 if (node != tail)
                 {
                     while (node != null)
                     {
-                        if (node.GetValue() == target)
+                        if (node.GetValue() == _nodeAfter.GetValue())
                         {
-                            item.next = node.next;
-                            node.next = item;
-                            return;
+                            _nodeToInsert.next = node.next;
+                            node.next = _nodeToInsert;
+                            return true;
                         }
                         node = node.next;
                     }
                 }
-                else
+                else if (node.GetValue() == _nodeAfter.GetValue())
                 {
-                    tail.next = item;
-                    tail = item;
+                    tail.next = _nodeToInsert;
+                    tail = _nodeToInsert;
+                    return true;
                 }
-            }
-        }
 
-        public void RemoveNode(int val)
-        {
-            Node node = head;
-            Node previousNode = head;
-            while (node != null)
+            }
+            else if (_nodeAfter == null)
             {
-                if (node.GetValue() == val)
-                {
-                    if (node == head)
-                        head = node.next;
-                    else
-                        previousNode.next = node.next;
-                    return;
-                } else
-                    previousNode = node;
-
-                node = node.next;
+                head = _nodeToInsert;
+                return true;
             }
-        }
 
-        public void RemoveAll(int val)
-        {
-            Node previousNode = null;
-            Node node = head;
-            while (node != null)
-            {
-                if (node.GetValue() == val)
-                {
-                    if (node == head)
-                        head = node.next;
-                    else
-                        previousNode.next = node.next;
-                } else
-                    previousNode = node;
-
-                node = node.next;
-            }
+            return false;
         }
 
         public String PrintList()
@@ -175,8 +173,6 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
-
-
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(1));
             testList.AddInTail(new Node(2));
@@ -184,13 +180,27 @@ namespace LinkedList
             testList.AddInTail(new Node(4));
             testList.AddInTail(new Node(5));
             testList.AddInTail(new Node(4));
-            int expected = 6;
-            testList.AddNode(new Node(4), 2);
-            Console.WriteLine(testList.PrintList());
-            int actual = testList.GetLength();
 
-            Console.WriteLine(expected == actual);
-            Console.WriteLine(testList.FindAll(4).PrintList());
+            Console.WriteLine("Список до вставки:\t" + testList.PrintList());
+            bool isAdded = testList.InsertAfter(new Node(4), new Node(6));
+            Console.WriteLine("Список после вставки:\t" + testList.PrintList());
+            Console.WriteLine($"Метод insertAfter() вернул {isAdded}");
+
+            int expected = 7;
+            int actual = testList.Count();
+            Console.WriteLine("Число элементов списка совпадает после вставки? - " + (expected == actual));
+
+            Console.Write("Проверка поиска всех элементов по значению.\nМетод FindAll(4) вернул массив: ");
+            testList.FindAll(4).ForEach(el => Console.Write(el.GetValue() + " "));
+
+            Console.WriteLine("\nПроверка удаления одного элемента");
+            testList.Remove(5);
+            Console.WriteLine("Список после выполнения метода Remove(5):" + testList.PrintList());
+
+            Console.WriteLine("Проверка удаления нескольких элементов");
+            testList.RemoveAll(4);
+            Console.WriteLine("Список после выполнения метода RemoveAll(4):" + testList.PrintList());
+
             Console.ReadKey(true);
         }
     }

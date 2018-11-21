@@ -1,14 +1,14 @@
-﻿using LinkedList;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
-namespace LinkedList.Tests
+namespace AlgorithmsDataStructures.Tests
 {
     [TestClass()]
     public class LinkedListTests
     {
 
         [TestMethod()]
-        public void RemoveNode_nor_Head_nor_Tail()
+        public void Remove_nor_Head_nor_Tail()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(1));
@@ -18,8 +18,8 @@ namespace LinkedList.Tests
 
             int expectedLength = 3;
 
-            testList.RemoveNode(2);
-            int actual = testList.GetLength();
+            testList.Remove(2);
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -35,8 +35,8 @@ namespace LinkedList.Tests
 
             int expectedLength = 3;
 
-            testList.RemoveNode(1);
-            int actual = testList.GetLength();
+            testList.Remove(1);
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -52,8 +52,8 @@ namespace LinkedList.Tests
 
             int expectedLength = 3;
 
-            testList.RemoveNode(3);
-            int actual = testList.GetLength();
+            testList.Remove(3);
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -63,20 +63,20 @@ namespace LinkedList.Tests
         {
             LinkedList testList = new LinkedList();
             int expectedLength = 0;
-            testList.RemoveNode(3);
-            int actual = testList.GetLength();
+            testList.Remove(3);
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
 
         [TestMethod()]
-        public void RemoveNode_from_List_with_One_Node()
+        public void Remove_from_List_with_One_Node()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(3));
             int expectedLength = 0;
-            testList.RemoveNode(3);
-            int actual = testList.GetLength();
+            testList.Remove(3);
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -87,7 +87,7 @@ namespace LinkedList.Tests
             LinkedList testList = new LinkedList();
             int expectedLength = 1;
             testList.AddInTail(new Node(4));
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -99,7 +99,7 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(1));
             int expectedLength = 2;
             testList.AddInTail(new Node(2));
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expectedLength, actual);
         }
@@ -120,7 +120,7 @@ namespace LinkedList.Tests
 
             int expected = 6;
             testList.RemoveAll(2);
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
@@ -141,7 +141,7 @@ namespace LinkedList.Tests
 
             int expected = 7;
             testList.RemoveAll(3);
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
@@ -162,7 +162,7 @@ namespace LinkedList.Tests
 
             int expected = 8;
             testList.RemoveAll(2);
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
@@ -184,7 +184,7 @@ namespace LinkedList.Tests
 
             int expected = 8;
             testList.RemoveAll(0);
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
@@ -209,7 +209,7 @@ namespace LinkedList.Tests
 
             int expected = 9;
             testList.RemoveAll(321);
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
@@ -224,7 +224,7 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(321));
             testList.RemoveAll(321);
 
-            Assert.IsTrue(testList.GetLength() == 0);
+            Assert.IsTrue(testList.Count() == 0);
         }
 
         [TestMethod()]
@@ -237,7 +237,7 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(3));
             testList.Clear();
 
-            Assert.IsTrue(testList.GetLength() == 0);
+            Assert.IsTrue(testList.Count() == 0);
         }
 
         [TestMethod()]
@@ -247,7 +247,7 @@ namespace LinkedList.Tests
 
             testList.Clear();
 
-            Assert.IsTrue(testList.GetLength() == 0);
+            Assert.IsTrue(testList.Count() == 0);
         }
 
         [TestMethod()]
@@ -255,9 +255,9 @@ namespace LinkedList.Tests
         {
             LinkedList testList = new LinkedList();
 
-            LinkedList results = testList.FindAll(3);
+            List<Node> results = testList.FindAll(3);
 
-            Assert.IsTrue(results.GetLength() == 0);
+            Assert.IsTrue(results.Count == 0);
         }
 
         [TestMethod()]
@@ -273,9 +273,9 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(3));
             testList.AddInTail(new Node(3));
             testList.AddInTail(new Node(3));
-            LinkedList results = testList.FindAll(3);
+            List<Node> results = testList.FindAll(3);
             int expected = 4;
-            int actual = results.GetLength();
+            int actual = results.Count;
             Assert.AreEqual(expected, actual);
         }
 
@@ -288,32 +288,32 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(2));
             testList.AddInTail(new Node(4));
 
-            LinkedList results = testList.FindAll(3);
+            List<Node> results = testList.FindAll(3);
 
-            Assert.IsTrue(results.GetLength() == 0);
+            Assert.IsTrue(results.Count == 0);
         }
 
         [TestMethod()]
-        public void GetLength_EmptyList()
+        public void Count_EmptyList()
         {
             LinkedList testList = new LinkedList();
             int expected = 0;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void GetLength_List_with_One_Node()
+        public void Count_List_with_One_Node()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(0));
             int expected = 1;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void GetLength_after_multiply_manipulations_with_List()
+        public void Count_after_multiply_manipulations_with_List()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(0));
@@ -321,42 +321,42 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(2));
             testList.AddInTail(new Node(3));
             testList.AddInTail(new Node(4));
-            testList.AddNode(new Node(19), 1);
+            testList.InsertAfter(new Node(1), new Node(19));
             testList.AddInTail(new Node(4));
-            testList.RemoveNode(0);
+            testList.Remove(0);
 
             int expected = 6;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void AddNode_in_EmptyList()
+        public void InsertAfter_in_EmptyList()
         {
             LinkedList testList = new LinkedList();
 
-            testList.AddNode(new Node(205), 0);
+            testList.InsertAfter(new Node(0), new Node(205));
 
             int expected = 0;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void AddNode_after_Head()
+        public void InsertAfter_after_Head()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(200));
-            testList.AddNode(new Node(201), 200);
+            testList.InsertAfter(new Node(200), new Node(201));
 
             int expected = 2;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void AddNode_after_Tail()
+        public void InsertAfter_after_Tail()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(200));
@@ -364,15 +364,15 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(202));
             testList.AddInTail(new Node(203));
             testList.AddInTail(new Node(204));
-            testList.AddNode(new Node(205), 204);
+            testList.InsertAfter(new Node(204), new Node(205));
 
             int expected = 6;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void AddNode_nor_Head_nor_Tail()
+        public void InsertAfter_nor_Head_nor_Tail()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(200));
@@ -380,15 +380,15 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(202));
             testList.AddInTail(new Node(203));
             testList.AddInTail(new Node(204));
-            testList.AddNode(new Node(2018), 202);
+            testList.InsertAfter(new Node(202), new Node(2018));
 
             int expected = 6;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void AddNode_after_nonexist_Node_Value()
+        public void InsertAfter_after_nonexist_Node_Value()
         {
             LinkedList testList = new LinkedList();
             testList.AddInTail(new Node(200));
@@ -396,65 +396,11 @@ namespace LinkedList.Tests
             testList.AddInTail(new Node(202));
             testList.AddInTail(new Node(203));
             testList.AddInTail(new Node(204));
-            testList.AddNode(new Node(205), 2018);
+            testList.InsertAfter(new Node(2018), new Node(205));
 
             int expected = 5;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void ReduceLinkedLists_with_Equal_Lengths_ ()
-        {
-            LinkedList testListOne = new LinkedList();
-
-            testListOne.AddInTail(new Node(200));
-            testListOne.AddInTail(new Node(201));
-            testListOne.AddInTail(new Node(202));
-            testListOne.AddInTail(new Node(203));
-            testListOne.AddInTail(new Node(204));
-            
-            LinkedList testListTwo = new LinkedList();
-
-            testListTwo.AddInTail(new Node(100));
-            testListTwo.AddInTail(new Node(101));
-            testListTwo.AddInTail(new Node(102));
-            testListTwo.AddInTail(new Node(103));
-            testListTwo.AddInTail(new Node(104));
-
-            LinkedList expectedResults = new LinkedList();
-            for (int i = 0; i < 5; i++)
-            {
-                expectedResults.AddInTail(new Node(300 + i * 2));
-            }
-
-            LinkedList actualResults = LinkedList.ReduceLinkedLists(testListOne, testListTwo);
-
-            Assert.IsTrue(expectedResults.PrintList() == actualResults.PrintList());
-        }
-
-        [TestMethod()]
-        public void ReduceLinkedLists_with_Different_Lengths_()
-        {
-            LinkedList testListOne = new LinkedList();
-
-            testListOne.AddInTail(new Node(200));
-            testListOne.AddInTail(new Node(201));
-            testListOne.AddInTail(new Node(202));
-            testListOne.AddInTail(new Node(203));
-            testListOne.AddInTail(new Node(204));
-
-            LinkedList testListTwo = new LinkedList();
-
-            testListTwo.AddInTail(new Node(100));
-            testListTwo.AddInTail(new Node(101));
-            testListTwo.AddInTail(new Node(102));
-            testListTwo.AddInTail(new Node(103));
-
-            LinkedList expectedResults = new LinkedList();
-            LinkedList actualResults = LinkedList.ReduceLinkedLists(testListOne, testListTwo);
-
-            Assert.AreEqual(expectedResults.GetLength(), actualResults.GetLength());
         }
     }
 }
