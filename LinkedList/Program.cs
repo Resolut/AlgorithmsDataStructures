@@ -168,40 +168,4 @@ namespace AlgorithmsDataStructures
         }
 
     }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            LinkedList testList = new LinkedList();
-            testList.AddInTail(new Node(1));
-            testList.AddInTail(new Node(2));
-            testList.AddInTail(new Node(3));
-            testList.AddInTail(new Node(4));
-            testList.AddInTail(new Node(5));
-            testList.AddInTail(new Node(4));
-
-            Console.WriteLine("Список до вставки:\t" + testList.PrintList());
-            bool isAdded = testList.InsertAfter(new Node(4), new Node(6));
-            Console.WriteLine("Список после вставки:\t" + testList.PrintList());
-            Console.WriteLine($"Метод insertAfter() вернул {isAdded}");
-
-            int expected = 7;
-            int actual = testList.Count();
-            Console.WriteLine("Число элементов списка совпадает после вставки? - " + (expected == actual));
-
-            Console.Write("Проверка поиска всех элементов по значению.\nМетод FindAll(4) вернул массив: ");
-            testList.FindAll(4).ForEach(el => Console.Write(el.GetValue() + " "));
-
-            Console.WriteLine("\nПроверка удаления одного элемента");
-            testList.Remove(5);
-            Console.WriteLine("Список после выполнения метода Remove(5):" + testList.PrintList());
-
-            Console.WriteLine("Проверка удаления нескольких элементов");
-            testList.RemoveAll(4);
-            Console.WriteLine("Список после выполнения метода RemoveAll(4):" + testList.PrintList());
-
-            Console.ReadKey(true);
-        }
-    }
 }
