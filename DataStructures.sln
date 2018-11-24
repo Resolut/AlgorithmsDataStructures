@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynArrayTests", "DynArrayTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challenges", "Challenges\Challenges.csproj", "{26B58C91-EB9A-4AB5-96EB-97703B849B32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj", "{964D6F6B-36FE-4533-9D8D-60EF014DC637}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{26B58C91-EB9A-4AB5-96EB-97703B849B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26B58C91-EB9A-4AB5-96EB-97703B849B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26B58C91-EB9A-4AB5-96EB-97703B849B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964D6F6B-36FE-4533-9D8D-60EF014DC637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964D6F6B-36FE-4533-9D8D-60EF014DC637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964D6F6B-36FE-4533-9D8D-60EF014DC637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964D6F6B-36FE-4533-9D8D-60EF014DC637}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
