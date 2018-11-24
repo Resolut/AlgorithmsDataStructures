@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Stack
+﻿namespace Stack
 {
     public class Node
     {
@@ -81,28 +78,6 @@ namespace Stack
             if (tail != null)
                 return lastNode;
             return null;
-        }
-    }
-
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Stack stackList = new Stack();
-            Console.WriteLine("Размер пустго стека: " + stackList.Size());
-            stackList.Push(new Node(1));
-            stackList.Push(new Node(2));
-            stackList.Push(new Node(3));
-            Console.WriteLine("Размер стека перед удалением: " + stackList.Size());
-            Console.WriteLine("Хвост стека перед удалением: " + stackList.Size());
-            Node removedNode = stackList.Pop();
-            Console.WriteLine("Размер стека после удаления: " + stackList.Size());
-            Console.WriteLine("Значение удаленного узла: " + removedNode.value);
-            Node lastNode = stackList.Peek();
-            Console.WriteLine("Попытка взятия последнего узла без удаления: " + lastNode.value);
-            Console.WriteLine("Длина после метода Peek()" + stackList.Size());
-            Console.ReadKey();
         }
     }
 }
