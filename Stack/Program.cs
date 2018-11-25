@@ -1,4 +1,7 @@
-﻿namespace Stack
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Stack
 {
     public class Node
     {
@@ -20,64 +23,47 @@
 
     public class Stack
     {
-        public Node head;
-        public Node tail;
+        private LinkedList<Node> stackObject;
 
         public Stack()
         {
-            head = null;
-            tail = null;
+            stackObject = new LinkedList<Node>();
         }
 
         public int Size()
         {
-            int count = 0;
-            Node node = head;
-            while (node != null)
-            {
-                node = node.next;
-                count++;
-            }
-            return count;
+            return stackObject.Count;
         }
 
         public void Push(Node _item)
         {
-
-            if (head == null)
-            {
-                head = _item;
-                _item.prev = null;
-                _item.next = null;
-            }
-            else
-            {
-                tail.next = _item;
-                _item.prev = tail;
-            }
-
-            tail = _item;
+            stackObject.AddLast(_item);
         }
 
         public Node Pop()
         {
-            Node lastNode = tail;
-            if (tail != null)
+            Node lastNode = null;
+            if (stackObject.Count() != 0)
             {
-
-                lastNode.prev.next = null;
-                tail = lastNode.prev;
-                return lastNode;
+                lastNode = stackObject.Last();
+                stackObject.RemoveLast();
             }
-            return null;
+
+            return lastNode;
         }
 
         public Node Peek()
         {
-            Node lastNode = tail;
-            if (tail != null)
-                return lastNode;
+            if (stackObject.Count() != 0)
+                return stackObject.Last();
             return null;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
         }
     }
 }
