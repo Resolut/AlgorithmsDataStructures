@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Stack
+namespace HeadStack
 {
     public class Node
     {
@@ -37,25 +37,25 @@ namespace Stack
 
         public void Push(Node _item)
         {
-            stackObject.AddLast(_item);
+            stackObject.AddFirst(_item);
         }
 
         public Node Pop()
         {
-            Node lastNode = null;
+            Node firstNode = null;
             if (stackObject.Count() != 0)
             {
-                lastNode = stackObject.Last();
-                stackObject.RemoveLast();
+                firstNode = stackObject.First();
+                stackObject.RemoveFirst();
             }
 
-            return lastNode;
+            return firstNode;
         }
 
         public Node Peek()
         {
             if (stackObject.Count() != 0)
-                return stackObject.Last();
+                return stackObject.First();
 
             return null;
         }
