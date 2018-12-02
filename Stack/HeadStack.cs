@@ -60,11 +60,4 @@ namespace HeadStack
             return null;
         }
     }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
 }

@@ -62,8 +62,8 @@ namespace Stack.Tests
             int expectedLength = 8;
             int actualLength = testStack.Size();
 
-            Assert.IsTrue(deletedNode.value == 9);
-            Assert.IsTrue(deletedNode2.value == 8);
+            Assert.IsTrue(deletedNode.value.ToString() == "9");
+            Assert.IsTrue(deletedNode2.value.ToString() == "8");
             Assert.AreEqual(expectedLength, actualLength);
         }
 
@@ -91,7 +91,7 @@ namespace Stack.Tests
             int expectedSize = 10;
             int actualSize = testStack.Size();
 
-            Assert.IsTrue(peekedNode.value == 9);
+            Assert.IsTrue(peekedNode.value.ToString() == "9");
             Assert.AreEqual(expectedSize, actualSize);
         }
     }
