@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AlgorithmsDataStructures
+namespace LinkedList
 {
-
     public class Node
     {
         public int value;
@@ -167,5 +169,13 @@ namespace AlgorithmsDataStructures
             return res;
         }
 
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+        }
     }
 }
