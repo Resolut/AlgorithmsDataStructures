@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
@@ -9,11 +8,6 @@ namespace AlgorithmsDataStructures
         public int value;
         public Node next;
         public Node(int _value) { value = _value; }
-
-        public int GetValue()
-        {
-            return value;
-        }
     }
 
     public class LinkedList
@@ -51,7 +45,7 @@ namespace AlgorithmsDataStructures
             Node node = head;
             while (node != null)
             {
-                if (node.GetValue() == _value)
+                if (node.value == _value)
                     nodes.Add(node);
                 node = node.next;
             }
@@ -64,10 +58,15 @@ namespace AlgorithmsDataStructures
             Node previousNode = head;
             while (node != null)
             {
-                if (node.GetValue() == _value)
+                if (node.value == _value)
                 {
                     if (node == head)
                         head = node.next;
+                    else if (node == tail)
+                    {
+                        previousNode.next = null;
+                        tail = previousNode;
+                    }
                     else
                         previousNode.next = node.next;
                     return true;
@@ -86,10 +85,15 @@ namespace AlgorithmsDataStructures
             Node node = head;
             while (node != null)
             {
-                if (node.GetValue() == _value)
+                if (node.value == _value)
                 {
                     if (node == head)
                         head = node.next;
+                    else if (node == tail)
+                    {
+                        previousNode.next = null;
+                        tail = previousNode;
+                    }
                     else
                         previousNode.next = node.next;
                 }
@@ -128,7 +132,7 @@ namespace AlgorithmsDataStructures
                 {
                     while (node != null)
                     {
-                        if (node.GetValue() == _nodeAfter.GetValue())
+                        if (node.value == _nodeAfter.value)
                         {
                             _nodeToInsert.next = node.next;
                             node.next = _nodeToInsert;
@@ -137,7 +141,7 @@ namespace AlgorithmsDataStructures
                         node = node.next;
                     }
                 }
-                else if (node.GetValue() == _nodeAfter.GetValue())
+                else if (node.value == _nodeAfter.value)
                 {
                     tail.next = _nodeToInsert;
                     tail = _nodeToInsert;
@@ -153,19 +157,5 @@ namespace AlgorithmsDataStructures
 
             return false;
         }
-
-        public String PrintList()
-        {
-            Node node = head;
-            String res = "";
-            while (node != null)
-            {
-                res += node.GetValue() + " ";
-                node = node.next;
-            }
-            if (res.Length == 0) return "[]";
-            return res;
-        }
-
     }
 }
