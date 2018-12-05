@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LinkedList
 {
@@ -8,6 +11,11 @@ namespace LinkedList
         public int value;
         public Node next;
         public Node(int _value) { value = _value; }
+
+        public int GetValue()
+        {
+            return value;
+        }
     }
 
     public class LinkedList
@@ -45,7 +53,7 @@ namespace LinkedList
             Node node = head;
             while (node != null)
             {
-                if (node.value == _value)
+                if (node.GetValue() == _value)
                     nodes.Add(node);
                 node = node.next;
             }
@@ -58,15 +66,10 @@ namespace LinkedList
             Node previousNode = head;
             while (node != null)
             {
-                if (node.value == _value)
+                if (node.GetValue() == _value)
                 {
                     if (node == head)
                         head = node.next;
-                    else if (node == tail)
-                    {
-                        previousNode.next = null;
-                        tail = previousNode;
-                    }
                     else
                         previousNode.next = node.next;
                     return true;
@@ -85,15 +88,10 @@ namespace LinkedList
             Node node = head;
             while (node != null)
             {
-                if (node.value == _value)
+                if (node.GetValue() == _value)
                 {
                     if (node == head)
                         head = node.next;
-                    else if (node == tail)
-                    {
-                        previousNode.next = null;
-                        tail = previousNode;
-                    }
                     else
                         previousNode.next = node.next;
                 }
@@ -132,7 +130,7 @@ namespace LinkedList
                 {
                     while (node != null)
                     {
-                        if (node.value == _nodeAfter.value)
+                        if (node.GetValue() == _nodeAfter.GetValue())
                         {
                             _nodeToInsert.next = node.next;
                             node.next = _nodeToInsert;
@@ -141,7 +139,7 @@ namespace LinkedList
                         node = node.next;
                     }
                 }
-                else if (node.value == _nodeAfter.value)
+                else if (node.GetValue() == _nodeAfter.GetValue())
                 {
                     tail.next = _nodeToInsert;
                     tail = _nodeToInsert;
@@ -164,7 +162,7 @@ namespace LinkedList
             String res = "";
             while (node != null)
             {
-                res += node.value + " ";
+                res += node.GetValue() + " ";
                 node = node.next;
             }
             if (res.Length == 0) return "[]";
@@ -177,6 +175,7 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
