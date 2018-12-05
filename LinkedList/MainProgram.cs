@@ -60,7 +60,9 @@ namespace LinkedList
             {
                 if (node.value == _value)
                 {
-                    if (node == head)
+                    if (head == tail)
+                        this.Clear();
+                    else if (node == head)
                         head = node.next;
                     else if (node == tail)
                     {
@@ -177,6 +179,24 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
+            LinkedList testList = new LinkedList();
+            testList.AddInTail(new Node(1));
+            Console.WriteLine("Узлов {0}", testList.Count());
+            Console.WriteLine("Голова {0}", testList.head.value);
+            Console.WriteLine("Хвост {0}", testList.tail.value);
+            testList.AddInTail(new Node(2));
+            Console.WriteLine("Узлов {0}", testList.Count());
+            Console.WriteLine("Голова {0}", testList.head.value);
+            Console.WriteLine("Хвост {0}", testList.tail.value);
+            Console.WriteLine("Удаление произошло?: {0}", testList.Remove(2));
+            Console.WriteLine("Узлов {0}", testList.Count());
+            Console.WriteLine("Голова {0}", testList.head.value);
+            Console.WriteLine("Хвост {0}", testList.tail.value);
+            Console.WriteLine("Удаление произошло?: {0}", testList.Remove(1));
+            Console.WriteLine("Узлов {0}", testList.Count());
+            Console.WriteLine("Хвост {0}", testList.tail.value);
+            Console.WriteLine("Голова {0}", testList.head.value);
+            Console.ReadKey();
         }
     }
 }

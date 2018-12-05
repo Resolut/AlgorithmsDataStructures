@@ -60,7 +60,9 @@ namespace AlgorithmsDataStructures
             {
                 if (node.value == _value)
                 {
-                    if (node == head)
+                    if (head == tail)
+                        this.Clear();
+                    else if (node == head)
                         head = node.next;
                     else if (node == tail)
                     {
@@ -87,7 +89,9 @@ namespace AlgorithmsDataStructures
             {
                 if (node.value == _value)
                 {
-                    if (node == head)
+                    if (head == tail)
+                        this.Clear();
+                    else if (node == head)
                         head = node.next;
                     else if (node == tail)
                     {
