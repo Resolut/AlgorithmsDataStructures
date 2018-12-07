@@ -151,7 +151,10 @@ namespace AlgorithmsDataStructures
                 }
             }
             else if (_nodeAfter == null && head == null)
+            {
                 head = _nodeToInsert;
+                tail = _nodeToInsert;
+            }
         }
     }
 }
