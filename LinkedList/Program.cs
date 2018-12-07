@@ -126,7 +126,7 @@ namespace AlgorithmsDataStructures
             return count;
         }
 
-        public bool InsertAfter(Node _nodeAfter, Node _nodeToInsert)
+        public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
             Node node = head;
 
@@ -140,7 +140,6 @@ namespace AlgorithmsDataStructures
                         {
                             _nodeToInsert.next = node.next;
                             node.next = _nodeToInsert;
-                            return true;
                         }
                         node = node.next;
                     }
@@ -149,17 +148,10 @@ namespace AlgorithmsDataStructures
                 {
                     tail.next = _nodeToInsert;
                     tail = _nodeToInsert;
-                    return true;
                 }
-
             }
             else if (_nodeAfter == null)
-            {
                 head = _nodeToInsert;
-                return true;
-            }
-
-            return false;
         }
     }
 }
