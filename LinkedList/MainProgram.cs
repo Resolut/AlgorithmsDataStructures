@@ -130,26 +130,26 @@ namespace LinkedList
 
             if (head != null)
             {
-                if (node != tail)
+                while (node != null)
                 {
-                    while (node != null)
+                    if (node.value == _nodeAfter.value)
                     {
-                        if (node.value == _nodeAfter.value)
+                        if (node == tail)
+                        {
+                            tail.next = _nodeToInsert;
+                            tail = _nodeToInsert;
+                            return true;
+                        }
+                        else
                         {
                             _nodeToInsert.next = node.next;
                             node.next = _nodeToInsert;
                             return true;
                         }
-                        node = node.next;
                     }
-                }
-                else if (node.value == _nodeAfter.value)
-                {
-                    tail.next = _nodeToInsert;
-                    tail = _nodeToInsert;
-                    return true;
-                }
 
+                    node = node.next;
+                }
             }
             else if (_nodeAfter == null)
             {
@@ -185,17 +185,11 @@ namespace LinkedList
             Console.WriteLine("Голова {0}", testList.head.value);
             Console.WriteLine("Хвост {0}", testList.tail.value);
             testList.AddInTail(new Node(2));
+            testList.AddInTail(new Node(3));
+            testList.InsertAfter(new Node(3), new Node(4));
             Console.WriteLine("Узлов {0}", testList.Count());
             Console.WriteLine("Голова {0}", testList.head.value);
             Console.WriteLine("Хвост {0}", testList.tail.value);
-            Console.WriteLine("Удаление произошло?: {0}", testList.Remove(2));
-            Console.WriteLine("Узлов {0}", testList.Count());
-            Console.WriteLine("Голова {0}", testList.head.value);
-            Console.WriteLine("Хвост {0}", testList.tail.value);
-            Console.WriteLine("Удаление произошло?: {0}", testList.Remove(1));
-            Console.WriteLine("Узлов {0}", testList.Count());
-            Console.WriteLine("Хвост {0}", testList.tail.value);
-            Console.WriteLine("Голова {0}", testList.head.value);
             Console.ReadKey();
         }
     }
