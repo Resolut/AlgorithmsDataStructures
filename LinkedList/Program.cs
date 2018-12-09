@@ -132,22 +132,23 @@ namespace AlgorithmsDataStructures
 
             if (head != null)
             {
-                if (node != tail)
+                while (node != null)
                 {
-                    while (node != null)
+                    if (node.value == _nodeAfter.value)
                     {
-                        if (node.value == _nodeAfter.value)
+                        if (node == tail)
+                        {
+                            tail.next = _nodeToInsert;
+                            tail = _nodeToInsert;
+                        }
+                        else
                         {
                             _nodeToInsert.next = node.next;
                             node.next = _nodeToInsert;
                         }
-                        node = node.next;
                     }
-                }
-                else if (node.value == _nodeAfter.value)
-                {
-                    tail.next = _nodeToInsert;
-                    tail = _nodeToInsert;
+
+                    node = node.next;
                 }
             }
             else if (_nodeAfter == null && head == null)
