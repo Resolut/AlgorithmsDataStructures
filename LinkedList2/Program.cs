@@ -1,30 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace LinkedList2
+namespace AlgorithmsDataStructures
 {
+
     public class Node
     {
-        private readonly int value;
-        public Node next;
-        public Node prev;
+        public int value;
+        public Node next, prev;
 
-        public Node(int itemValue)
+        public Node(int _value)
         {
-            value = itemValue;
+            value = _value;
             next = null;
             prev = null;
-        }
-
-        public int GetValue()
-        {
-            return value;
         }
     }
 
     public class LinkedList2
     {
-        private Node head;
-        private Node tail;
+        public Node head;
+        public Node tail;
 
         public LinkedList2()
         {
@@ -32,120 +28,127 @@ namespace LinkedList2
             tail = null;
         }
 
-        public void RemoveNode(int value)
+        public void AddInTail(Node _item)
+        {
+            if (head == null)
+            {
+                head = _item;
+                head.next = null;
+                head.prev = null;
+            }
+            else
+            {
+                tail.next = _item;
+                _item.prev = tail;
+            }
+            tail = _item;
+        }
+
+        public Node Find(int _value)
         {
             Node node = head;
             while (node != null)
             {
-                if (node.GetValue() == value)
-                {
-                    if (node == head)
-                    {
-                        node.prev = null;
-                        head = node.next;
-                    }
-                    else
-                        node.prev.next = node.next;
-                    return;
-                }
-
-                node = node.next;
-            }
-        }
-
-        public void AddInTail(Node item)
-        {
-            if (head == null)
-            {
-                head = item;
-                item.prev = null;
-                item.next = null;
-            }
-            else
-            {
-                tail.next = item;
-                item.prev = tail;
-            }
-
-            tail = item;
-        }
-
-        public void AddNode(Node item, int target)
-        {
-            Node node = head;
-            if (head != null)
-            {
-                if (node != tail)
-                {
-                    while (node != null)
-                    {
-                        if (node.GetValue() == target)
-                        {
-                            item.next = node.next;
-                            item.prev = node;
-                            node.next = item;
-                            return;
-                        }
-                        node = node.next;
-                    }
-                }
-                else
-                {
-                    tail.next = item;
-                    item.prev = tail;
-                    tail = item;
-                }
-            }
-        }
-
-        public void AddInHead(Node item)
-        {
-            if (head == null)
-            {
-                head = item;
-                item.prev = null;
-                item.next = null;
-
-            }
-            else
-            {
-                item.next = head;
-                item.prev = null;
-            }
-
-            head = item;
-        }
-
-        public Node Find(int val)
-        {
-            Node node = head;
-            while (node != null)
-            {
-                if (node.GetValue() == val)
-                    return node;
+                if (node.value == _value) return node;
                 node = node.next;
             }
 
             return null;
         }
 
-        public LinkedList2 FindAll(int value)
+        public List<Node> FindAll(int _value)
         {
+            List<Node> nodes = new List<Node>();
             Node node = head;
-            LinkedList2 resList = new LinkedList2();
 
             while (node != null)
             {
-                if (node.GetValue() == value)
-                    resList.AddInTail(new Node(node.GetValue()));
+                if (node.value == _value)
+                    nodes.Add(node);
                 node = node.next;
             }
 
-            return resList;
+            return nodes;
         }
 
+        public bool Remove(int _value)
+        {
+            Node node = head;
+            Node previousNode = head;
 
-        public int GetLength()
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (head == tail)
+                        this.Clear();
+                    else if (node == head)
+                    {
+                        head = node.next;
+                        head.prev = null;
+                    }
+                    else if (node == tail)
+                    {
+                        previousNode.next = null;
+                        tail = previousNode;
+                    }
+                    else
+                    {
+                        previousNode.next = node.next;
+                        node.next.prev = previousNode;
+                    }
+                    return true;
+                }
+                else
+                    previousNode = node;
+
+                node = node.next;
+            }
+
+            return false;
+        }
+
+        public void RemoveAll(int _value)
+        {
+            Node previousNode = head;
+            Node node = head;
+
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (head == tail)
+                        this.Clear();
+                    else if (node == head)
+                    {
+                        head = node.next;
+                        head.prev = null;
+                    }
+                    else if (node == tail)
+                    {
+                        previousNode.next = null;
+                        tail = previousNode;
+                    }
+                    else
+                    {
+                        previousNode.next = node.next;
+                        node.next.prev = previousNode;
+                    }
+                }
+                else
+                    previousNode = node;
+
+                node = node.next;
+            }
+        }
+
+        public void Clear()
+        {
+            head = null;
+            tail = null;
+        }
+
+        public int Count()
         {
             int count = 0;
             Node node = head;
@@ -154,46 +157,51 @@ namespace LinkedList2
                 node = node.next;
                 count++;
             }
+
             return count;
         }
 
-        public String PrintList()
+        public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
             Node node = head;
-            String res = "";
-            while (node != null)
+
+            if (head != null)
             {
-                res += node.GetValue() + " ";
-                node = node.next;
+                if (_nodeAfter == null)
+                {
+                    tail.next = _nodeToInsert;
+                    _nodeToInsert.prev = tail;
+                    tail = _nodeToInsert;
+                }
+                else
+                {
+                    while (node != null)
+                    {
+                        if (node.value == _nodeAfter.value)
+                        {
+                            if (node == tail)
+                            {
+                                tail.next = _nodeToInsert;
+                                _nodeToInsert.prev = tail;
+                                tail = _nodeToInsert;
+                            }
+                            else
+                            {
+                                _nodeToInsert.next = node.next;
+                                _nodeToInsert.prev = node;
+                                node.next = _nodeToInsert;
+                            }
+                        }
+
+                        node = node.next;
+                    }
+                }
             }
-            if (res.Length == 0) return "[]";
-            return res;
-        }
-
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            LinkedList2 testList = new LinkedList2();
-            testList.AddInTail(new Node(1));
-            testList.AddInTail(new Node(4));
-            testList.AddInTail(new Node(4));
-            testList.AddInTail(new Node(4));
-            testList.AddInTail(new Node(5));
-            testList.AddInTail(new Node(4));
-            int expected = 7;
-            testList.AddInHead(new Node(4));
-            Console.WriteLine(testList.PrintList());
-            int actual = testList.GetLength();
-
-            Console.WriteLine(expected == actual);
-            LinkedList2 resultsList = testList.FindAll(4);
-            Console.WriteLine(resultsList.PrintList());
-            Console.WriteLine(resultsList.GetLength());
-            Console.ReadKey(true);
+            else if (_nodeAfter == null && head == null)
+            {
+                head = _nodeToInsert;
+                tail = _nodeToInsert;
+            }
         }
     }
 }

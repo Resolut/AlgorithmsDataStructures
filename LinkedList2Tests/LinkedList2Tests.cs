@@ -1,5 +1,6 @@
 ﻿using LinkedList2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace LinkedList2.Tests
 {
@@ -7,20 +8,22 @@ namespace LinkedList2.Tests
     public class LinkedList2Tests
     {
         [TestMethod()]
-        public void RemoveNode_from_EmptyList()
+        public void Remove_from_EmptyList()
         {
 
             LinkedList2 testList = new LinkedList2();
             int expected = 0;
-            testList.RemoveNode(5);
-            int actual = testList.GetLength();
+            testList.Remove(5);
+            int actual = testList.Count();
 
+            Assert.IsNull(testList.head);
+            Assert.IsNull(testList.tail);
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(5));
         }
 
         [TestMethod()]
-        public void RemoveNode_from_Head()
+        public void Remove_from_Head()
         {
 
             LinkedList2 testList = new LinkedList2();
@@ -29,15 +32,15 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(2));
             testList.AddInTail(new Node(3));
             int expected = 3;
-            testList.RemoveNode(5);
-            int actual = testList.GetLength();
+            testList.Remove(5);
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(5));
         }
 
         [TestMethod()]
-        public void RemoveNode_from_Tail()
+        public void Remove_from_Tail()
         {
 
             LinkedList2 testList = new LinkedList2();
@@ -46,15 +49,15 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(2));
             testList.AddInTail(new Node(3));
             int expected = 3;
-            testList.RemoveNode(3);
-            int actual = testList.GetLength();
+            testList.Remove(3);
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(3));
         }
 
         [TestMethod()]
-        public void RemoveNode_nor_Head_nor_Tail()
+        public void Remove_nor_Head_nor_Tail()
         {
 
             LinkedList2 testList = new LinkedList2();
@@ -65,15 +68,15 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(3));
             testList.AddInTail(new Node(4));
             int expected = 5;
-            testList.RemoveNode(5);
-            int actual = testList.GetLength();
+            testList.Remove(5);
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(5));
         }
 
         [TestMethod()]
-        public void RemoveNode_if_more_One_Exists()
+        public void Remove_if_more_One_Exists()
         {
 
             LinkedList2 testList = new LinkedList2();
@@ -85,15 +88,15 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(4));
             testList.AddInTail(new Node(5));
             int expected = 6;
-            testList.RemoveNode(5);
-            int actual = testList.GetLength();
+            testList.Remove(5);
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
-            Assert.IsTrue(testList.FindAll(5).GetLength() >= 1);
+            Assert.IsTrue(testList.FindAll(5).Count >= 1);
         }
 
         [TestMethod()]
-        public void RemoveNode_nonExist()
+        public void Remove_nonExist()
         {
 
             LinkedList2 testList = new LinkedList2();
@@ -104,8 +107,8 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(4));
             testList.AddInTail(new Node(5));
             int expected = 6;
-            testList.RemoveNode(19);
-            int actual = testList.GetLength();
+            testList.Remove(19);
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(19));
@@ -123,7 +126,7 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(5));
             int expected = 6;
             testList.AddInHead(new Node(19));
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNotNull(testList.Find(19));
@@ -136,7 +139,7 @@ namespace LinkedList2.Tests
             testList.AddInHead(new Node(21));
 
             int expected = 1;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
             Assert.AreEqual(expected, actual);
             Assert.IsNotNull(testList.Find(21));
@@ -155,13 +158,13 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(4));
             testList.AddInHead(new Node(4));
             int expected = 7;
-            int actual = testList.GetLength();
+            int actual = testList.Count();
 
 
-            LinkedList2 resultsList = testList.FindAll(4);
+            List<Node> resultsList = testList.FindAll(4);
 
             Assert.AreEqual(expected, actual);
-            Assert.IsTrue(testList.FindAll(4).GetLength() == 5);
+            Assert.IsTrue(testList.FindAll(4).Count == 5);
         }
 
         [TestMethod()]
@@ -176,10 +179,10 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(6));
             testList.AddInHead(new Node(7));
             int expected = 8;
-            testList.AddNode(new Node(21), 6);
-            int actual = testList.GetLength();
+            testList.InsertAfter(new Node(6), new Node(21));
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
-            Assert.IsTrue(testList.Find(21).GetValue() == 21);
+            Assert.IsTrue(testList.Find(21).value == 21);
         }
 
         [TestMethod()]
@@ -192,10 +195,10 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(4));
             testList.AddInTail(new Node(5));
             int expected = 6;
-            testList.AddNode(new Node(21), 5);
-            int actual = testList.GetLength();
+            testList.InsertAfter(new Node(5), new Node(21));
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
-            Assert.IsTrue(testList.Find(21).GetValue() == 21);
+            Assert.IsTrue(testList.Find(21).value == 21);
         }
 
         [TestMethod()]
@@ -208,8 +211,8 @@ namespace LinkedList2.Tests
             testList.AddInTail(new Node(4));
             testList.AddInTail(new Node(5));
             int expected = 5;
-            testList.AddNode(new Node(21), 13);
-            int actual = testList.GetLength();
+            testList.InsertAfter(new Node(13), new Node(21));
+            int actual = testList.Count();
             Assert.AreEqual(expected, actual);
             Assert.IsNull(testList.Find(21));
         }
