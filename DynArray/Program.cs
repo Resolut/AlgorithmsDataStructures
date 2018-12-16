@@ -1,162 +1,107 @@
 ﻿using System;
+using System.Collections.Generic;
 
-
-namespace DynArray
+namespace AlgorithmsDataStructures
 {
 
-    public class DynArray
+    public class DynArray<T>
     {
-        private int count = 0;
-        private int capacity;
-        private object[] array;
-
-        public int GetCapacity()
-        {
-            return capacity;
-        }
-
-        public void SetCapacity(int newSize)
-        {
-            capacity = newSize;
-        }
-
-        public int GetCount()
-        {
-            return count;
-        }
-
-        public void ChangeCount(char op)
-        {
-            if (op == '+')
-                count++;
-            else if (op == '-')
-                count--;
-        }
+        public T[] array;
+        public int count;
+        public int capacity;
 
         public DynArray()
         {
-            capacity = 16;
-            array = new object[capacity];
+            count = 0;
+            MakeArray(16);
         }
 
-        public void MakeArray(int newCapacity)
+        public void MakeArray(int new_capacity)
         {
-            SetCapacity(newCapacity);
-            object[] resArr = new object[newCapacity];
+            capacity = new_capacity;
+            if (array == null)
+                array = new T[new_capacity];
+
+            T[] resArr = new T[new_capacity];
 
             for (int i = 0; i < array.Length; i++)
-            {
                 resArr[i] = array[i];
-            }
+
             array = resArr;
         }
 
-        public object GetItem(int i)
+        public T GetItem(int index)
         {
-            if (i < GetCount())
-                return array[i];
+            if (index < count && index >= 0)
+                return array[index];
             else
-                return new IndexOutOfRangeException("Введён Недопустимый индекс массива!");
+                new IndexOutOfRangeException("Введён Недопустимый индекс массива!");
+
+            return default(T);
         }
 
-        public void AppEnd(object item)
+        public void Append(T itm)
         {
-            if (GetCount() == GetCapacity())
-            {
-                MakeArray(GetCapacity() * 2);
-            }
-            array[GetCount()] = item;
-            ChangeCount('+');
+            if (count == capacity)
+                MakeArray(capacity * 2);
+
+            array[count] = itm;
+            count++;
         }
 
-        public void Insert(int index, object item)
+        public void Insert(T itm, int index)
         {
-            if (index < 0 || index >= GetCount())
+            if (index < 0 || index > count)
                 throw new IndexOutOfRangeException("Введён недопустимый индекс массива!");
-            if (GetCount() == GetCapacity())
+            else if (index == count)
+                this.Append(itm);
+            else
             {
-                MakeArray(GetCapacity() * 2);
-            }
+                if (count == capacity)
+                    MakeArray(capacity * 2);
 
-            object[] tempArray = new object[GetCapacity()];
+                T[] tempArr = new T[capacity];
 
-            for (int i = 0; i < GetCount(); i++)
-            {
-                if (i < index)
-                    tempArray[i] = array[i];
-                else if (i == index)
+                for (int i = 0; i < count; i++)
                 {
-                    tempArray[i] = item;
-                    tempArray[i + 1] = array[i];
+                    if (i < index)
+                        tempArr[i] = array[i];
+                    else if (i == index)
+                    {
+                        tempArr[i] = itm;
+                        tempArr[i + 1] = array[i];
+                    }
+                    else
+                        tempArr[i + 1] = array[i];
                 }
-                else
-                    tempArray[i + 1] = array[i];
+
+                array = tempArr;
+                count++;
             }
-            array = tempArray;
-            ChangeCount('+');
         }
 
-        public void Delete(int index)
+        public void Remove(int index)
         {
-            if (index < 0 || index >= GetCount())
+            if (index < 0 || index >= count)
                 throw new IndexOutOfRangeException("Введён недопустимый индекс массива!");
-            if (GetCount() <= GetCapacity() / 2 && GetCapacity() >= 16)
+            if (count <= capacity / 2 && capacity >= 16)
             {
-                SetCapacity((int)Math.Round(GetCapacity() / 1.5));
-                if (GetCapacity() < 16)
-                    SetCapacity(16);
+                capacity = (int)(capacity / 1.5);
+                if (capacity < 16)
+                    capacity = 16;
             }
 
-            object[] tempArray = new object[GetCapacity()];
+            T[] tempArr = new T[capacity];
 
-            for (int i = 0; i < GetCount() - 1; i++)
+            for (int i = 0; i < count - 1; i++)
             {
                 if (i < index)
-                    tempArray[i] = array[i];
+                    tempArr[i] = array[i];
                 else
-                    tempArray[i] = array[i + 1];
+                    tempArr[i] = array[i + 1];
             }
-            array = tempArray;
-            ChangeCount('-');
-        }
-
-        public void Print()
-        {
-            for (int i = 0; i < GetCount(); i++)
-            {
-                Console.Write("{0} ", array[i]);
-            }
-            Console.WriteLine();
-        }
-
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            DynArray testDynArr = new DynArray();
-            int item = 0;
-            for (item = 1; item < 18; item++)
-            {
-                testDynArr.AppEnd(item);
-            }
-            Console.WriteLine("Заполненный массив:");
-            testDynArr.Print();
-
-            for (int i = 0; i < 2; i++)
-            {
-                Console.WriteLine($"Перед удалением\nЕмкость буфера: {testDynArr.GetCapacity()}");
-                Console.WriteLine($"Количество элементов: {testDynArr.GetCount()}");
-                testDynArr.Delete(3);
-                Console.WriteLine($"После удаления\nЕмкость буфера: {testDynArr.GetCapacity()}");
-                Console.WriteLine($"Количество элементов: {testDynArr.GetCount()}");
-                testDynArr.Print();
-                Console.WriteLine("===============================================");
-            }
-            Console.WriteLine(testDynArr.GetItem(4).ToString());
-
-            Console.ReadKey();
+            array = tempArr;
+            count--;
         }
     }
 }
