@@ -56,14 +56,14 @@ namespace Stack
 
         public Node Peek()
         {
-            if (stackObject.Count() != 0)
+            if (stackObject.Count != 0)
                 return stackObject.Last();
 
             return null;
         }
     }
 
-    class Program
+    class MainProgram
     {
         static void Main(string[] args)
         {
