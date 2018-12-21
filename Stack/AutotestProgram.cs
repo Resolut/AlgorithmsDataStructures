@@ -6,46 +6,65 @@ namespace AlgorithmsDataStructures
 
     public class Stack<T>
     {
-        private LinkedList<T> stackObject;
+        private class Node
+
+        {
+            public T Value { get; set; }
+            public Node Next { get; set; }
+            public Node Prev { get; set; }
+
+            public Node(T _value, Node next = null, Node prev = null)
+            {
+                Value = _value;
+                Next = next;
+                Prev = prev;
+            }
+        }
+
+        public LinkedList<T> stackObject;
 
         public Stack()
         {
-            // инициализация внутреннего хранилища стека
             stackObject = new LinkedList<T>();
         }
 
         public int Size()
-        {
-            // размер текущего стека		  
+        {		  
             return stackObject.Count;
         }
 
         public T Pop()
         {
-            // ваш код
+            LinkedListNode<T> lastNode;
+
             if (stackObject.Count != 0)
             {
-                lastNode = stackObject.Last();
+                lastNode = stackObject.Last;
                 stackObject.RemoveLast();
+
+                return lastNode.Value;
             }
-            return default(T); // null, если стек пустой
+
+            return default(T);
         }
 
         public void Push(T val)
         {
-            // ваш код
             stackObject.AddLast(val);
         }
 
         public T Peek()
         {
-            // ваш код
-            if (stackObject.Count != 0)
-                return stackObject.Last();
+            LinkedListNode<T> node;
 
-            return default(T); // null, если стек пустой
+            if (stackObject.Count != 0)
+            {
+                node = stackObject.First;
+
+                return node.Value;
+            }
+
+            return default(T);
         }
     }
-}
-
 }
