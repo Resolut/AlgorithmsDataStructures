@@ -6,43 +6,36 @@ namespace AlgorithmsDataStructures
 
     public class Stack<T>
     {
-        private class Node
-
-        {
-            public T Value { get; set; }
-            public Node Next { get; set; }
-            public Node Prev { get; set; }
-
-            public Node(T _value, Node next = null, Node prev = null)
-            {
-                Value = _value;
-                Next = next;
-                Prev = prev;
-            }
-        }
-
-        public LinkedList<T> stackObject;
+        public T[] items;
+        private int count;
+        int capacity;
 
         public Stack()
         {
-            stackObject = new LinkedList<T>();
+            count = 0;
+            Resize(16);
         }
 
         public int Size()
-        {		  
-            return stackObject.Count;
+        {
+            return count;
         }
 
         public T Pop()
         {
-            LinkedListNode<T> lastNode;
-
-            if (stackObject.Count != 0)
+            if (count <= capacity / 2 && capacity >= 16)
             {
-                lastNode = stackObject.Last;
-                stackObject.RemoveLast();
+                capacity = (int)(capacity / 1.5);
+                if (capacity < 16)
+                    capacity = 16;
+            }
 
-                return lastNode.Value;
+            if (count > 0)
+            {
+                T item = items[--count];
+                items[count] = default(T);
+
+                return item;
             }
 
             return default(T);
@@ -50,21 +43,33 @@ namespace AlgorithmsDataStructures
 
         public void Push(T val)
         {
-            stackObject.AddLast(val);
+            if (count == capacity)
+                Resize(capacity * 2);
+
+            items[count] = val;
+            count++;
         }
 
         public T Peek()
         {
-            LinkedListNode<T> node;
-
-            if (stackObject.Count != 0)
-            {
-                node = stackObject.First;
-
-                return node.Value;
-            }
+            if (count > 0)
+                return items[count - 1];
 
             return default(T);
+        }
+
+        public void Resize(int new_capacity)
+        {
+            capacity = new_capacity;
+            if (items == null)
+                items = new T[new_capacity];
+
+            T[] resArr = new T[new_capacity];
+
+            for (int i = 0; i < items.Length; i++)
+                resArr[i] = items[i];
+
+            items = resArr;
         }
     }
 }
