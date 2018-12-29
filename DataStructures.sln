@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackTests", "StackTests\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queue", "Queue\Queue.csproj", "{165B6FA8-95E7-4FDF-9B93-7A6BDBF2E0F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deque", "Dequeue\Deque.csproj", "{BAFEFF3E-8D8E-4D8A-8D97-EC9D84520E8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{165B6FA8-95E7-4FDF-9B93-7A6BDBF2E0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{165B6FA8-95E7-4FDF-9B93-7A6BDBF2E0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{165B6FA8-95E7-4FDF-9B93-7A6BDBF2E0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAFEFF3E-8D8E-4D8A-8D97-EC9D84520E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFEFF3E-8D8E-4D8A-8D97-EC9D84520E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFEFF3E-8D8E-4D8A-8D97-EC9D84520E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFEFF3E-8D8E-4D8A-8D97-EC9D84520E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
