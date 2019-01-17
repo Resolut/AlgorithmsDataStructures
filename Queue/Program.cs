@@ -34,12 +34,4 @@ namespace Queue
             return items.Count;
         }
     }
-
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
 }
