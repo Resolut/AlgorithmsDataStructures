@@ -33,5 +33,17 @@ namespace Queue
         {
             return items.Count;
         }
+
+        public void Rotate(int offset)
+        {
+            T shiftValue = default(T);
+
+            while (offset > 0)
+            {
+                shiftValue = Dequeue();
+                Enqueue(shiftValue);
+                --offset;
+            }
+        }
     }
 }
