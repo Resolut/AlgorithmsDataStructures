@@ -34,11 +34,27 @@ namespace AlgorithmsDataStructures
             int result = 0;
             if (typeof(T) == typeof(String))
             {
+                if (v1.ToString().Trim().Length < v2.ToString().Trim().Length)
+                {
+                    result = -1;
+                }
+                else if (v1.ToString().Trim().Length > v2.ToString().Trim().Length)
+                {
+                    result = 1;
+                }
+                else
+                {
+                    // TODO: сделать сравнение посимвольно, если строки равны по длине
+                }
+                
                 // версия для лексикографического сравнения строк
             }
             else
             {
-                // универсальное сравнение
+                if ()
+                {
+
+                }// универсальное сравнение
             }
 
             return result;
@@ -80,7 +96,6 @@ namespace AlgorithmsDataStructures
                     {
                         previousNode.next = null;
                         tail = previousNode;
-
                     }
                     else
                     {
