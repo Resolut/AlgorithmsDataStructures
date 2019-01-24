@@ -32,46 +32,113 @@ namespace AlgorithmsDataStructures
         public int Compare(T v1, T v2)
         {
             int result = 0;
+
             if (typeof(T) == typeof(String))
             {
-                if (v1.ToString().Trim().Length < v2.ToString().Trim().Length)
+                string strV1 = v1.ToString().Trim();
+                string strV2 = v2.ToString().Trim();
+
+                if (strV1.Length < strV2.Length)
                 {
                     result = -1;
                 }
-                else if (v1.ToString().Trim().Length > v2.ToString().Trim().Length)
+                else if (strV1.Length > strV2.Length)
                 {
                     result = 1;
                 }
                 else
                 {
-                    // TODO: сделать сравнение посимвольно, если строки равны по длине
+                    for (int i = 0; i < strV1.Length; i++)
+                    {
+                        if (strV1[i] < strV2[i])
+                        {
+                            result = -1;
+                            break;
+                        }
+                        if (strV1[i] > strV2[i])
+                        {
+                            result = 1;
+                            break;
+                        }
+                    }
                 }
-                
-                // версия для лексикографического сравнения строк
             }
             else
             {
-                if ()
+                if (typeof(T) == typeof(int))
                 {
+                    int digit1 = Convert.ToInt32(v1);
+                    int digit2 = Convert.ToInt32(v2);
 
-                }// универсальное сравнение
+                    if (digit1 < digit2)
+                        result = -1;
+                    else if (digit1 > digit2)
+                        result = 1;
+                }
             }
 
             return result;
-            // -1 если v1 < v2
-            // 0 если v1 == v2
-            // +1 если v1 > v2
         }
 
         public void Add(T value)
         {
-            // автоматическая вставка value 
-            // в нужную позицию
+            Node<T> node = head;
+            Node<T> nodeToInsert = new Node<T>(value);
+
+            if (node != null)
+            {
+                while (node != null)
+                {
+                    int result = Compare(node.value, value);
+
+                    // Выполнение вставки нового элемента в конец списка 
+                    // с учётом признака упорядоченности
+                    if (Compare(tail.value, value) == -1 && _ascending ||
+                        Compare(tail.value, value) == 1 && !_ascending)
+                    {
+                        nodeToInsert = tail.prev;
+                        tail = nodeToInsert;
+                        return;
+                    }
+
+                    // Выполнение вставки нового элемента между элементами 
+                    // с учётом признака упорядоченности списка
+                    if ((result == 1 || result == 0 && _ascending) ||
+                        (result == -1 || result == 0 && !_ascending))
+                    {
+                        nodeToInsert.next = node;
+                        nodeToInsert.prev = node.prev;
+                        return;
+                    }
+
+                    node = node.next;
+                }
+            }
+            else
+            {
+                // вставка в пустой список
+                head = nodeToInsert;
+                tail = nodeToInsert;
+            }
+
         }
 
         public Node<T> Find(T val)
         {
-            return null; // здесь будет ваш код
+            Node<T> node = head;
+
+            while (node != null)
+            {
+                int issue = Compare(node.value, val);
+
+                if (issue == 0) return node; // Поиск завершен, элемент найден
+                else if (issue == 1 && _ascending) break;   // Прерывание поиска для возрастающего списка 
+                else if (issue == -1 && !_ascending) break; // Прерывание поиска для убывающего списка
+
+                node = node.next;
+            }
+
+            return null;
         }
 
         public void Delete(T val)
@@ -81,7 +148,7 @@ namespace AlgorithmsDataStructures
 
             while (node != null)
             {
-                if (Compare(node.value, val) == 0) // Сравниваться могут раззные типы данных, поэтому используем метод Compare
+                if (Compare(node.value, val) == 0) // тип параметра val может быть разным, поэтому используем метод Compare
                 {
                     if (head == tail)
                     {
@@ -112,7 +179,6 @@ namespace AlgorithmsDataStructures
         }
 
         public void Clear(bool asc)
-
         {
             _ascending = asc;
             head = null;
