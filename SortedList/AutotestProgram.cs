@@ -89,25 +89,44 @@ namespace AlgorithmsDataStructures
             {
                 while (node != null)
                 {
-                    int result = Compare(node.value, value);
 
-                    // Выполнение вставки нового элемента в конец списка 
+                    // Вставка нового элемента в конец списка 
                     // с учётом признака упорядоченности
-                    if (Compare(tail.value, value) == -1 && _ascending ||
-                        Compare(tail.value, value) == 1 && !_ascending)
+                    if ((Compare(tail.value, value) == -1 && _ascending) ||
+                        (Compare(tail.value, value) == 1 && !_ascending))
                     {
-                        nodeToInsert = tail.prev;
+                        tail.next = nodeToInsert;
+                        nodeToInsert.prev = tail;
                         tail = nodeToInsert;
+
                         return;
                     }
 
-                    // Выполнение вставки нового элемента между элементами 
+                    // Вставка нового элемента в начало списка 
+                    // с учётом признака упорядоченности
+                    if ((Compare(head.value, value) == 1 && _ascending) ||
+                        (Compare(head.value, value) == -1 && !_ascending))
+                    {
+                        nodeToInsert.next = head;
+                        head.prev = nodeToInsert;
+                        nodeToInsert.prev = null;
+                        head = nodeToInsert;
+
+                        return;
+                    }
+
+                    int result = Compare(node.value, value);
+
+                    // Вставка нового элемента между элементами 
                     // с учётом признака упорядоченности списка
-                    if ((result == 1 || result == 0 && _ascending) ||
-                        (result == -1 || result == 0 && !_ascending))
+                    if (((result == 1 || result == 0) && _ascending) ||
+                        ((result == -1 || result == 0) && !_ascending))
                     {
                         nodeToInsert.next = node;
                         nodeToInsert.prev = node.prev;
+                        node.prev.next = nodeToInsert;
+                        node.prev = nodeToInsert;
+
                         return;
                     }
 
@@ -132,8 +151,8 @@ namespace AlgorithmsDataStructures
                 int issue = Compare(node.value, val);
 
                 if (issue == 0) return node; // Поиск завершен, элемент найден
-                else if (issue == 1 && _ascending) break;   // Прерывание поиска для возрастающего списка 
-                else if (issue == -1 && !_ascending) break; // Прерывание поиска для убывающего списка
+                else if (issue == 1 && _ascending) break;   // Прерывание поиска для списка с признаком возрастания 
+                else if (issue == -1 && !_ascending) break; // Прерывание поиска для списка с признаком убывания
 
                 node = node.next;
             }
@@ -152,7 +171,7 @@ namespace AlgorithmsDataStructures
                 {
                     if (head == tail)
                     {
-                        this.Clear(false);
+                        Clear(_ascending);
                     }
                     else if (node == head)
                     {
