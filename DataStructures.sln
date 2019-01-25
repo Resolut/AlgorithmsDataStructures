@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DequeTests", "DequeTests\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderedList", "SortedList\OrderedList.csproj", "{CA8FCC31-6868-4DB8-BDA2-2C96EB92C93F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderedListTests", "OrderedListTests\OrderedListTests.csproj", "{1C6F325D-C116-4F8E-9C7F-062DBBF72477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{CA8FCC31-6868-4DB8-BDA2-2C96EB92C93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA8FCC31-6868-4DB8-BDA2-2C96EB92C93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA8FCC31-6868-4DB8-BDA2-2C96EB92C93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
