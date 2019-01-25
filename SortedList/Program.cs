@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderedList
 {
@@ -91,25 +88,44 @@ namespace OrderedList
             {
                 while (node != null)
                 {
-                    int result = Compare(node.value, value);
 
-                    // Выполнение вставки нового элемента в конец списка 
+                    // Вставка нового элемента в конец списка 
                     // с учётом признака упорядоченности
-                    if (Compare(tail.value, value) == -1 && _ascending ||
-                        Compare(tail.value, value) == 1 && !_ascending)
+                    if ((Compare(tail.value, value) == -1 && _ascending) ||
+                        (Compare(tail.value, value) == 1 && !_ascending))
                     {
-                        nodeToInsert.prev = tail.prev;
+                        tail.next = nodeToInsert;
+                        nodeToInsert.prev = tail;
                         tail = nodeToInsert;
+
                         return;
                     }
 
-                    // Выполнение вставки нового элемента между элементами 
+                    // Вставка нового элемента в начало списка 
+                    // с учётом признака упорядоченности
+                    if ((Compare(head.value, value) == 1 && _ascending) ||
+                        (Compare(head.value, value) == -1 && !_ascending))
+                    {
+                        nodeToInsert.next = head;
+                        head.prev = nodeToInsert;
+                        nodeToInsert.prev = null;
+                        head = nodeToInsert;
+
+                        return;
+                    }
+
+                    int result = Compare(node.value, value);
+
+                    // Вставка нового элемента между элементами 
                     // с учётом признака упорядоченности списка
-                    if ((result == 1 || result == 0 && _ascending) ||
-                        (result == -1 || result == 0 && !_ascending))
+                    if (((result == 1 || result == 0 ) && _ascending) ||
+                        ((result == -1 || result == 0 ) && !_ascending))
                     {
                         nodeToInsert.next = node;
                         nodeToInsert.prev = node.prev;
+                        node.prev.next = nodeToInsert;
+                        node.prev = nodeToInsert;
+
                         return;
                     }
 
@@ -134,8 +150,8 @@ namespace OrderedList
                 int issue = Compare(node.value, val);
 
                 if (issue == 0) return node; // Поиск завершен, элемент найден
-                else if (issue == 1 && _ascending) break;   // Прерывание поиска для возрастающего списка 
-                else if (issue == -1 && !_ascending) break; // Прерывание поиска для убывающего списка
+                else if (issue == 1 && _ascending) break;   // Прерывание поиска для списка с признаком возрастания 
+                else if (issue == -1 && !_ascending) break; // Прерывание поиска для списка с признаком убывания
 
                 node = node.next;
             }
@@ -154,7 +170,7 @@ namespace OrderedList
                 {
                     if (head == tail)
                     {
-                        this.Clear(false);
+                        Clear(_ascending);
                     }
                     else if (node == head)
                     {
@@ -213,6 +229,20 @@ namespace OrderedList
             }
             return r;
         }
+
+        // не проверяется 
+        public String PrintList()
+        {
+            Node<T> node = head;
+            String res = "";
+            while (node != null)
+            {
+                res += node.value + " ";
+                node = node.next;
+            }
+            if (res.Length == 0) return "[]";
+            return res;
+        }
     }
 
     class Program
@@ -220,21 +250,20 @@ namespace OrderedList
         static void Main(string[] args)
         {
             OrderedList<int> ascList = new OrderedList<int>(true);
-            OrderedList<int> descList = new OrderedList<int>(false);
 
             Console.WriteLine("Элементов в пустом списке: {0}", ascList.Count());
-            ascList.Add(0);
-            ascList.Add(1);
-            ascList.Add(2);
+            ascList.Add(9);
             ascList.Add(3);
             ascList.Add(4);
-            Console.WriteLine("Элементов в возрастающем списке: {0}", ascList.Count());
-            
-            descList.Add(7);
-            descList.Add(8);
-            descList.Add(9);
-            descList.Add(10);
-            Console.WriteLine("Элементов в убывающем списке: {0}", descList.Count());
+            ascList.Add(5);
+            ascList.Add(6);
+            ascList.Add(7);
+            ascList.Add(0);
+            ascList.Add(-999);
+
+            Console.WriteLine("Элементов в списке: {0}", ascList.Count());
+            Console.WriteLine("Список {0}", ascList.PrintList());
+            Console.WriteLine("Голова {0}, Хвост {1}", ascList.head.value, ascList.tail.value);
 
             Console.ReadKey();
         }
