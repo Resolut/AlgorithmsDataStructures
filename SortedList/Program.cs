@@ -249,23 +249,6 @@ namespace OrderedList
     {
         static void Main(string[] args)
         {
-            OrderedList<int> ascList = new OrderedList<int>(true);
-
-            Console.WriteLine("Элементов в пустом списке: {0}", ascList.Count());
-            ascList.Add(9);
-            ascList.Add(3);
-            ascList.Add(4);
-            ascList.Add(5);
-            ascList.Add(6);
-            ascList.Add(7);
-            ascList.Add(0);
-            ascList.Add(-999);
-
-            Console.WriteLine("Элементов в списке: {0}", ascList.Count());
-            Console.WriteLine("Список {0}", ascList.PrintList());
-            Console.WriteLine("Голова {0}, Хвост {1}", ascList.head.value, ascList.tail.value);
-
-            Console.ReadKey();
         }
     }
 }
