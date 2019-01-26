@@ -118,7 +118,7 @@ namespace OrderedList
 
                     // Вставка нового элемента между элементами 
                     // с учётом признака упорядоченности списка
-                    if (((result == 1 || result == 0 ) && _ascending) ||
+                    if ((result == 1  && _ascending) ||
                         ((result == -1 || result == 0 ) && !_ascending))
                     {
                         nodeToInsert.next = node;
