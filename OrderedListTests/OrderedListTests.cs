@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AlgorithmsDataStructures;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlgorithmsDataStructures.Tests
 {
@@ -326,6 +327,52 @@ namespace AlgorithmsDataStructures.Tests
 
             Assert.IsNull(actualFoundValue);
             Assert.AreEqual(expectedSize, actualSize);
+        }
+
+        [TestMethod()]
+        public void Add_if_Exists_Duplicate_Element_Asc_List()
+        {
+            OrderedList<int> tList = new OrderedList<int>(true);
+
+            tList.Add(10);
+            tList.Add(9);
+            tList.Add(1);
+            tList.Add(5);
+            tList.Add(1);
+            tList.Add(6);
+            tList.Add(2);
+            tList.Add(8);
+            tList.Add(7);
+            tList.Add(4);
+
+            Assert.IsTrue(tList.Count() == 10);
+            Assert.IsTrue(tList.head.value == 1);
+            Assert.IsTrue(tList.head.next.value == 1);
+            Assert.IsTrue(tList.head.next.prev.value == 1);
+            Assert.IsTrue(tList.head.next.next.value == 2);
+        }
+
+        [TestMethod()]
+        public void Add_if_Exists_Duplicate_Element_Desc_List()
+        {
+            OrderedList<int> tList = new OrderedList<int>(false);
+
+            tList.Add(10);
+            tList.Add(9);
+            tList.Add(1);
+            tList.Add(5);
+            tList.Add(1);
+            tList.Add(6);
+            tList.Add(2);
+            tList.Add(8);
+            tList.Add(7);
+            tList.Add(4);
+
+            Assert.IsTrue(tList.Count() == 10);
+            Assert.IsTrue(tList.tail.value == 1);
+            Assert.IsTrue(tList.tail.prev.value == 1);
+            Assert.IsTrue(tList.tail.prev.next.value == 1);
+            Assert.IsTrue(tList.tail.prev.prev.value == 2);
         }
     }
 }
