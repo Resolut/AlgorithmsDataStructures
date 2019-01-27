@@ -119,7 +119,7 @@ namespace AlgorithmsDataStructures
 
                     // Вставка нового элемента между элементами 
                     // с учётом признака упорядоченности списка
-                    if ((result == 1  && _ascending) ||
+                    if ((result == 1 && _ascending) ||
                         ((result == -1 || result == 0) && !_ascending))
                     {
                         nodeToInsert.next = node;
@@ -137,7 +137,11 @@ namespace AlgorithmsDataStructures
             {
                 // вставка в пустой список
                 head = nodeToInsert;
+                head.next = null;
+                head.prev = null;
                 tail = nodeToInsert;
+                tail.next = null;
+                tail.prev = null;
             }
 
         }
