@@ -81,7 +81,6 @@ namespace OrderedList
 
         public void Add(T value)
         {
-            if (typeof(T) == null) return;
             Node<T> node = head;
             Node<T> nodeToInsert = new Node<T>(value);
 
