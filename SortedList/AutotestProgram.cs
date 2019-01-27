@@ -92,8 +92,8 @@ namespace AlgorithmsDataStructures
 
                     // Вставка нового элемента в конец списка 
                     // с учётом признака упорядоченности
-                    if ((Compare(tail.value, value) == -1 && _ascending) ||
-                        (Compare(tail.value, value) == 1 && !_ascending))
+                    if (((Compare(tail.value, value) == -1 || Compare(tail.value, value) == 0) && _ascending) ||
+                        ((Compare(tail.value, value) == 1 || Compare(tail.value, value) == 0) && !_ascending))
                     {
                         tail.next = nodeToInsert;
                         nodeToInsert.prev = tail;

@@ -91,16 +91,16 @@ namespace OrderedList
 
                     // Вставка нового элемента в конец списка 
                     // с учётом признака упорядоченности
-                    if ((Compare(tail.value, value) == -1 && _ascending) ||
-                        (Compare(tail.value, value) == 1 && !_ascending))
+                    if (((Compare(tail.value, value) == -1 || Compare(tail.value, value) == 0) && _ascending) ||
+                        ((Compare(tail.value, value) == 1 || Compare(tail.value, value) == 0) && !_ascending))
                     {
                         tail.next = nodeToInsert;
                         nodeToInsert.prev = tail;
                         tail = nodeToInsert;
                         tail.next = null;
-                        Console.WriteLine("lOG: ADD in TAIL======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev == null);
-                        Console.WriteLine("LOG: ADD in TAIL======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next is null: {2}", head.value, head.prev == null, head.next == null);
-                        Console.WriteLine("LOG: ADD in TAIL======\nTail.value: {0}\nTail.prev is null: {1}\nTail.next is null: {2}\nLOG's END ======", tail.value, tail.prev == null, tail.next == null);
+                        Console.WriteLine("=== LOG: ADD in TAIL ===\n======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev.value);
+                        Console.WriteLine("======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next: {2}", head.value, head.prev == null, head.next.value);
+                        Console.WriteLine("======\nTail.value: {0}\nTail.prev: {1}\nTail.next is null: {2}\n=== LOG ADD in TAIL END ===", tail.value, tail.prev.value, tail.next == null);
 
                         return;
                     }
@@ -115,9 +115,9 @@ namespace OrderedList
                         nodeToInsert.prev = null;
                         head = nodeToInsert;
                         head.prev = null;
-                        Console.WriteLine("lOG: ADD in HEAD======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev == null);
-                        Console.WriteLine("LOG: ADD in HEAD======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next is null: {2}", head.value, head.prev == null, head.next == null);
-                        Console.WriteLine("LOG: ADD in HEAD======\nTail.value: {0}\nTail.prev is null: {1}\nTail.next is null: {2}\nLOG's END ======", tail.value, tail.prev == null, tail.next == null);
+                        Console.WriteLine("=== LOG: ADD in HEAD ===\n======\nnodeToInsert.value:{0}\nnodeToInsert.next: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next.value, nodeToInsert.prev == null);
+                        Console.WriteLine("======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next: {2}", head.value, head.prev == null, head.next.value);
+                        Console.WriteLine("======\nTail.value: {0}\nTail.prev: {1}\nTail.next is null: {2}\n=== LOG ADD in HEAD END ===", tail.value, tail.prev.value, tail.next == null);
 
                         return;
                     }
@@ -127,13 +127,15 @@ namespace OrderedList
                     // Вставка нового элемента между элементами 
                     // с учётом признака упорядоченности списка
                     if ((result == 1 && _ascending) ||
-                        ((result == -1 || result == 0) && !_ascending))
+                        (result == -1 && !_ascending))
                     {
                         nodeToInsert.next = node;
                         nodeToInsert.prev = node.prev;
                         node.prev.next = nodeToInsert;
                         node.prev = nodeToInsert;
-
+                        Console.WriteLine("=== LOG: ADD in MIDDLE ===\n======\nnodeToInsert.value:{0}\nnodeToInsert.next: {1}\nnodeToInsert.prev: {2}", nodeToInsert.value, nodeToInsert.next.value, nodeToInsert.prev.value);
+                        Console.WriteLine("======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next: {2}", head.value, head.prev == null, head.next.value);
+                        Console.WriteLine("======\nTail.value: {0}\nTail.prev: {1}\nTail.next is null: {2}\n=== LOG ADD in MIDDLE END ===", tail.value, tail.prev.value, tail.next == null);
                         return;
                     }
 
@@ -261,77 +263,19 @@ namespace OrderedList
     {
         static void Main(string[] args)
         {
-            OrderedList<int> ascList = new OrderedList<int>(true);
-            Console.WriteLine("Count: {0}\nHead is null: {1}\nTail is null: {2}\n",
-            ascList.Count(),
-            ascList.head == null,
-            ascList.tail == null);
-            ascList.Add(123);
-            Console.WriteLine("\nCount: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
-                ascList.Count(),
-                ascList.head.value,
-                ascList.tail.value,
-                ascList.head.next == null,
-                ascList.head.prev == null,
-                ascList.tail.prev == null,
-                ascList.tail.next == null);
-            Console.WriteLine(ascList.PrintList());
+            OrderedList<int> ascList = new OrderedList<int>(false);
+
             ascList.Add(12);
-            Console.WriteLine("\nCount: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
-                ascList.Count(),
-                ascList.head.value,
-                ascList.tail.value,
-                ascList.head.next == null,
-                ascList.head.prev == null,
-                ascList.tail.prev == null,
-                ascList.tail.next == null);
+            ascList.Add(12);
+            ascList.Add(0);
+            ascList.Add(0);
+            ascList.Add(-1);
+            ascList.Add(-1);
+            Console.WriteLine(ascList.PrintList()); 
+            
             //OrderedList<int> descList = new OrderedList<int>(false);
-            //Console.WriteLine("Count: {0}\nHead is null: {1}\nTail is null: {2}",
-            //descList.Count(),
-            //descList.head == null,
-            //descList.tail == null);
-            //descList.Add(9);
-            //Console.WriteLine("Count: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
-            //    descList.Count(),
-            //    descList.head.value,
-            //    descList.tail.value,
-            //    descList.head.next == null,
-            //    descList.head.prev == null,
-            //    descList.tail.prev == null,
-            //    descList.tail.next == null);
-            //Console.WriteLine(descList.PrintList());
-
             //OrderedList<string> strList = new OrderedList<string>(true);
-            //Console.WriteLine("Count before Adding: {0}\nHead is null: {1}\nTail is null: {2}",
-            //strList.Count(),
-            //strList.head == null,
-            //strList.tail == null);
-            //strList.Add("привет");
-            //Console.WriteLine("Count: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
-            //    strList.Count(),
-            //    strList.head.value,
-            //    strList.tail.value,
-            //    strList.head.next == null,
-            //    strList.head.prev == null,
-            //    strList.tail.prev == null,
-            //    strList.tail.next == null);
-            //Console.WriteLine(strList.PrintList());
-
             //OrderedList<string> str2List = new OrderedList<string>(false);
-            //Console.WriteLine("Count before Adding: {0}\nHead is null: {1}\nTail is null: {2}",
-            //str2List.Count(),
-            //str2List.head == null,
-            //str2List.tail == null);
-            //str2List.Add("пока");
-            //Console.WriteLine("Count: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
-            //    str2List.Count(),
-            //    str2List.head.value,
-            //    str2List.tail.value,
-            //    str2List.head.next == null,
-            //    str2List.head.prev == null,
-            //    str2List.tail.prev == null,
-            //    str2List.tail.next == null);
-            //Console.WriteLine(str2List.PrintList());
 
             Console.ReadKey();
         }
