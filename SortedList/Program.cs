@@ -97,6 +97,10 @@ namespace OrderedList
                         tail.next = nodeToInsert;
                         nodeToInsert.prev = tail;
                         tail = nodeToInsert;
+                        tail.next = null;
+                        Console.WriteLine("lOG: ADD in TAIL======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev == null);
+                        Console.WriteLine("LOG: ADD in TAIL======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next is null: {2}", head.value, head.prev == null, head.next == null);
+                        Console.WriteLine("LOG: ADD in TAIL======\nTail.value: {0}\nTail.prev is null: {1}\nTail.next is null: {2}\nLOG's END ======", tail.value, tail.prev == null, tail.next == null);
 
                         return;
                     }
@@ -110,6 +114,10 @@ namespace OrderedList
                         head.prev = nodeToInsert;
                         nodeToInsert.prev = null;
                         head = nodeToInsert;
+                        head.prev = null;
+                        Console.WriteLine("lOG: ADD in HEAD======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev == null);
+                        Console.WriteLine("LOG: ADD in HEAD======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next is null: {2}", head.value, head.prev == null, head.next == null);
+                        Console.WriteLine("LOG: ADD in HEAD======\nTail.value: {0}\nTail.prev is null: {1}\nTail.next is null: {2}\nLOG's END ======", tail.value, tail.prev == null, tail.next == null);
 
                         return;
                     }
@@ -140,10 +148,7 @@ namespace OrderedList
                 head.prev = null;
                 tail = nodeToInsert;
                 tail.next = null;
-                tail.prev =null;
-                Console.WriteLine("lOG: ======\nnodeToInsert.value:{0}\nnodeToInsert.next is null: {1}\nnodeToInsert.prev is null: {2}", nodeToInsert.value, nodeToInsert.next == null, nodeToInsert.prev == null);
-                Console.WriteLine("LOG: ======\nHead.value: {0}\nHead.prev is null: {1}\nHead.next is null: {2}", head.value, head.prev == null, head.next == null);
-                Console.WriteLine("LOG: ======\nTail.value: {0}\nTail.prev is null: {1}\nTail.next is null: {2}\nLOG's END ======", tail.value, tail.prev == null, tail.next == null);
+                tail.prev = null;
             }
 
         }
@@ -271,7 +276,15 @@ namespace OrderedList
                 ascList.tail.prev == null,
                 ascList.tail.next == null);
             Console.WriteLine(ascList.PrintList());
-
+            ascList.Add(12);
+            Console.WriteLine("\nCount: {0}\nHead: {1}\nTail: {2}\nHead.next is null: {3}\nHead.prev is null: {4}\nTail.next is null: {5}\nTail.prev is null: {6}",
+                ascList.Count(),
+                ascList.head.value,
+                ascList.tail.value,
+                ascList.head.next == null,
+                ascList.head.prev == null,
+                ascList.tail.prev == null,
+                ascList.tail.next == null);
             //OrderedList<int> descList = new OrderedList<int>(false);
             //Console.WriteLine("Count: {0}\nHead is null: {1}\nTail is null: {2}",
             //descList.Count(),

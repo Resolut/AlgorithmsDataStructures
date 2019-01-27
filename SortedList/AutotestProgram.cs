@@ -98,6 +98,7 @@ namespace AlgorithmsDataStructures
                         tail.next = nodeToInsert;
                         nodeToInsert.prev = tail;
                         tail = nodeToInsert;
+                        tail.next = null;
 
                         return;
                     }
@@ -111,6 +112,7 @@ namespace AlgorithmsDataStructures
                         head.prev = nodeToInsert;
                         nodeToInsert.prev = null;
                         head = nodeToInsert;
+                        head.prev = null;
 
                         return;
                     }
