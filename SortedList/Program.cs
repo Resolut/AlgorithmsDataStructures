@@ -263,14 +263,18 @@ namespace OrderedList
     {
         static void Main(string[] args)
         {
-            OrderedList<int> ascList = new OrderedList<int>(false);
+            OrderedList<int> ascList = new OrderedList<int>(true);
 
             ascList.Add(12);
             ascList.Add(12);
+            ascList.Add(12);
+            ascList.Add(12);
             ascList.Add(0);
             ascList.Add(0);
-            ascList.Add(-1);
-            ascList.Add(-1);
+            ascList.Add(0);
+            ascList.Add(1);
+            ascList.Add(1);
+            ascList.Add(1);
             Console.WriteLine(ascList.PrintList()); 
             
             //OrderedList<int> descList = new OrderedList<int>(false);
