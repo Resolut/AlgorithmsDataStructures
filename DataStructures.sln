@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderedList", "SortedList\O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderedListTests", "OrderedListTests\OrderedListTests.csproj", "{1C6F325D-C116-4F8E-9C7F-062DBBF72477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTable", "HasTable\HashTable.csproj", "{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C6F325D-C116-4F8E-9C7F-062DBBF72477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
