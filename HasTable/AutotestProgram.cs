@@ -21,19 +21,53 @@ namespace AlgorithmsDataStructures
         public int HashFun(string value)
         {
             // всегда возвращает корректный индекс слота
-            return 0;
+            int hash = 0;
+            for (int i = 0; i < value.Length; i++)
+            {
+                hash += value[i];
+            }
+            hash %= size;
+
+            return hash;
         }
 
         public int SeekSlot(string value)
         {
             // находит индекс пустого слота для значения, или -1
-            return -1;
+            int startSlot = HashFun(value);
+            if (slots[startSlot] == null)
+                return startSlot;
+            else
+            {
+                int offset = startSlot;
+                bool loopEnds = false; // флаг оповещает, что цикл прошёл до конца таблицы
+                while (slots[offset] != null && offset < slots.Length)
+                {
+                    if (offset + step >= slots.Length)
+                    {
+                        loopEnds = true;
+                        offset = offset + step - slots.Length;
+                    }
+                    if (loopEnds && offset >= startSlot)
+                        break;
+                    if (slots[offset] == null)
+                        return offset;
+                    offset += step;
+                }
+            }
+            return -1; // не удалось найти свободный слот из-за коллизий
         }
 
         public int Put(string value)
         {
             // записываем значение по хэш-функции
+            int target = HashFun(value);
 
+            if (slots[target] == null)
+            {
+                slots[target] = value;
+                return target;
+            }
             // возвращается индекс слота или -1
             // если из-за коллизий элемент не удаётся разместить 
             return -1;
@@ -42,6 +76,12 @@ namespace AlgorithmsDataStructures
         public int Find(string value)
         {
             // находит индекс слота со значением, или -1
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i] == value)
+                    return i;
+            }
+
             return -1;
         }
     }
