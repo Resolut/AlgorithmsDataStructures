@@ -22,12 +22,14 @@ namespace AlgorithmsDataStructures
         {
             // всегда возвращает корректный индекс слота
             int hash = 0;
-
-            for (int i = 0; i < value.Length; i++)
+            if (value != null)
             {
-                hash += value[i];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    hash += value[i];
+                }
+                hash %= size;
             }
-            hash %= size;
 
             return hash;
         }
