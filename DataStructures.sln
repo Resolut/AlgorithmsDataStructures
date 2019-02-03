@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderedListTests", "Ordered
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTable", "HasTable\HashTable.csproj", "{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTableTests", "HashTableTests\HashTableTests.csproj", "{C29D96F2-2AB3-48A9-8FCF-F7CE48499DCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916F8A06-527D-4EA6-88A0-F1E5AC1F99AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29D96F2-2AB3-48A9-8FCF-F7CE48499DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29D96F2-2AB3-48A9-8FCF-F7CE48499DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29D96F2-2AB3-48A9-8FCF-F7CE48499DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29D96F2-2AB3-48A9-8FCF-F7CE48499DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
