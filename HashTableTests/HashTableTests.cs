@@ -408,7 +408,7 @@ namespace AlgorithmsDataStructures.Tests
             int expected_1 = 1;
             int actual_1 = hTable.Find("B");
 
-            int expected_2 = 2;
+            int expected_2 = -1;
             int actual_2 = hTable.Find("C");
 
             int expected_3 = 3;
