@@ -81,34 +81,6 @@ namespace AlgorithmsDataStructures
 
         public int Find(string value)
         {
-            //// находит индекс слота со значением, или -1
-            //int startSlot = HashFun(value);
-
-            //if (slots[startSlot] == value)
-            //    return startSlot;
-            //else
-            //{
-            //    int offset = startSlot;
-            //    bool loopEnds = false; // флаг оповещает, что цикл прошёл до конца таблицы
-
-            //    while (slots[offset] != null && offset < slots.Length)
-            //    {
-            //        if (offset + step >= slots.Length)
-            //        {
-            //            loopEnds = true;
-            //            offset = offset + step - slots.Length;
-            //        }
-            //        if (loopEnds && offset >= startSlot)
-            //            break;
-            //        if (slots[offset] == value)
-            //            return offset;
-
-            //        offset += step;
-            //    }
-            //}
-
-            //return -1;
-
             // находит индекс пустого слота для значения, или -1
             int startSlot = HashFun(value);
 
@@ -122,6 +94,7 @@ namespace AlgorithmsDataStructures
                 while (slots[offset] != value)
                 {
                     offset += step;
+
                     if (offset >= slots.Length)
                     {
                         loopEnds = true;
