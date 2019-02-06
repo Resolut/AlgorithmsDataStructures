@@ -281,7 +281,7 @@ namespace AlgorithmsDataStructures.Tests
         }
 
         [TestMethod()]
-        public void PutTest_if_hTable_is_empty()
+        public void Put_if_HashTable_is_empty()
         {
             HashTable hTable = new HashTable(19, 3);
             string value = "Test";
@@ -345,7 +345,7 @@ namespace AlgorithmsDataStructures.Tests
         }
 
         [TestMethod()]
-        public void FindTest_if_Target_Has_Same_Hash_Is_Not_Found()
+        public void Find_if_Target_Has_Same_Hash_Is_Not_Found()
         {
             HashTable hTable = new HashTable(5, 3);
             hTable.slots[2] = "C";
@@ -361,7 +361,7 @@ namespace AlgorithmsDataStructures.Tests
         }
 
         [TestMethod()]
-        public void FindTest_if_Found_in_LastSlot()
+        public void Find_if_Found_in_LastSlot()
         {
             HashTable hTable = new HashTable(5, 3);
             hTable.slots[2] = "C";
@@ -393,7 +393,7 @@ namespace AlgorithmsDataStructures.Tests
         }
 
         [TestMethod()]
-        public void FindTest_Found_in_Order()
+        public void Find_Found_in_Order()
         {
             HashTable hTable = new HashTable(5, 3);
             hTable.slots[0] = "A";
@@ -422,6 +422,32 @@ namespace AlgorithmsDataStructures.Tests
             Assert.AreEqual(expected_2, actual_2);
             Assert.AreEqual(expected_3, actual_3);
             Assert.AreEqual(expected_4, actual_4);
+        }
+
+        [TestMethod()]
+        public void Find_if_First_Slot_is_Null()
+        {
+            HashTable hTable = new HashTable(5, 3);
+            hTable.slots[0] = "A";
+            hTable.slots[1] = "B";
+            hTable.slots[2] = "C";
+            hTable.slots[3] = "D";
+
+            int expected = -1;
+            int actual = hTable.Find("J");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Find_if_HashTable_is_Null()
+        {
+            HashTable hTable = new HashTable(5, 3);
+
+            int expected = -1;
+            int actual = hTable.Find("J");
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
