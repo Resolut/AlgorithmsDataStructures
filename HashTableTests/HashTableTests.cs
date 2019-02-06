@@ -1,5 +1,4 @@
-﻿using AlgorithmsDataStructures;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlgorithmsDataStructures.Tests
 {
