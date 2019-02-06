@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace AlgorithmsDataStructures.Tests
 {
@@ -290,6 +291,7 @@ namespace AlgorithmsDataStructures.Tests
 
             Assert.AreEqual(expectedSlot, actualSlot);
             Assert.AreEqual(value, hTable.slots[17]);
+            Assert.IsTrue(hTable.size == 19);
         }
 
         [TestMethod()]
@@ -304,12 +306,139 @@ namespace AlgorithmsDataStructures.Tests
 
             Assert.AreEqual(expectedSlot, actualSlot);
             Assert.AreEqual(value, hTable.slots[16]);
+            Assert.IsTrue(hTable.size == 19);
 
             int failSlot = hTable.Put(value2);
             int expectedFail = -1;
 
             Assert.AreEqual(expectedFail, failSlot);
             Assert.AreEqual(value, hTable.slots[16]);
+            Assert.IsTrue(hTable.size == 19);
+        }
+
+        [TestMethod()]
+        public void Put_in_Last_Free_Slot()
+        {
+            HashTable hTable = new HashTable(5, 3);
+            string value1 = "A";
+            string value2 = "B";
+            string value3 = "C";
+            string value4 = "D";
+            string target = "E";
+
+
+            int actualSlot1 = hTable.Put(value1);
+            Assert.AreEqual(value1, hTable.slots[0]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot2 = hTable.Put(value2);
+            Assert.AreEqual(value2, hTable.slots[1]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot3 = hTable.Put(value3);
+            Assert.AreEqual(value3, hTable.slots[2]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot4 = hTable.Put(value4);
+            Assert.AreEqual(value4, hTable.slots[3]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot5 = hTable.Put(target);
+            Assert.AreEqual(target, hTable.slots[4]);
+            Assert.IsTrue(hTable.size == 5);
+
+
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Assert.IsNotNull(hTable.slots[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void Put_Dupclicate_()
+        {
+            HashTable hTable = new HashTable(5, 3);
+            string value1 = "A";
+            string value2 = "B";
+            string value3 = "C";
+            string value4 = "D";
+            string target = "A";
+
+
+            int actualSlot1 = hTable.Put(value1);
+            Assert.AreEqual(value1, hTable.slots[0]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot2 = hTable.Put(value2);
+            Assert.AreEqual(value2, hTable.slots[1]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot3 = hTable.Put(value3);
+            Assert.AreEqual(value3, hTable.slots[2]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot4 = hTable.Put(value4);
+            Assert.AreEqual(value4, hTable.slots[3]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot5 = hTable.Put(target);
+            Assert.IsNull(hTable.slots[4]);
+            Assert.IsTrue(hTable.size == 5);
+        }
+
+        [TestMethod()]
+        public void Put_if_All_values_Are_Equal_()
+        {
+            HashTable hTable = new HashTable(5, 3);
+            string value1 = "A";
+            string value2 = "A";
+            string value3 = "A";
+            string value4 = "A";
+            string target = "A";
+
+
+            int actualSlot1 = hTable.Put(value1);
+            Assert.AreEqual(value1, hTable.slots[0]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot2 = hTable.Put(value2);
+            Assert.IsTrue(actualSlot2 == -1);
+            Assert.IsNull(hTable.slots[1]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot3 = hTable.Put(value3);
+            Assert.IsTrue(actualSlot3 == -1);
+            Assert.IsNull(hTable.slots[2]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot4 = hTable.Put(value4);
+            Assert.IsTrue(actualSlot4 == -1);
+            Assert.IsNull(hTable.slots[3]);
+            Assert.IsTrue(hTable.size == 5);
+
+            int actualSlot5 = hTable.Put(target);
+            Assert.IsTrue(actualSlot5 == -1);
+            Assert.IsNull(hTable.slots[4]);
+            Assert.IsTrue(hTable.size == 5);
+        }
+
+        [TestMethod()]
+        public void Put_Equal_Values_Collisions()
+        {
+            HashTable hTable = new HashTable(19, 3);
+            string[] values = { "L", "M", "N", "O", "P", "Q",
+                                "R", "S", "A", "B", "C", "D",
+                                "E", "F", "G", "H", "I", "J", "K"};
+            for (int i = 0; i < values.Length; i++)
+            {
+                int actualSlot1 = hTable.Put(values[i]);
+                Assert.AreEqual(values[i], hTable.slots[i]);
+                Assert.IsTrue(hTable.size == 19);
+            }
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Assert.IsNotNull(hTable.slots[i]);
+            }
         }
 
         [TestMethod()]
@@ -383,7 +512,7 @@ namespace AlgorithmsDataStructures.Tests
 
             int expected_4 = 4;
             int actual_4 = hTable.Find("W");
-            
+
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(expected_1, actual_1);
             Assert.AreEqual(expected_2, actual_2);
@@ -447,6 +576,173 @@ namespace AlgorithmsDataStructures.Tests
             int actual = hTable.Find("J");
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Put_Values_More_Than_Table_Size()
+        {
+            HashTable hTable = new HashTable(5, 3);
+
+            hTable.Put("A");
+            hTable.Put("B");
+            hTable.Put("C");
+            hTable.Put("D");
+            hTable.Put("E");
+
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Assert.IsNotNull(hTable.slots[i]);
+            }
+
+            hTable = new HashTable(17, 3);
+
+            hTable.Put("A");
+            hTable.Put("B");
+            hTable.Put("C");
+            hTable.Put("D");
+            hTable.Put("E");
+
+            hTable.Put("F");
+            hTable.Put("G");
+            hTable.Put("H");
+            hTable.Put("I");
+            hTable.Put("J");
+
+            hTable.Put("K");
+            hTable.Put("L");
+            hTable.Put("M");
+            hTable.Put("N");
+            hTable.Put("O");
+
+            hTable.Put("P");
+            hTable.Put("Q");
+
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Assert.IsNotNull(hTable.slots[i]);
+            }
+
+            hTable = new HashTable(26, 3);
+
+            hTable.Put("A");
+            hTable.Put("B");
+            hTable.Put("C");
+            hTable.Put("D");
+            hTable.Put("E");
+
+            hTable.Put("F");
+            hTable.Put("G");
+            hTable.Put("H");
+            hTable.Put("I");
+            hTable.Put("J");
+
+            hTable.Put("K");
+            hTable.Put("L");
+            hTable.Put("M");
+            hTable.Put("N");
+            hTable.Put("O");
+
+            hTable.Put("P");
+            hTable.Put("Q");
+            hTable.Put("R");
+            hTable.Put("S");
+            hTable.Put("T");
+
+            hTable.Put("U");
+            hTable.Put("V");
+            hTable.Put("W");
+            hTable.Put("X");
+            hTable.Put("Y");
+
+            hTable.Put("Z");
+
+            hTable.Put("a");
+            hTable.Put("b");
+            hTable.Put("c");
+            hTable.Put("d");
+            hTable.Put("e");
+
+            hTable.Put("f");
+            hTable.Put("g");
+            hTable.Put("h");
+            hTable.Put("i");
+            hTable.Put("j");
+
+            hTable.Put("k");
+            hTable.Put("l");
+            hTable.Put("m");
+            hTable.Put("n");
+            hTable.Put("o");
+
+            hTable.Put("p");
+            hTable.Put("q");
+            hTable.Put("r");
+            hTable.Put("s");
+            hTable.Put("t");
+
+            hTable.Put("u");
+            hTable.Put("v");
+            hTable.Put("w");
+            hTable.Put("x");
+            hTable.Put("y");
+
+            hTable.Put("z");
+
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Assert.IsNotNull(hTable.slots[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void Put_100_Values()
+        {
+            HashTable hTable = new HashTable(22, 3);
+
+            
+            hTable.Put("0");
+            hTable.Put("1");
+            hTable.Put("2");
+            hTable.Put("3");
+            hTable.Put("4");
+
+            hTable.Put("5");
+            hTable.Put("6");
+            hTable.Put("7");
+            hTable.Put("8");
+            hTable.Put("9");
+
+            hTable.Put("10");
+            hTable.Put("11");
+            hTable.Put("12");
+            hTable.Put("59");
+            hTable.Put("69");
+
+            hTable.Put("79");
+            hTable.Put("89");
+            hTable.Put("99");
+            hTable.Put("100");
+            hTable.Put("101");
+
+            hTable.Put("102");
+            hTable.Put("103");
+            hTable.Put("D");
+            hTable.Put("E");
+            hTable.Put("F");
+
+            hTable.Put("G");
+
+
+
+            for (int i = 0; i < hTable.slots.Length; i++)
+            {
+                Console.WriteLine(@"Слот {0} содержит значение? : {1};", i, hTable.slots[i] != null);
+                if (hTable.slots[i] == null)
+                    Console.WriteLine("slot [{0}] null;", i);
+                else
+                    Console.WriteLine("slot [{0}] = {1};", i, hTable.slots[i]);
+                Assert.IsNotNull(hTable.slots[i]);
+            }
         }
     }
 }
