@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 
 namespace AlgorithmsDataStructures.Tests
 {
@@ -308,11 +309,11 @@ namespace AlgorithmsDataStructures.Tests
             Assert.AreEqual(value, hTable.slots[16]);
             Assert.IsTrue(hTable.size == 19);
 
-            int failSlot = hTable.Put(value2);
-            int expectedFail = -1;
+            int actualNextSlot = hTable.Put(value2);
+            int expectedNextSlot = 0;
 
-            Assert.AreEqual(expectedFail, failSlot);
-            Assert.AreEqual(value, hTable.slots[16]);
+            Assert.AreEqual(expectedNextSlot, actualNextSlot);
+            Assert.AreEqual(value2, hTable.slots[0]);
             Assert.IsTrue(hTable.size == 19);
         }
 
@@ -398,27 +399,29 @@ namespace AlgorithmsDataStructures.Tests
 
 
             int actualSlot1 = hTable.Put(value1);
+            Console.WriteLine("ActualSlot1: {0}",actualSlot1);
             Assert.AreEqual(value1, hTable.slots[0]);
-            Assert.IsTrue(hTable.size == 5);
 
             int actualSlot2 = hTable.Put(value2);
-            Assert.IsTrue(actualSlot2 == -1);
-            Assert.IsNull(hTable.slots[1]);
-            Assert.IsTrue(hTable.size == 5);
+            Console.WriteLine("ActualSlot2: {0}", actualSlot2);
+            Assert.IsTrue(actualSlot2 == 3);
+            Assert.AreEqual(value2, hTable.slots[3]);
 
             int actualSlot3 = hTable.Put(value3);
+            Console.WriteLine("ActualSlot2: {0}", actualSlot3);
             Assert.IsTrue(actualSlot3 == -1);
-            Assert.IsNull(hTable.slots[2]);
-            Assert.IsTrue(hTable.size == 5);
+            Assert.IsNull(hTable.slots[1]);
 
             int actualSlot4 = hTable.Put(value4);
+            Console.WriteLine("ActualSlot2: {0}", actualSlot4);
             Assert.IsTrue(actualSlot4 == -1);
-            Assert.IsNull(hTable.slots[3]);
-            Assert.IsTrue(hTable.size == 5);
+            Assert.IsNull(hTable.slots[4]);
 
             int actualSlot5 = hTable.Put(target);
+            Console.WriteLine("ActualSlot2: {0}", actualSlot5);
             Assert.IsTrue(actualSlot5 == -1);
-            Assert.IsNull(hTable.slots[4]);
+            Assert.IsNull(hTable.slots[2]);
+
             Assert.IsTrue(hTable.size == 5);
         }
 
@@ -695,53 +698,25 @@ namespace AlgorithmsDataStructures.Tests
         }
 
         [TestMethod()]
-        public void Put_100_Values()
+        public void Put_96_Values()
         {
-            HashTable hTable = new HashTable(22, 3);
+            HashTable hTable = new HashTable(100, 3);
 
-            
-            hTable.Put("0");
-            hTable.Put("1");
-            hTable.Put("2");
-            hTable.Put("3");
-            hTable.Put("4");
-
-            hTable.Put("5");
-            hTable.Put("6");
-            hTable.Put("7");
-            hTable.Put("8");
-            hTable.Put("9");
-
-            hTable.Put("10");
-            hTable.Put("11");
-            hTable.Put("12");
-            hTable.Put("59");
-            hTable.Put("69");
-
-            hTable.Put("79");
-            hTable.Put("89");
-            hTable.Put("99");
-            hTable.Put("100");
-            hTable.Put("101");
-
-            hTable.Put("102");
-            hTable.Put("103");
-            hTable.Put("D");
-            hTable.Put("E");
-            hTable.Put("F");
-
-            hTable.Put("G");
-
-
+            for (int i = 0; i < hTable.size; i++)
+            {
+                string value = ""+(char)(i +33);
+                hTable.Put(value);
+            }
 
             for (int i = 0; i < hTable.slots.Length; i++)
             {
-                Console.WriteLine(@"Слот {0} содержит значение? : {1};", i, hTable.slots[i] != null);
                 if (hTable.slots[i] == null)
-                    Console.WriteLine("slot [{0}] null;", i);
+                    Console.WriteLine(@"slot [{0}] null", i);
                 else
-                    Console.WriteLine("slot [{0}] = {1};", i, hTable.slots[i]);
+                    Console.WriteLine(@"slot [{0}] = {1}", i, hTable.slots[i]);
+
                 Assert.IsNotNull(hTable.slots[i]);
+                
             }
         }
     }
