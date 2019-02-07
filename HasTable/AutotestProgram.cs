@@ -67,16 +67,13 @@ namespace AlgorithmsDataStructures
         public int Put(string value)
         {
             // записываем значение по хэш-функции
-            int target = HashFun(value);
+            int target = SeekSlot(value);
 
-            if (slots[target] == null)
-            {
+            if (target != -1)
                 slots[target] = value;
-                return target;
-            }
             // возвращается индекс слота или -1
             // если из-за коллизий элемент не удаётся разместить 
-            return -1;
+            return target;
         }
 
         public int Find(string value)
