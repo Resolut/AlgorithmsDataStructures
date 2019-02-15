@@ -148,7 +148,7 @@ namespace HashTable
             int colCounter2 = 0;
             int colCounter3 = 0;
 
-            for (int i = 0; i < table.size * 5; i++)
+            for (int i = 0; i < table.size * 10; i++)
             {
                 string value = "" + (char)(i + 33);
                 int putSlot = table.Put(value);
@@ -160,7 +160,7 @@ namespace HashTable
                 int putSlot3 = table3.Put(value);
                 if (putSlot3 == -1) ++colCounter3;
             }
-            System.Console.WriteLine("Число коллизий\nфункции1:{0}\nфункции2:{1}\nфункции3:{2}", colCounter1, colCounter2, colCounter3);
+            System.Console.WriteLine("Число коллизий\n хэш-функции1:{0}\n хэш-функции2:{1}\n хэш-функции3:{2}", colCounter1, colCounter2, colCounter3);
 
             System.Console.ReadKey();
         }
