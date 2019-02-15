@@ -7,21 +7,27 @@ namespace HashTable
         public int size;
         public int step;
         public string[] slots;
-        private delegate int HashF(string value);
+        public delegate int HashF(string value);
 
         List<HashF> familyHashFun = new List<HashF>();
 
-        public int CurrentHash { get; set; } // случайно выбранная хэш-функции 
-
         public HashTable(int sz, int stp)
         {
-            // Хэш-функция 1
+
             HashF func1 = (value) =>
             {
                 int hash = 0;
-                int a = 5;
-                int b = 3;
-                int p = 7;
+                int[,] arrPar = { { 5, 3, 7 },
+                                  { 8, 11, 17 },
+                                  { 7, 0, 13 } };
+
+                System.DateTime time = System.DateTime.Now;
+                int seed = time.Millisecond;
+                System.Random rand = new System.Random(seed);
+                int hPar = rand.Next(arrPar.GetLength(0)); // Случайный выбор параметров хэш-функции из массива arrPar
+                int a = arrPar[hPar, 0];
+                int b = arrPar[hPar, 1];
+                int p = arrPar[hPar, 2];
 
                 if (value != null)
                 {
@@ -29,68 +35,20 @@ namespace HashTable
                     {
                         hash += value[i];
                     }
-                    hash = ((a * hash + b) % p) % size;
+                    hash = (a * hash + b) % p % size;
                 }
                 return hash;
             };
-
-            // Хэш-функция 2
-            HashF func2 = (value) =>
-            {
-                int hash = 0;
-                int a = 8;
-                int b = 11;
-                int p = 17;
-
-                if (value != null)
-                {
-                    for (int i = 0; i < value.Length; i++)
-                    {
-                        hash += value[i];
-                    }
-                    hash = ((a * hash + b) % p) % size;
-                }
-                return hash;
-            };
-
-            // Хэш-функция 3
-            HashF func3 = (value) =>
-            {
-                int hash = 0;
-                int a = 7;
-                int b = 0;
-                int p = 13;
-
-                if (value != null)
-                {
-                    for (int i = 0; i < value.Length; i++)
-                    {
-                        hash += value[i];
-                    }
-                    hash = ((a * hash + b) % p) % size;
-                }
-                return hash;
-            };
-
             familyHashFun.Add(func1);
-            familyHashFun.Add(func2);
-            familyHashFun.Add(func3);
-
-            System.DateTime time = System.DateTime.Now;
-            int seed = time.Millisecond;
-            System.Random rand = new System.Random(seed);
-            CurrentHash = rand.Next(familyHashFun.Count); // Случайный выбор хэш-функции из списка
-
             size = sz;
             step = stp;
             slots = new string[size];
             for (int i = 0; i < size; i++) slots[i] = null;
-
         }
 
         public int HashFun(string value)
         {
-            return familyHashFun[CurrentHash](value); // Вызываеем хэш-функцию, определённую случайным образом в конструкторе
+            return familyHashFun[0](value); // Вызываеем хэш-функцию с набором подготовленных и случайно выбранных параметров 
         }
 
         public int SeekSlot(string value)
@@ -186,21 +144,23 @@ namespace HashTable
             HashTable table = new HashTable(23, 5);
             HashTable table2 = new HashTable(23, 5);
             HashTable table3 = new HashTable(23, 5);
+            int colCounter1 = 0;
+            int colCounter2 = 0;
+            int colCounter3 = 0;
 
-            for (int i = 0; i < table.size; i++)
+            for (int i = 0; i < table.size * 10; i++)
             {
                 string value = "" + (char)(i + 33);
-                table.Put(value);
-                table2.Put(value);
-                table3.Put(value);
-            }
+                int putSlot = table.Put(value);
+                if (putSlot == -1) ++colCounter1;
 
-            System.Console.WriteLine("Таблица 1 используемая хэш-функция #{0}", table.CurrentHash + 1);
-            table.PrintHashTable();
-            System.Console.WriteLine("Таблица 2 используемая хэш-функция #{0}", table2.CurrentHash + 1);
-            table2.PrintHashTable();
-            System.Console.WriteLine("Таблица 3 используемая хэш-функция #{0}", table3.CurrentHash + 1);
-            table3.PrintHashTable();
+                int putSlot2 = table2.Put(value);
+                if (putSlot2 == -1) ++colCounter2;
+
+                int putSlot3 = table3.Put(value);
+                if (putSlot3 == -1) ++colCounter3;
+            }
+            System.Console.WriteLine("Число колизий\nфункции1{0}\nфункции2:{1}\nфункции3:{2}", colCounter1, colCounter2, colCounter3);
 
             System.Console.ReadKey();
         }
