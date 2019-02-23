@@ -148,7 +148,7 @@ namespace HashTable
             int colCounter2 = 0;
             int colCounter3 = 0;
 
-            for (int i = 0; i < table.size * 10; i++)
+            for (int i = 0; i < table.size * 2; i++)
             {
                 string value = "" + (char)(i + 33);
                 int putSlot = table.Put(value);
