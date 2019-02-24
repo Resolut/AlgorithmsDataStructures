@@ -20,5 +20,17 @@ namespace AlgorithmsDataStructures.Tests
             Assert.IsTrue(strSet.size == 5);
             Assert.IsTrue(strSet.Get("word"));
         }
+
+        [TestMethod()]
+        public void Put_if_Set_Already_Has_This_Elem()
+        {
+            PowerSet<string> strSet = new PowerSet<string>(5);
+            strSet.Put("word");
+
+            Assert.IsTrue(strSet.size == 5);
+            Assert.IsTrue(strSet.Get("word"));
+
+            strSet.Put("word");
+        }
     }
 }
