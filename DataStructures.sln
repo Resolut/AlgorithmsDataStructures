@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeDictionaryTests", "Na
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSet", "PowerSet\PowerSet.csproj", "{7B4CF3DB-A256-41C2-BBD2-8F65A0465C05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSetTests", "PowerSetTests\PowerSetTests.csproj", "{7697082D-5B1C-423C-8365-5B5E55B6749D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -279,6 +281,18 @@ Global
 		{7B4CF3DB-A256-41C2-BBD2-8F65A0465C05}.Release|x64.Build.0 = Release|Any CPU
 		{7B4CF3DB-A256-41C2-BBD2-8F65A0465C05}.Release|x86.ActiveCfg = Release|Any CPU
 		{7B4CF3DB-A256-41C2-BBD2-8F65A0465C05}.Release|x86.Build.0 = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|x64.Build.0 = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Debug|x86.Build.0 = Debug|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|x64.ActiveCfg = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|x64.Build.0 = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|x86.ActiveCfg = Release|Any CPU
+		{7697082D-5B1C-423C-8365-5B5E55B6749D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
