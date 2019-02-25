@@ -5,47 +5,18 @@ namespace AlgorithmsDataStructures
 {
     public class PowerSet<T>
     {
-        public int size;
-        public T[] slots;
+        private readonly List<T> items;
 
-        public PowerSet(int sz)
+        public PowerSet()
         {
-            size = sz;
-            slots = new T[size];
-            for (int i = 0; i < size; i++) slots[i] = default(T);
-        }
-
-        /// <summary>
-        /// Вычисляет и возвращает хэш для передаваемого значения
-        /// </summary>
-        /// <param name="value">значение типа T для которого требуется вычислить хэш</param>
-        /// <returns>Хэш типа int</returns>
-        public int HashFun(T value)
-        {
-            int hash = 0;
-            if (value != null)
-
-            {
-                if (typeof(T) == typeof(String) || typeof(T) == typeof(int) || typeof(T) == typeof(double))
-                {
-                    string val = value.ToString();
-
-                    for (int i = 0; i < val.Length; i++)
-                    {
-                        hash += val[i];
-                    }
-                    hash %= size;
-                }
-            }
-
-            return hash;
+            items = new List<T>();
         }
 
         /// <summary>
         /// Определяет количество элементов в текущем множестве
         /// </summary>
         /// <returns>количество элементов во множестве</returns>
-        public int Size() => size;
+        public int Size() => items.Count;
 
         /// <summary>
         /// производит добавление элемента в текущее множество, не допуская добавление дубликатов во множество
@@ -53,8 +24,8 @@ namespace AlgorithmsDataStructures
         /// <param name="value">добавляемый элемент</param>
         public void Put(T value)
         {
-            if (slots[HashFun(value)] == null)
-                slots[HashFun(value)] = value;
+            if (!Get(value))
+                items.Add(value);
         }
 
         /// <summary>
@@ -64,10 +35,7 @@ namespace AlgorithmsDataStructures
         /// <returns>возвращает true если value имеется в множестве, иначе false</returns>
         public bool Get(T value)
         {
-            if (slots[HashFun(value)].Equals(value))
-                return true;
-
-            return false;
+            return items.Contains(value);
         }
 
         /// <summary>
@@ -77,26 +45,9 @@ namespace AlgorithmsDataStructures
         /// <returns>возвращает true, если элемент найден в текущем множестве и удаление было произвеедено, иначе false</returns>
         public bool Remove(T value)
         {
-            if (size == 0) return false;
-
-            if (Get(value))
-            {
-                T[] outputArr = new T[size - 1];
-                int counter = 0;
-
-                for (int i = 0; i < slots.Length; i++) // копируем массив за вычетом удаляемого элемента
-                {
-                    if (i == HashFun(value)) continue;
-                    outputArr[counter] = slots[i];
-                    ++counter;
-                }
-                slots = outputArr;
-
-                return true;
-            }
-            // иначе false
-            return false;
+            return items.Remove(value);
         }
+
         /// <summary>
         /// вычисляет и возвращает новое множество-перечение текущего множества с множеством set2 
         /// </summary>
@@ -104,36 +55,18 @@ namespace AlgorithmsDataStructures
         /// <returns>множество-пересечение PowerSet<T> текущего множества и множества set2</returns>
         public PowerSet<T> Intersection(PowerSet<T> set2)
         {
-            PowerSet<T> outSet;
-            int finalSize = 0; // конечный размер для возвращаемого множества
+            PowerSet<T> interSet = new PowerSet<T>();
 
-            // возвращаемому множеству задаем временный размер большего из двух множеств
-            if (size < set2.size)
-                outSet = new PowerSet<T>(set2.size);
-            else
-                outSet = new PowerSet<T>(size);
-
-            for (int i = 0; i < size; i++)
+            foreach (T item in items)
             {
-                if (set2.Get(slots[i]))
+                // добавление всех элементов первого множества, которые присутствуют и во втором множестве
+                if (set2.items.Contains(item))
                 {
-                    outSet.Put(slots[i]);
-                    ++finalSize;
+                    interSet.Put(item);
                 }
             }
 
-            T[] tempArr = new T[finalSize];
-            int counter = 0;
-
-            for (int i = 0; i < outSet.size; i++) // копируем массив выходного множества outSet за вычетом элементов, равным null
-            {
-                if (outSet.slots[i] == null) continue;
-                tempArr[counter] = outSet.slots[i];
-                ++counter;
-            }
-            outSet.slots = tempArr;
-
-            return outSet;
+            return interSet;
         }
 
         /// <summary>
@@ -143,35 +76,24 @@ namespace AlgorithmsDataStructures
         /// <returns>множество-объединение PowerSet<T> текущего множества со множеством set2</returns>
         public PowerSet<T> Union(PowerSet<T> set2)
         {
-            PowerSet<T> outSet = new PowerSet<T>(size + set2.size);
-            int finalSize = 0; // конечный размер для возвращаемого множества
+            PowerSet<T> unionSet = new PowerSet<T>();
 
-            for (int i = 0; i < size; i++) // добавляем все элементы первого множества
+            foreach (T item in items)
             {
-                outSet.Put(slots[i]);
+                // добавление всех элементов первого множества
+                unionSet.Put(item);
             }
 
-            for (int i = 0; i < set2.size; i++) // добавляем все элементы второго множества, которые отсутствуют в первом
+            foreach (T item in set2.items)
             {
-                if (!Get(set2.slots[i]))
+                // добавление всех элементов второго множества, которые отсутствуют в первом
+                if (!Get(item))
                 {
-                    outSet.Put(set2.slots[i]);
-                    ++finalSize;
+                    unionSet.Put(item);
                 }
             }
 
-            T[] tempArr = new T[finalSize];
-            int counter = 0;
-
-            for (int i = 0; i < outSet.size; i++) // копируем массив выходного множества outSet за вычетом элементов, равным null
-            {
-                if (outSet.slots[i] == null) continue;
-                tempArr[counter] = outSet.slots[i];
-                ++counter;
-            }
-            outSet.slots = tempArr;
-
-            return outSet;
+            return unionSet;
         }
 
         /// <summary>
@@ -181,30 +103,21 @@ namespace AlgorithmsDataStructures
         /// <returns>множество PowerSet<T> разница текущего множества и множества set2</returns>
         public PowerSet<T> Difference(PowerSet<T> set2)
         {
-            PowerSet<T> outSet = new PowerSet<T>(size);
-            int finalSize = 0; // конечный размер для возвращаемого множества
+            PowerSet<T> difSet = new PowerSet<T>();
 
-            for (int i = 0; i < set2.size; i++) // добавляем все элементы второго множества, которые отсутствуют в первом
+            foreach (T item in items)
             {
-                if (!Get(set2.slots[i]))
-                {
-                    outSet.Put(set2.slots[i]);
-                    ++finalSize;
-                }
+                // добавляем все элементы первого множества
+                difSet.Put(item);
             }
 
-            T[] tempArr = new T[finalSize];
-            int counter = 0;
-
-            for (int i = 0; i < outSet.size; i++) // копируем массив выходного множества outSet за вычетом элементов, равным null
+            foreach (T item in set2.items)
             {
-                if (outSet.slots[i] == null) continue;
-                tempArr[counter] = outSet.slots[i];
-                ++counter;
+                // удаляем все элементы второго множества, которые присутствуют в первом
+                difSet.Remove(item);
             }
-            outSet.slots = tempArr;
 
-            return outSet;
+            return difSet;
         }
 
         /// <summary>
@@ -214,9 +127,10 @@ namespace AlgorithmsDataStructures
         /// <returns>возвращает true если set2 есть подмножество текущего элемента, иначе false</returns>
         public bool IsSubset(PowerSet<T> set2)
         {
-            for (int i = 0; i < set2.size; i++) // провекра, что все элементы второго множества присутствуют в первом
+            foreach (T item in set2.items) 
             {
-                if (!Get(set2.slots[i])) return false;
+                // провекра, что все элементы второго множества присутствуют в первом
+                if (!Get(item)) return false;
             }
 
             return true;
