@@ -16,8 +16,10 @@ namespace AlgorithmsDataStructures
         /// Определяет количество элементов в текущем множестве
         /// </summary>
         /// <returns>количество элементов во множестве</returns>
-        public int Size() => items.Count;
-
+        public int Size()
+        {
+           return items.Count;
+        }
         /// <summary>
         /// производит добавление элемента в текущее множество, не допуская добавление дубликатов во множество
         /// </summary>
