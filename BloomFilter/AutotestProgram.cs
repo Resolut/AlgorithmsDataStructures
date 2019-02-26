@@ -11,9 +11,9 @@ namespace AlgorithmsDataStructures
 
         public BloomFilter(int f_len)
         {
-            filter_len = f_len;
+            filter_len = f_len; // для тестов передавать 32
             // создаём битовый массив длиной f_len ...
-            bloomFilter = 0;
+            bloomFilter = 0; // маска из 32 битов
         }
 
         // хэш-функции
