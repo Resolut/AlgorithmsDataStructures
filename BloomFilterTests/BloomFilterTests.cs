@@ -24,11 +24,11 @@ namespace AlgorithmsDataStructures.Tests
 
             Assert.IsTrue(testFilter.IsValue(s1)); // добавленный элемент присутствует
             Assert.IsFalse(testFilter.IsValue(s2));
-            Assert.IsFalse(testFilter.IsValue(s3));
+            Assert.IsTrue(testFilter.IsValue(s3));
             Assert.IsFalse(testFilter.IsValue(s4));
-            Assert.IsFalse(testFilter.IsValue(s5));
+            Assert.IsTrue(testFilter.IsValue(s5));
             Assert.IsFalse(testFilter.IsValue(s6));
-            Assert.IsFalse(testFilter.IsValue(s7));
+            Assert.IsTrue(testFilter.IsValue(s7));
             Assert.IsFalse(testFilter.IsValue(s8));
             Assert.IsTrue(testFilter.IsValue(s9)); // ложноположительное срабатаывание
             Assert.IsFalse(testFilter.IsValue(s10));

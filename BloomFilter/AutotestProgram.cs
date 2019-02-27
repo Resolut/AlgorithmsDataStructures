@@ -24,8 +24,7 @@ namespace AlgorithmsDataStructures
 
             for (int i = 0; i < str1.Length; i++)
             {
-                if (i != 0)
-                    code = (code * MULTIPLIER + (int)str1[i]) % filter_len;
+                code = (code * MULTIPLIER + (int)str1[i]) % filter_len;
             }
 
             return code;
@@ -38,8 +37,7 @@ namespace AlgorithmsDataStructures
 
             for (int i = 0; i < str1.Length; i++)
             {
-                if (i != 0)
-                    code = (code * MULTIPLIER + (int)str1[i]) % filter_len;
+                code = (code * MULTIPLIER + (int)str1[i]) % filter_len;
             }
             
             return code;
