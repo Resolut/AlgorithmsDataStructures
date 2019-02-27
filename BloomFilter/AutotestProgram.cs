@@ -53,8 +53,6 @@ namespace AlgorithmsDataStructures
 
         public bool IsValue(string str1)
         {
-            Console.WriteLine("\"{0}\":\tHash1\t{1}\tHash2\t{2}", str1, Hash1(str1), Hash2(str1));
-
             if (bloomFilter.Get(Hash1(str1)) && bloomFilter.Get(Hash2(str1))) return true;
 
             return false;
