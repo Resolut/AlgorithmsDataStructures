@@ -21,7 +21,7 @@ namespace AlgorithmsDataStructures.Tests
             string s10 = "9012345678";
 
             testFilter.Add(s1);
-
+            BloomFilter.PrintIndexAndValues(testFilter.bloomFilter);
             Assert.IsTrue(testFilter.IsValue(s1)); // добавленный элемент присутствует
             Assert.IsFalse(testFilter.IsValue(s2));
             Assert.IsTrue(testFilter.IsValue(s3));

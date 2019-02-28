@@ -8,7 +8,7 @@ namespace AlgorithmsDataStructures
     public class BloomFilter
     {
         public int filter_len;
-        private BitArray bloomFilter;
+        public BitArray bloomFilter;
 
         public BloomFilter(int f_len)
         {
@@ -51,9 +51,20 @@ namespace AlgorithmsDataStructures
 
         public bool IsValue(string str1)
         {
+            Console.WriteLine("\"{0}\":\tHash1\t{1}\tHash2\t{2}", str1, Hash1(str1), Hash2(str1));
             if (bloomFilter.Get(Hash1(str1)) && bloomFilter.Get(Hash2(str1))) return true;
 
             return false;
+        }
+
+        public static void PrintIndexAndValues(IEnumerable myCol)
+        {
+            int i = 0;
+            foreach (Object obj in myCol)
+            {
+                Console.WriteLine("    [{0}]:    {1}", i++, obj);
+            }
+            Console.WriteLine();
         }
     }
 }
