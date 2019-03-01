@@ -41,28 +41,43 @@ namespace NativeCache
         {
             // возвращает true если ключ имеется,
             // иначе false
-            if (slots[HashFun(key)] == key) return true;
+            if (slots[HashFun(key)] == key)
+            {
+                hits[HashFun(key)]++;
+                return true;
+            }
 
             return false;
         }
 
         public void Put(string key, T value)
         {
-            // записываем значение ключа по хэш-функции
-            slots[HashFun(key)] = key;
-
-            // гарантированно записываем 
-            // значение value по ключу key
-            values[HashFun(key)] = value;
+            if (slots[HashFun(key)] == null)
+            {
+                // записываем значение ключа по хэш-функции
+                slots[HashFun(key)] = key;
+                // гарантированно записываем 
+                // значение value по ключу key
+                values[HashFun(key)] = value;
+            }
+            else
+            {
+                // записываем ключ key и значение value в слот с минимальным числом обращений
+                slots[GetMinHitsElem()] = key;
+                values[GetMinHitsElem()] = value;
+            }
         }
 
         public T Get(string key)
         {
-            // возвращает value для key, 
-            // или null если ключ не найден
             if (IsKey(key))
                 return values[HashFun(key)];
             return default(T);
+        }
+
+        private int GetMinHitsElem()
+        {
+            return Array.IndexOf(hits, hits.Min());
         }
     }
 
@@ -70,6 +85,7 @@ namespace NativeCache
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
