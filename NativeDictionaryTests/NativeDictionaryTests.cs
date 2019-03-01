@@ -111,11 +111,8 @@ namespace AlgorithmsDataStructures.Tests
                                 clients.Get(names[4]));
             Console.WriteLine("=== LOG END ===");
 
-            string expectedValue = "Regular";
             string actualValue = clients.Get(names[0]);
-            string expectedValue2 = "New";
             string actualValue2 = clients.Get(names[1]);
-            string expectedValue3 = "Deptor";
             string actualValue3 = clients.Get(names[2]);
             string expectedValue4 = "VIP";
             string actualValue4 = clients.Get(names[3]);
