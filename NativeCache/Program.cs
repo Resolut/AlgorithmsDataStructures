@@ -83,8 +83,7 @@ namespace NativeCache
         {
             return Array.IndexOf(hits, hits.Min()); // индекс слота с минимальным числом обращений
         }
-
-
+        
     }
 
     class Program

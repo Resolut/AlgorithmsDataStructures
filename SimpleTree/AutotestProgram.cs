@@ -5,9 +5,9 @@ namespace AlgorithmsDataStructures2
 {
     public class SimpleTreeNode<T>
     {
-        T NodeValue; // значение в узле
-        SimpleTreeNode<T> Parent; // родитель или null для корня
-        List<SimpleTreeNode<T>> Children; // список дочерних узлов или null
+        public T NodeValue; // значение в узле
+        public SimpleTreeNode<T> Parent; // родитель или null для корня
+        public List<SimpleTreeNode<T>> Children; // список дочерних узлов или null
 
         public SimpleTreeNode(T val, SimpleTreeNode<T> parent)
         {
@@ -19,7 +19,7 @@ namespace AlgorithmsDataStructures2
 
     public class SimpleTree<T>
     {
-        SimpleTreeNode<T> Root; // корень, может быть null
+        public SimpleTreeNode<T> Root; // корень, может быть null
 
         public SimpleTree(SimpleTreeNode<T> root)
         {
@@ -29,6 +29,37 @@ namespace AlgorithmsDataStructures2
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
             // ваш код добавления нового дочернего узла существующему ParentNode
+            if (ParentNode != null)
+            {
+                SimpleTreeNode<T> current = Root;
+
+                if (current == null)
+                {
+                    Root = ParentNode;
+                    ParentNode.Children.Add(NewChild);
+                    return;
+                }
+
+                while (current.Children.Contains(ParentNode)) // TODO проверить наличие узла в дочерних узлах
+                {
+                    if (current == ParentNode)
+                    {
+                        current.Children.Add(NewChild);
+                        return;
+                    }
+                    else
+                    {
+                        foreach (SimpleTreeNode<T> childNode in current.Children)
+                        {
+                            if (childNode == ParentNode)
+                            {
+                                childNode.Children.Add(NewChild);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
