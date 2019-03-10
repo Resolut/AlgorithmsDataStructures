@@ -29,37 +29,14 @@ namespace AlgorithmsDataStructures2
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
             // ваш код добавления нового дочернего узла существующему ParentNode
-            if (ParentNode != null)
+            Stack<SimpleTreeNode<T>> nodesList = new Stack<SimpleTreeNode<T>>();
+            nodesList.Push(Root);
+            
+            while(nodesList.Count > 0)
             {
-                SimpleTreeNode<T> current = Root;
-
-                if (current == null)
-                {
-                    Root = ParentNode;
-                    ParentNode.Children.Add(NewChild);
-                    return;
-                }
-
-                while (current.Children.Contains(ParentNode)) // TODO проверить наличие узла в дочерних узлах
-                {
-                    if (current == ParentNode)
-                    {
-                        current.Children.Add(NewChild);
-                        return;
-                    }
-                    else
-                    {
-                        foreach (SimpleTreeNode<T> childNode in current.Children)
-                        {
-                            if (childNode == ParentNode)
-                            {
-                                childNode.Children.Add(NewChild);
-                                return;
-                            }
-                        }
-                    }
-                }
+                SimpleTreeNode<T> node = nodesList.Peek(); 
             }
+
         }
 
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
