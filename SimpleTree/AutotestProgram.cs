@@ -53,6 +53,15 @@ namespace AlgorithmsDataStructures2
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
             // ваш код поиска узлов по значению
+            SimpleTreeNode<T> node = Root;
+            List<SimpleTreeNode<T>> result = null;
+            if (node.NodeValue.Equals(val))
+            {
+                result.Add(node);
+                return result;
+            }
+
+            int count = Root.Children.Count;
             return null;
         }
 
