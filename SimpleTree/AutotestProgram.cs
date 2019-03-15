@@ -29,13 +29,6 @@ namespace AlgorithmsDataStructures2
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
             // ваш код добавления нового дочернего узла существующему ParentNode
-            Stack<SimpleTreeNode<T>> nodesList = new Stack<SimpleTreeNode<T>>();
-            nodesList.Push(Root);
-            
-            while(nodesList.Count > 0)
-            {
-                SimpleTreeNode<T> node = nodesList.Peek(); 
-            }
 
         }
 
@@ -54,15 +47,20 @@ namespace AlgorithmsDataStructures2
         {
             // ваш код поиска узлов по значению
             SimpleTreeNode<T> node = Root;
+            int count = Root.Children.Count;
             List<SimpleTreeNode<T>> result = null;
+
             if (node.NodeValue.Equals(val))
             {
                 result.Add(node);
-                return result;
             }
 
-            int count = Root.Children.Count;
-            return null;
+            for (int i = 0; result == null && i < count; i++)
+            {
+                result = FindNodesByValue(val);
+            }
+
+            return result;
         }
 
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
