@@ -29,25 +29,56 @@ namespace AlgorithmsDataStructures2
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
             // ваш код добавления нового дочернего узла существующему ParentNode
+            List<SimpleTreeNode<T>> targetList = FindNodesByValue(ParentNode.NodeValue); // получаем список узлов
 
+            if (targetList != null)
+            {
+                SimpleTreeNode<T> targetNode = targetList[0]; // берем первый узел, если узлов с таким значением в дереве несколько
+                targetNode.Children.Add(NewChild);
+            }
+
+            // TODO проверить, что узел добавлен к текущему узлу
         }
 
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
         {
-            // ваш код удаления существующего узла NodeToDelete
+            List<SimpleTreeNode<T>> targetList = FindNodesByValue(NodeToDelete.NodeValue);
+
+            if (targetList != null)
+            {
+                SimpleTreeNode<T> targetNode = targetList[0];
+                targetNode.Parent.Children.Remove(targetNode);
+                targetNode.Parent.Children.AddRange(targetNode.Children);
+                targetNode = null;
+
+                // TODO проверить, что родитель имеет потомков и узел удалён
+                // TODO проверить, что потомки ссылаются на родителя
+            }
         }
 
         public List<SimpleTreeNode<T>> GetAllNodes()
         {
             // ваш код выдачи всех узлов дерева в определённом порядке
-            return null;
+            SimpleTreeNode<T> node = Root;
+            int count = node.Children.Count;
+            List<SimpleTreeNode<T>> result = null;
+
+            result.Add(node);
+
+            for (int i = 0; result == null && i < count; i++)
+            {
+                node = node.Children[i];
+                result = GetAllNodes();
+            }
+
+            return result;
         }
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
             // ваш код поиска узлов по значению
             SimpleTreeNode<T> node = Root;
-            int count = Root.Children.Count;
+            int count = node.Children.Count;
             List<SimpleTreeNode<T>> result = null;
 
             if (node.NodeValue.Equals(val))
@@ -57,6 +88,7 @@ namespace AlgorithmsDataStructures2
 
             for (int i = 0; result == null && i < count; i++)
             {
+                node = node.Children[i];
                 result = FindNodesByValue(val);
             }
 
