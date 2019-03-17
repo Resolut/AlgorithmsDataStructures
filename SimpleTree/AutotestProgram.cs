@@ -66,9 +66,8 @@ namespace AlgorithmsDataStructures2
             int count = 0;
             if (node.Children != null)
                 count = node.Children.Count;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
 
-            
+            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
 
             for (int i = 0; i < count; i++)
             {
