@@ -62,37 +62,20 @@ namespace AlgorithmsDataStructures2
 
         public List<SimpleTreeNode<T>> GetAllNodes()
         {
-            SimpleTreeNode<T> node = Root;
-            int count = 0;
-            if (node.Children != null)
-                count = node.Children.Count;
-
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
-
-            for (int i = 0; i < count; i++)
-            {
-                node = node.Children[i];
-                result = GetAllNodes();
-            }
-
-            return result;
+            return Recursive(Root);
         }
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
             SimpleTreeNode<T> node = Root;
-            int count = 0;
-
-            if (node.Children != null)
-                count = node.Children.Count;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>>();
+            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
 
             if (node.NodeValue.Equals(val))
             {
                 result.Add(node);
             }
 
-            for (int i = 0; result == null && i < count; i++)
+            for (int i = 0; node.Children != null && i < node.Children.Count; i++)
             {
                 node = node.Children[i];
                 result = FindNodesByValue(val);
@@ -109,23 +92,7 @@ namespace AlgorithmsDataStructures2
 
         public int Count()
         {
-            // количество всех узлов в дереве
-            SimpleTreeNode<T> node = Root;
-            int count = 0;
-
-            if (node.Children != null)
-                count = node.Children.Count;
-            int result = 0;
-
-            result++;
-
-            for (int i = 0; i < count; i++)
-            {
-                node = node.Children[i];
-                Count();
-            }
-
-            return result;
+            return GetAllNodes().Count;
         }
 
         public int LeafCount()
@@ -148,6 +115,23 @@ namespace AlgorithmsDataStructures2
             return leafCount;
         }
 
+        private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T))
+        {
+            SimpleTreeNode<T> node = targetNode;
+            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
+
+            //if (node.NodeValue.Equals(val))
+            //{
+            //    result.Add(node);
+            //}
+
+            for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+            {
+                result = Recursive(node.Children[i]);
+            }
+
+            return result;
+        }
     }
 
 }
