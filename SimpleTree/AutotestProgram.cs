@@ -28,19 +28,19 @@ namespace AlgorithmsDataStructures2
 
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
-            // ваш код добавления нового дочернего узла существующему ParentNode
-            List<SimpleTreeNode<T>> targetList = FindNodesByValue(ParentNode.NodeValue); // получаем список узлов
-
-            if (targetList != null)
+            if (FindNodesByValue(ParentNode.NodeValue) != null)
             {
-                SimpleTreeNode<T> targetNode = targetList[0]; // берем первый узел, если узлов с таким значением в дереве несколько
-                targetNode.Children = new List<SimpleTreeNode<T>>
+                SimpleTreeNode<T> targetNode = FindNodesByValue(ParentNode.NodeValue)[0]; // берём первый узел, если узлов с таким значением в дереве несколько
+                //Console.WriteLine("LOG targetNode = {0}", targetNode.NodeValue);
+                if (targetNode.Children == null)
                 {
-                    NewChild
-                };
-            }
+                    targetNode.Children = new List<SimpleTreeNode<T>> { NewChild };
+                }
+                else
+                    targetNode.Children.Add(NewChild);
 
-            // TODO проверить, что узел добавлен к текущему узлу
+                NewChild.Parent = targetNode;
+            }
         }
 
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
@@ -50,13 +50,12 @@ namespace AlgorithmsDataStructures2
             if (targetList != null)
             {
                 SimpleTreeNode<T> targetNode = targetList[0];
-                targetNode.Parent.Children.Remove(targetNode);
-                targetNode.Parent.Children.AddRange(targetNode.Children);
-                targetNode = null;
-
-                // TODO проверить, что родитель имеет потомков и узел удалён
-                // TODO проверить, что потомки ссылаются на родителя
-                // TODO проверить, что узел не является корнем дерева
+                if (targetNode != Root)
+                {
+                    targetNode.Parent.Children.Remove(targetNode);
+                    targetNode.Parent.Children.AddRange(targetNode.Children);
+                    targetNode = null;
+                }
             }
         }
 
@@ -67,27 +66,14 @@ namespace AlgorithmsDataStructures2
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
-            SimpleTreeNode<T> node = Root;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
-
-            if (node.NodeValue.Equals(val))
-            {
-                result.Add(node);
-            }
-
-            for (int i = 0; node.Children != null && i < node.Children.Count; i++)
-            {
-                node = node.Children[i];
-                result = FindNodesByValue(val);
-            }
-
-            return result;
+            return Recursive(Root, val, true);
         }
 
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
         {
-            // ваш код перемещения узла вместе с его поддеревом -- 
-            // в качестве дочернего для узла NewParent
+            OriginalNode.Parent.Children.Remove(OriginalNode);
+            OriginalNode.Parent = NewParent;
+            AddChild(NewParent, OriginalNode);
         }
 
         public int Count()
@@ -97,37 +83,29 @@ namespace AlgorithmsDataStructures2
 
         public int LeafCount()
         {
-            SimpleTreeNode<T> node = Root;
-            int count = node.Children.Count;
-            int leafCount = 0;
-
-            if (node.Children == null)
-            {
-                leafCount++;
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                node = node.Children[i];
-                leafCount = LeafCount();
-            }
-
-            return leafCount;
+            Predicate<SimpleTreeNode<T>> hasNullChildren = delegate (SimpleTreeNode<T> node) { return node.Children == null; };
+            List<SimpleTreeNode<T>> allNodesList = Recursive(Root);
+            int  result = allNodesList.FindAll(hasNullChildren).Count;
+            return result;
         }
 
-        private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T))
+        private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
         {
             SimpleTreeNode<T> node = targetNode;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
+            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>>();
 
-            //if (node.NodeValue.Equals(val))
-            //{
-            //    result.Add(node);
-            //}
+            if (isFind)
+            {
+                if (node.NodeValue.Equals(val))
+                    result.Add(node);
+            }
 
             for (int i = 0; node.Children != null && i < node.Children.Count; i++)
             {
-                result = Recursive(node.Children[i]);
+                if (isFind)
+                    Recursive(node.Children[i], val, true);
+                else
+                    result.AddRange(Recursive(node.Children[i]));
             }
 
             return result;
