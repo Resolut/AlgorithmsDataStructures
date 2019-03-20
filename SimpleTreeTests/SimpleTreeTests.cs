@@ -54,6 +54,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.AreEqual(expected, actual);
 
             testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(1, null));
+
             nodes = testTree.GetAllNodes();
             Assert.IsTrue(nodes.Count == 2);
 
@@ -153,5 +154,100 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.AreEqual(expectedLeafs, leafs);
         }
 
+
+        [TestMethod()]
+        public void Get_Lists_All_Nodes_and_FoundNodes()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(5, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(6, null));
+
+            List<SimpleTreeNode<int>> foundtList = testTree.FindNodesByValue(4);
+
+            foreach (var item in foundtList)
+            {
+                Console.WriteLine("item = {0}", item.NodeValue); 
+            }
+            Assert.IsTrue(foundtList.Count == 1);
+            Assert.IsTrue(testTree.Count() == 6);
+        }
+
+        [TestMethod()]
+        public void Get_FoundNodes_If_Duplicates_Exists()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+            
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы первого уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(5, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(6, null));
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(7, null)); // узлы второго уровня
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[4], new SimpleTreeNode<int>(8, null));
+
+            testTree.AddChild(testTree.Root.Children[4].Children[0], new SimpleTreeNode<int>(7, null)); // узлы третьего уровня
+
+            List<SimpleTreeNode<int>> foundtList = testTree.FindNodesByValue(7); // Список найденных узлов
+
+            foreach (var item in foundtList)
+            {
+                Console.WriteLine("item = {0}", item.NodeValue);
+            }
+
+            int expectedCount = 11;
+            int expectedLeafs = 5;
+            int expectedFoundNodes = 4;
+
+            int actualCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+            int actualFoundNodes = foundtList.Count;
+
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.AreEqual(expectedLeafs,actualLeafs);
+            Assert.AreEqual(expectedFoundNodes, actualFoundNodes);
+        }
+
+        [TestMethod()]
+        public void FindNodesByValue_If_TargetNode_Is_not_Exists()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы первого уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(5, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(6, null));
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(7, null)); // узлы второго уровня
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[4], new SimpleTreeNode<int>(8, null));
+
+            testTree.AddChild(testTree.Root.Children[4].Children[0], new SimpleTreeNode<int>(7, null)); // узлы третьего уровня
+
+            List<SimpleTreeNode<int>> foundtList = testTree.FindNodesByValue(12); // Список найденных узлов
+
+
+            int expectedCount = 11;
+            int expectedLeafs = 5;
+            int expectedFoundNodes = 0;
+
+            int actualCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+            int actualFoundNodes = foundtList.Count;
+
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+            Assert.AreEqual(expectedFoundNodes, actualFoundNodes);
+        }
     }
 }
