@@ -77,11 +77,11 @@ namespace AlgorithmsDataStructures2.Tests
                 if (i < 5)
                     testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(i, null));
                 else if (i < 7)
-                    testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(i, testTree.Root.Children[0]));
+                    testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(i, null));
                 else if (i == 7)
-                    testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(i, testTree.Root.Children[1]));
+                    testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(i, null));
                 else
-                    testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(i, testTree.Root.Children[2]));
+                    testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(i, null));
             }
 
             Console.WriteLine("=========Log==========");
@@ -112,5 +112,46 @@ namespace AlgorithmsDataStructures2.Tests
             int leafs = testTree.LeafCount();
             Assert.AreEqual(expectedLeafs, leafs);
         }
+
+        [TestMethod()]
+        public void Get_All_Nodes_in_3_level_Tree_One_Child()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null));
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(6, null));
+
+            Console.WriteLine("=========Log==========");
+            Console.Write("Корень: {0}", testTree.Root.NodeValue);
+            Console.Write("\t Узлов: {0}", testTree.Count());
+            Console.WriteLine("\t Листьев: {0}", testTree.LeafCount());
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            foreach (SimpleTreeNode<int> node in nodes)
+            {
+                Console.WriteLine("Current Node Value:\t{0}\nParrent Node:\t{1}", node.NodeValue, (node.Parent == null) ? -9999 : node.Parent.NodeValue);
+
+                for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+                {
+                    Console.WriteLine("SubNode:\t{0} ", node.Children[i].NodeValue);
+                    if (node.Children[i].Children == null)
+                        Console.WriteLine("Does not have children.\n");
+                }
+                Console.WriteLine();
+            }
+
+            int expectedNodes = 6;
+            int actualNodes = testTree.Count();
+            Assert.AreEqual(expectedNodes, actualNodes);
+
+            int expectedLeafs = 4;
+            int leafs = testTree.LeafCount();
+            Assert.AreEqual(expectedLeafs, leafs);
+        }
+
     }
 }

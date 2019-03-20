@@ -28,14 +28,13 @@ namespace AlgorithmsDataStructures2
 
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
+            Console.WriteLine("LOG\nFindNodesByValue(ParentNode.NodeValue = {0}", FindNodesByValue(ParentNode.NodeValue).Count);
             if (FindNodesByValue(ParentNode.NodeValue) != null)
             {
                 SimpleTreeNode<T> targetNode = FindNodesByValue(ParentNode.NodeValue)[0]; // берём первый узел, если узлов с таким значением в дереве несколько
-                //Console.WriteLine("LOG targetNode = {0}", targetNode.NodeValue);
+
                 if (targetNode.Children == null)
-                {
                     targetNode.Children = new List<SimpleTreeNode<T>> { NewChild };
-                }
                 else
                     targetNode.Children.Add(NewChild);
 
@@ -85,8 +84,7 @@ namespace AlgorithmsDataStructures2
         {
             Predicate<SimpleTreeNode<T>> hasNullChildren = delegate (SimpleTreeNode<T> node) { return node.Children == null; };
             List<SimpleTreeNode<T>> allNodesList = Recursive(Root);
-            int  result = allNodesList.FindAll(hasNullChildren).Count;
-            return result;
+            return allNodesList.FindAll(hasNullChildren).Count;
         }
 
         private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
