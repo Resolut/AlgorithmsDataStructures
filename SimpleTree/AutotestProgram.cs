@@ -28,7 +28,6 @@ namespace AlgorithmsDataStructures2
 
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
-            Console.WriteLine("LOG\nFindNodesByValue(ParentNode.NodeValue = {0}", FindNodesByValue(ParentNode.NodeValue).Count);
             if (FindNodesByValue(ParentNode.NodeValue) != null)
             {
                 SimpleTreeNode<T> targetNode = FindNodesByValue(ParentNode.NodeValue)[0]; // берём первый узел, если узлов с таким значением в дереве несколько
@@ -42,7 +41,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
+        public void DeleteNode(SimpleTreeNode<T> NodeToDelete) // Написать тесты для проверки удаления узла
         {
             List<SimpleTreeNode<T>> targetList = FindNodesByValue(NodeToDelete.NodeValue);
 
@@ -90,10 +89,11 @@ namespace AlgorithmsDataStructures2
         private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
         {
             SimpleTreeNode<T> node = targetNode;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>>();
+            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
 
             if (isFind)
             {
+                result = new List<SimpleTreeNode<T>>();
                 if (node.NodeValue.Equals(val))
                     result.Add(node);
             }
@@ -101,7 +101,7 @@ namespace AlgorithmsDataStructures2
             for (int i = 0; node.Children != null && i < node.Children.Count; i++)
             {
                 if (isFind)
-                    Recursive(node.Children[i], val, true);
+                     result.AddRange(Recursive(node.Children[i], val, true));
                 else
                     result.AddRange(Recursive(node.Children[i]));
             }
