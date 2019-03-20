@@ -51,7 +51,8 @@ namespace AlgorithmsDataStructures2
                 if (targetNode != Root)
                 {
                     targetNode.Parent.Children.Remove(targetNode);
-                    targetNode.Parent.Children.AddRange(targetNode.Children);
+                    if (targetNode.Children != null)
+                        targetNode.Parent.Children.AddRange(targetNode.Children);
                     targetNode = null;
                 }
             }
@@ -64,7 +65,7 @@ namespace AlgorithmsDataStructures2
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
-            return Recursive(Root, val, true);
+            return Recursive(Root, val, true).Count == 0 ? null : Recursive(Root, val, true);
         }
 
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
@@ -101,7 +102,7 @@ namespace AlgorithmsDataStructures2
             for (int i = 0; node.Children != null && i < node.Children.Count; i++)
             {
                 if (isFind)
-                     result.AddRange(Recursive(node.Children[i], val, true));
+                    result.AddRange(Recursive(node.Children[i], val, true));
                 else
                     result.AddRange(Recursive(node.Children[i]));
             }
