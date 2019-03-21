@@ -154,7 +154,6 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.AreEqual(expectedLeafs, leafs);
         }
 
-
         [TestMethod()]
         public void Get_Lists_All_Nodes_and_FoundNodes()
         {
@@ -385,7 +384,7 @@ namespace AlgorithmsDataStructures2.Tests
         }
 
         [TestMethod()]
-        public void Test_Count_and_LeafCount() // TODO дописать тест
+        public void Test_Count_and_LeafCount()
         {
             SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
 
@@ -402,29 +401,24 @@ namespace AlgorithmsDataStructures2.Tests
             testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(10, null));
 
             testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(11, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(12, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(13, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[1].Children[1], new SimpleTreeNode<int>(13, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[4].Children[1], new SimpleTreeNode<int>(11, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[4].Children[1], new SimpleTreeNode<int>(12, null)); // узлы третьего уровня
-            testTree.AddChild(testTree.Root.Children[4].Children[1], new SimpleTreeNode<int>(13, null)); // узлы третьего уровня
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(12, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(13, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[1], new SimpleTreeNode<int>(14, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[0], new SimpleTreeNode<int>(15, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[1], new SimpleTreeNode<int>(16, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(17, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(18, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(19, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(20, null));
 
-            int beforeDelNodesCount = 11;
-            int beforeDelLeafs = 5;
+            int expectedNodesCount = 20;
+            int expectedLeafs = 10;
 
             int actualNodesCount = testTree.Count();
             int actualLeafs = testTree.LeafCount();
 
-            Assert.AreEqual(beforeDelNodesCount, actualNodesCount);
-            Assert.AreEqual(beforeDelLeafs, actualLeafs);
-
-            testTree.DeleteNode(new SimpleTreeNode<int>(7, testTree.Root.Children[4].Children[0])); // попытка удаления псевдо-листа со значением "7"
-
-            int afterDelNodesCount = 11;
-            int afterDelLeafs = 5;
-
-            int actualAfterDelNodesCount = testTree.Count();
-            int actualAfterDelLeafs = testTree.LeafCount();
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
 
             Console.WriteLine("=========Log==========");
             Console.WriteLine("Всего Узлов: {0}", testTree.Count());
@@ -451,11 +445,296 @@ namespace AlgorithmsDataStructures2.Tests
                 Console.WriteLine();
                 Console.WriteLine();
             }
+        }
 
-            Assert.AreEqual(afterDelNodesCount, actualAfterDelNodesCount);
-            Assert.IsTrue(testTree.Root.Children[4].Children[0].Children.Count == 1);
-            Assert.AreEqual(afterDelLeafs, actualAfterDelLeafs);
+        [TestMethod()]
+        public void Test_Count_and_LeafCount_if_Tree_Has_Root_Only()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
 
+            int expectedNodesCount = 1;
+            int expectedLeafs = 1;
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+        }
+
+        [TestMethod()]
+        public void DelteNode_in_3_Level_Tree_if_Node_Has_Descendants()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы первого уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null)); // узлы второго уровня
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(6, null));
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(8, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(9, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(10, null));
+
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(11, null)); // узлы третьего уровня
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(12, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(13, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[1], new SimpleTreeNode<int>(14, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[0], new SimpleTreeNode<int>(15, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[1], new SimpleTreeNode<int>(16, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(17, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(18, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(19, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(20, null));
+
+            int expectedNodesCount = 20;
+            int expectedLeafs = 10;
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+
+            Console.WriteLine("Отображение дерева:");
+            Console.WriteLine("Всего Узлов: {0}", testTree.Count());
+            Console.WriteLine("Всего Листьев: {0}\n", testTree.LeafCount());
+
+            testTree.DeleteNode(testTree.Root.Children[2].Children[1]); // попытка удаления узла "10"
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            foreach (SimpleTreeNode<int> node in nodes)
+            {
+                if (node == testTree.Root)
+                    Console.WriteLine("Корень дерева:\t{0}\nРодитель: -", node.NodeValue);
+                else
+                    Console.WriteLine("Текущий узел:\t{0}\nРодитель:\t{1}", node.NodeValue, node.Parent.NodeValue);
+
+                Console.Write("Потомки:");
+                for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+                {
+                    Console.Write(" [{0} ", node.Children[i].NodeValue);
+                    if (node.Children[i].Children == null)
+                        Console.Write(" - нет своих потомков; ]");
+                    else
+                        Console.Write(" - Есть свои потомки; ]");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+            int expectedNewChilds = 4;
+            int actualNewChilds = testTree.Root.Children[2].Children.Count;
+
+            Assert.AreEqual(expectedNewChilds, actualNewChilds);
+            Assert.IsNull(testTree.FindNodesByValue(10)); // проверка, что узел удалён
+
+            Assert.IsTrue(testTree.Root.Children[2].Children[0].NodeValue == 9); // проверка, что родитель удаленного узла добавил себе его потомков
+            Assert.IsTrue(testTree.Root.Children[2].Children[1].NodeValue == 18);
+            Assert.IsTrue(testTree.Root.Children[2].Children[2].NodeValue == 19);
+            Assert.IsTrue(testTree.Root.Children[2].Children[3].NodeValue == 20);
+
+            Assert.IsTrue(testTree.Root.Children[2].Children[0].Parent.NodeValue == 4); // проверка, что потомки ссылаются на родителя удаленного узла
+            Assert.IsTrue(testTree.Root.Children[2].Children[1].Parent.NodeValue == 4);
+            Assert.IsTrue(testTree.Root.Children[2].Children[2].Parent.NodeValue == 4);
+            Assert.IsTrue(testTree.Root.Children[2].Children[3].Parent.NodeValue == 4);
+
+            Assert.IsNull(testTree.Root.Children[2].Children[1].Children); // проверка что потомки удалленного узла по-прежнему не имеют потомков
+            Assert.IsNull(testTree.Root.Children[2].Children[2].Children);
+            Assert.IsNull(testTree.Root.Children[2].Children[3].Children);
+        }
+
+        [TestMethod()]
+        public void Delete_Root()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+            int expectedNodesCount = 4;
+            int expectedLeafs = 3;
+
+            testTree.DeleteNode(testTree.Root); // попытка удаления корня
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.IsNotNull(testTree.Root);
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+        }
+
+        [TestMethod()]
+        public void MoveNode_if_Node_is_Leaf()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+            int expectedNodesCount = 4;
+            int expectedLeafs = 2;
+
+            testTree.MoveNode(testTree.Root.Children[0], testTree.Root.Children[2]); // попытка перемещения узла листа
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.IsTrue(testTree.Root.Children[0].NodeValue == 3);
+            Assert.IsTrue(testTree.Root.Children[1].Children.Count == 1);
+            Assert.IsTrue(testTree.Root.Children[1].Children[0].NodeValue == 2);
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+
+            Console.WriteLine("Отображение дерева:");
+            Console.WriteLine("Всего Узлов: {0}", testTree.Count());
+            Console.WriteLine("Всего Листьев: {0}\n", testTree.LeafCount());
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            foreach (SimpleTreeNode<int> node in nodes)
+            {
+                if (node == testTree.Root)
+                    Console.WriteLine("Корень дерева:\t{0}\nРодитель: -", node.NodeValue);
+                else
+                    Console.WriteLine("Текущий узел:\t{0}\nРодитель:\t{1}", node.NodeValue, node.Parent.NodeValue);
+
+                Console.Write("Потомки:");
+                for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+                {
+                    Console.Write(" [{0} ", node.Children[i].NodeValue);
+                    if (node.Children[i].Children == null)
+                        Console.Write(" - нет своих потомков; ]");
+                    else
+                        Console.Write(" - Есть свои потомки; ]");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+        }
+
+        [TestMethod()]
+        public void MoveNode_if_Node_is_Root()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+            int expectedNodesCount = 4;
+            int expectedLeafs = 3;
+
+            testTree.MoveNode(testTree.Root, testTree.Root.Children[2]); // попытка перемещения корня
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.IsTrue(testTree.Root.NodeValue == 1);
+            Assert.IsNull(testTree.Root.Children[2].Children);
+            Assert.IsTrue(testTree.Root.Children[2].NodeValue == 4);
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+
+            Console.WriteLine("Отображение дерева:");
+            Console.WriteLine("Всего Узлов: {0}", testTree.Count());
+            Console.WriteLine("Всего Листьев: {0}\n", testTree.LeafCount());
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            foreach (SimpleTreeNode<int> node in nodes)
+            {
+                if (node == testTree.Root)
+                    Console.WriteLine("Корень дерева:\t{0}\nРодитель: -", node.NodeValue);
+                else
+                    Console.WriteLine("Текущий узел:\t{0}\nРодитель:\t{1}", node.NodeValue, node.Parent.NodeValue);
+
+                Console.Write("Потомки:");
+                for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+                {
+                    Console.Write(" [{0} ", node.Children[i].NodeValue);
+                    if (node.Children[i].Children == null)
+                        Console.Write(" - нет своих потомков; ]");
+                    else
+                        Console.Write(" - Есть свои потомки; ]");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+        }
+
+        [TestMethod()]
+        public void MoveNode_in_3_Level_Tree_if_Node_Has_Descendants()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null));
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы первого уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null)); // узлы второго уровня
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(6, null));
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(8, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(9, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(10, null));
+
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(11, null)); // узлы третьего уровня
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(12, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[0], new SimpleTreeNode<int>(13, null));
+            testTree.AddChild(testTree.Root.Children[0].Children[1], new SimpleTreeNode<int>(14, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[0], new SimpleTreeNode<int>(15, null));
+            testTree.AddChild(testTree.Root.Children[1].Children[1], new SimpleTreeNode<int>(16, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(17, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(18, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(19, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[1], new SimpleTreeNode<int>(20, null));
+
+            testTree.MoveNode(testTree.Root.Children[2],testTree.Root.Children[0].Children[1]);
+
+            int expectedNodesCount = 20;
+            int expectedLeafs = 10;
+
+            int actualNodesCount = testTree.Count();
+            int actualLeafs = testTree.LeafCount();
+
+            Assert.AreEqual(expectedNodesCount, actualNodesCount);
+            Assert.AreEqual(expectedLeafs, actualLeafs);
+            Assert.IsTrue(testTree.Root.Children.Count == 2);
+            Assert.IsTrue(testTree.Root.Children[0].Children[1].Children.Count == 2);
+            Assert.IsTrue(testTree.Root.Children[0].Children[1].Children[0].NodeValue == 14);
+            Assert.IsTrue(testTree.Root.Children[0].Children[1].Children[1].NodeValue == 4);
+
+
+            Console.WriteLine("Отображение дерева:");
+            Console.WriteLine("Всего Узлов: {0}", testTree.Count());
+            Console.WriteLine("Всего Листьев: {0}\n", testTree.LeafCount());
+
+            List<SimpleTreeNode<int>> nodes = testTree.GetAllNodes();
+
+            foreach (SimpleTreeNode<int> node in nodes)
+            {
+                if (node == testTree.Root)
+                    Console.WriteLine("Корень дерева:\t{0}\nРодитель: -", node.NodeValue);
+                else
+                    Console.WriteLine("Текущий узел:\t{0}\nРодитель:\t{1}", node.NodeValue, node.Parent.NodeValue);
+
+                Console.Write("Потомки:");
+                for (int i = 0; node.Children != null && i < node.Children.Count; i++)
+                {
+                    Console.Write(" [{0} ", node.Children[i].NodeValue);
+                    if (node.Children[i].Children == null)
+                        Console.Write(" - нет своих потомков; ]");
+                    else
+                        Console.Write(" - Есть свои потомки; ]");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
         }
     }
 }
