@@ -48,7 +48,6 @@ namespace AlgorithmsDataStructures2
             if (targetList != null)
             {
                 var targetNode = targetList.Find(delegate (SimpleTreeNode<T> node) { return node == NodeToDelete; });
-                //var targetNode = targetList.Find(delegate (SimpleTreeNode<T> node) { return node.Parent == NodeToDelete.Parent && node.Children == NodeToDelete.Children; });
                 if (targetNode != null && targetNode != Root)
                 {
                     targetNode.Parent.Children.Remove(targetNode);
