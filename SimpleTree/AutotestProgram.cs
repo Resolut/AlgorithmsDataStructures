@@ -47,12 +47,20 @@ namespace AlgorithmsDataStructures2
 
             if (targetList != null)
             {
-                SimpleTreeNode<T> targetNode = targetList[0];
-                if (targetNode != Root)
+                var targetNode = targetList.Find(delegate (SimpleTreeNode<T> node) { return node == NodeToDelete; });
+                //var targetNode = targetList.Find(delegate (SimpleTreeNode<T> node) { return node.Parent == NodeToDelete.Parent && node.Children == NodeToDelete.Children; });
+                if (targetNode != null && targetNode != Root)
                 {
                     targetNode.Parent.Children.Remove(targetNode);
                     if (targetNode.Children != null)
+                    {
+                        foreach (var child in targetNode.Children)
+                        {
+                            child.Parent = targetNode.Parent;
+                        }
                         targetNode.Parent.Children.AddRange(targetNode.Children);
+                    }
+
                     targetNode = null;
                 }
             }
@@ -82,15 +90,13 @@ namespace AlgorithmsDataStructures2
 
         public int LeafCount()
         {
-            Predicate<SimpleTreeNode<T>> hasNullChildren = delegate (SimpleTreeNode<T> node) { return node.Children == null; };
-            List<SimpleTreeNode<T>> allNodesList = Recursive(Root);
-            return allNodesList.FindAll(hasNullChildren).Count;
+            return Recursive(Root).FindAll(delegate (SimpleTreeNode<T> node) { return node.Children == null || node.Children.Count == 0; }).Count;
         }
 
         private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
         {
             SimpleTreeNode<T> node = targetNode;
-            List<SimpleTreeNode<T>> result = new List<SimpleTreeNode<T>> { node };
+            var result = new List<SimpleTreeNode<T>> { node };
 
             if (isFind)
             {
