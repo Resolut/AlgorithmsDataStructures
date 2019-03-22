@@ -77,11 +77,20 @@ namespace AlgorithmsDataStructures2
 
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
         {
-            if (OriginalNode != null && OriginalNode != Root)
+            List<SimpleTreeNode<T>> targetList = FindNodesByValue(OriginalNode.NodeValue);
+            List<SimpleTreeNode<T>> newParentList = FindNodesByValue(NewParent.NodeValue);
+
+            if (targetList != null && newParentList != null)
             {
-                OriginalNode.Parent.Children.Remove(OriginalNode);
-                OriginalNode.Parent = NewParent;
-                AddChild(NewParent, OriginalNode);
+                var targetNode = targetList.Find(delegate (SimpleTreeNode<T> node) { return node == OriginalNode; });
+                var newParentNode = newParentList.Find(delegate (SimpleTreeNode<T> node) { return node == NewParent; });
+
+                if (targetNode != null && targetNode != Root && newParentNode != null)
+                {
+                    OriginalNode.Parent.Children.Remove(OriginalNode);
+                    OriginalNode.Parent = NewParent;
+                    AddChild(NewParent, OriginalNode);
+                }
             }
         }
 
