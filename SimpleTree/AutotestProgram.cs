@@ -41,7 +41,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public void DeleteNode(SimpleTreeNode<T> NodeToDelete) // Написать тесты для проверки удаления узла
+        public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
         {
             List<SimpleTreeNode<T>> targetList = FindNodesByValue(NodeToDelete.NodeValue);
 
