@@ -48,17 +48,37 @@ namespace AlgorithmsDataStructures2
         public BSTFind<T> FindNodeByKey(int key)
         {
             // ищем в дереве узел и сопутствующую информацию по ключу
-            return null;
+            BSTNode<T> currentNode = Root; // поиск начинатся с корня
+
+            while (key != currentNode.NodeKey) // пока совпадение не найдено
+            {
+                if (key < currentNode.NodeKey)
+                    currentNode = currentNode.LeftChild; //  двигаемся влево
+                else
+                    currentNode = currentNode.RightChild; // двигаемся вправо
+                if (currentNode == null) return new BSTFind<T> { Node = null, NodeHasKey = false }; // узел отсутствует
+            }
+
+            return new BSTFind<T> { Node = currentNode, NodeHasKey = true }; // возвращаем найденный узел
         }
+
 
         public bool AddKeyValue(int key, T val)
         {
             // добавляем ключ-значение в дерево
+            BSTFind<T> targetFound = FindNodeByKey(key);
+            if (targetFound.Node == null)
+            {
+                // TODO реализовать добавление узла с помощью метода FindNodeByKey(int key)
+                return true;
+            }
+
             return false; // если ключ уже есть
         }
 
         public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
         {
+            // TODO реализовать поиск минимального/ максимального значения
             // ищем максимальное/минимальное в поддереве
             return null;
         }
@@ -68,6 +88,5 @@ namespace AlgorithmsDataStructures2
             // удаляем узел по ключу
             return false; // если узел не найден
         }
-
     }
 }
