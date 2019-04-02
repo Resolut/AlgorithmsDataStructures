@@ -53,13 +53,13 @@ namespace AlgorithmsDataStructures2
             while (key != currentNode.NodeKey) // пока совпадение не найдено
             {
                 if (key < currentNode.NodeKey)
-                    currentNode = currentNode.LeftChild; //  двигаемся влево
+                    currentNode = currentNode.LeftChild; // двигаемся влево
                 else
                     currentNode = currentNode.RightChild; // двигаемся вправо
                 if (currentNode == null) return new BSTFind<T> { Node = null, NodeHasKey = false }; // узел отсутствует
             }
 
-            return new BSTFind<T> { Node = currentNode, NodeHasKey = true }; // возвращаем найденный узел
+            return new BSTFind<T> { Node = currentNode, NodeHasKey = true }; // найденный узел
         }
 
 
@@ -78,9 +78,18 @@ namespace AlgorithmsDataStructures2
 
         public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
         {
-            // TODO реализовать поиск минимального/ максимального значения
             // ищем максимальное/минимальное в поддереве
-            return null;
+            BSTNode<T> current = Root;
+            BSTNode<T> tempNode;
+            if (FindMax)
+                tempNode = current.RightChild;
+            else
+                tempNode = current.LeftChild;
+
+            while (tempNode != null)
+                current = tempNode;
+
+            return current;
         }
 
         public bool DeleteNodeByKey(int key)
