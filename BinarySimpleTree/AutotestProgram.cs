@@ -47,16 +47,27 @@ namespace AlgorithmsDataStructures2
 
         public BSTFind<T> FindNodeByKey(int key)
         {
-            // ищем в дереве узел и сопутствующую информацию по ключу
+            if (Root == null) return null; // досрочное прекращение поиска если дерево не содержит корня
+
             BSTNode<T> currentNode = Root; // поиск начинатся с корня
+            BSTNode<T> parrent; // родитель, к которому добавится новый узел в случае, если по ключу совпадений не обнаружено 
 
             while (key != currentNode.NodeKey) // пока совпадение не найдено
             {
+                parrent = currentNode;
+
                 if (key < currentNode.NodeKey)
+                {
                     currentNode = currentNode.LeftChild; // двигаемся влево
+                    if (currentNode == null)
+                        return new BSTFind<T> { Node = parrent, NodeHasKey = false, ToLeft = true }; // узел-родитель для добавления нового узла левым потомком
+                }
                 else
+                {
                     currentNode = currentNode.RightChild; // двигаемся вправо
-                if (currentNode == null) return new BSTFind<T> { Node = null, NodeHasKey = false }; // узел отсутствует
+                    if (currentNode == null)
+                        return new BSTFind<T> { Node = parrent, NodeHasKey = false, ToLeft = false }; // 
+                }
             }
 
             return new BSTFind<T> { Node = currentNode, NodeHasKey = true }; // найденный узел
@@ -65,12 +76,24 @@ namespace AlgorithmsDataStructures2
 
         public bool AddKeyValue(int key, T val)
         {
-            // добавляем ключ-значение в дерево
-            BSTFind<T> targetFound = FindNodeByKey(key);
-            if (targetFound.Node == null)
+            // добавляем ключ-значение в дерево, если кроень не null
+            if (Root != null)
             {
-                // TODO реализовать добавление узла с помощью метода FindNodeByKey(int key)
-                return true;
+                BSTFind<T> foundNode = FindNodeByKey(key);
+
+                if (!foundNode.NodeHasKey)
+                {
+                    if (foundNode.ToLeft)
+                        foundNode.Node.LeftChild = new BSTNode<T>(key, val, foundNode.Node);
+                    else
+                        foundNode.Node.RightChild = new BSTNode<T>(key, val, foundNode.Node);
+
+                    return true;
+                }
+            }
+            else
+            {
+                Root = new BSTNode<T>(key, val, null); // создаем корень дерева
             }
 
             return false; // если ключ уже есть
@@ -79,7 +102,7 @@ namespace AlgorithmsDataStructures2
         public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
         {
             // ищем максимальное/минимальное в поддереве
-            BSTNode<T> current = Root;
+            BSTNode<T> current = FromNode;
             BSTNode<T> tempNode;
             if (FindMax)
                 tempNode = current.RightChild;
@@ -96,6 +119,26 @@ namespace AlgorithmsDataStructures2
         {
             // удаляем узел по ключу
             return false; // если узел не найден
+        }
+
+        public int Count()
+        {
+            return Recursive(Root); // количество узлов в дереве
+        }
+
+        // вспомогательная функция для обхода дерева
+        private int Recursive(BSTNode<T> node) 
+        {
+            int count = 0;
+
+            while (node != null)
+            {
+                Recursive(node.LeftChild);
+                ++count;
+                Recursive(node.RightChild);
+            }
+
+            return count;
         }
     }
 }
