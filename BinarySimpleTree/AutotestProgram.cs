@@ -151,10 +151,19 @@ namespace AlgorithmsDataStructures2
                 }
                 else // узел имеет двух потомков
                 {
-                    BSTNode<T> successorNode = FinMinMax(foundNode.Node.RightChild, false); // находим наименьший потомок который больше удаляемого узла
+                    BSTNode<T> successorNode = FinMinMax(foundNode.Node.RightChild, false); // наименьший потомок, который больше удаляемого узла
+                    if (successorNode.RightChild != null) // если наименьший потомок не является листом
+                    {
+                        successorNode.Parent.LeftChild = successorNode.RightChild; // передаем его правого потомка предешственнику левым узлом
+                    }
+
+                    foundNode.Node.Parent.RightChild = successorNode;
+                    successorNode.Parent = foundNode.Node.Parent;
                 }
+
                 return true;
             }
+
             return false; // если узел не найден
         }
 
