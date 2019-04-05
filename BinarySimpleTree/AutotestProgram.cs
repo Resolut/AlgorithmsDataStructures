@@ -73,7 +73,6 @@ namespace AlgorithmsDataStructures2
             return new BSTFind<T> { Node = currentNode, NodeHasKey = true }; // найденный узел
         }
 
-
         public bool AddKeyValue(int key, T val)
         {
             // добавляем ключ-значение в дерево, если кроень не null
@@ -103,14 +102,14 @@ namespace AlgorithmsDataStructures2
         {
             // ищем максимальное/минимальное в поддереве
             BSTNode<T> current = FromNode;
-            BSTNode<T> tempNode;
-            if (FindMax)
-                tempNode = current.RightChild;
-            else
-                tempNode = current.LeftChild;
-
-            while (tempNode != null)
-                current = tempNode;
+            
+            if (current != null)
+            {
+                if (FindMax)
+                    current = current.RightChild;
+                else
+                    current = current.LeftChild;
+            }
 
             return current;
         }
@@ -173,15 +172,13 @@ namespace AlgorithmsDataStructures2
         }
 
         // вспомогательная функция для обхода дерева
-        private int Recursive(BSTNode<T> node)
+        private int Recursive(BSTNode<T> node, int count = 0)
         {
-            int count = 0;
-
-            while (node != null)
+            if (node != null)
             {
-                Recursive(node.LeftChild);
-                ++count;
-                Recursive(node.RightChild);
+                count++;
+                count = Recursive(node.LeftChild, count);
+                count = Recursive(node.RightChild, count);
             }
 
             return count;
