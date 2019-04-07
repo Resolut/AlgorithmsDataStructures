@@ -166,17 +166,13 @@ namespace AlgorithmsDataStructures2
                     else
                     {
                         if (successorNode.Parent.LeftChild == successorNode)
-                        {
                             successorNode.Parent.LeftChild = null; // удаляем левый лист 
-                        }
                         else
-                        {
                             successorNode.Parent.RightChild = null; // удаляем правый лист 
-                        }
                     }
                     // преемник замещает удаленный узел
                     if (foundNode.Node.Parent.RightChild == foundNode.Node)
-                        foundNode.Node.Parent.RightChild = successorNode; 
+                        foundNode.Node.Parent.RightChild = successorNode;
                     else
                         foundNode.Node.Parent.LeftChild = successorNode;
 
@@ -184,12 +180,12 @@ namespace AlgorithmsDataStructures2
 
                     successorNode.LeftChild = foundNode.Node.LeftChild; // левый потомок удаленного узла становится потомком узла-преемника
                     successorNode.RightChild = foundNode.Node.RightChild; // правый потомок удаленного узла становится потомком узла-преемника
-                    
+
                     // связать потомков удаленного узла с новым родителем
                     if (foundNode.Node.RightChild != null)
-                        foundNode.Node.RightChild.Parent = successorNode; 
+                        foundNode.Node.RightChild.Parent = successorNode;
                     if (foundNode.Node.LeftChild != null)
-                        foundNode.Node.LeftChild.Parent = successorNode; 
+                        foundNode.Node.LeftChild.Parent = successorNode;
                 }
 
                 return true;
