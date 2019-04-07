@@ -504,5 +504,71 @@ namespace AlgorithmsDataStructures2.Tests
 
             testBSTree.RecursivePrint(foundRoot.Node);
         }
+
+        [TestMethod()]
+        public void DeleteNodeByKey_in_Tree_with_31_Nodes_If_NodeToDelete_Has_Leafs()
+        {
+            BST<string> testBSTree = new BST<string>(new BSTNode<string>(16, "Root", null));
+
+            bool isAdded1 = testBSTree.AddKeyValue(8, "Level_1 Left_Child");
+            bool isAdded2 = testBSTree.AddKeyValue(24, "Level_1 Right_Child");
+
+            bool isAdded3 = testBSTree.AddKeyValue(4, "Level_2 Left_Child");
+            bool isAdded4 = testBSTree.AddKeyValue(12, "Level_2 Right_Child");
+            bool isAdded5 = testBSTree.AddKeyValue(20, "Level_2 Left_Child");
+            bool isAdded6 = testBSTree.AddKeyValue(28, "Level_2 Right_Child");
+
+            bool isAdded7 = testBSTree.AddKeyValue(2, "Level_3 Left_Child");
+            bool isAdded8 = testBSTree.AddKeyValue(6, "Level_3 Right_Child");
+            bool isAdded9 = testBSTree.AddKeyValue(10, "Level_3 Left_Child");
+            bool isAdded10 = testBSTree.AddKeyValue(14, "Level_3 Right_Child");
+            bool isAdded11 = testBSTree.AddKeyValue(18, "Level_3 Left_Child");
+            bool isAdded12 = testBSTree.AddKeyValue(22, "Level_3 Right_Child");
+            bool isAdded13 = testBSTree.AddKeyValue(26, "Level_3 Left_Child");
+            bool isAdded14 = testBSTree.AddKeyValue(30, "Level_3 Right_Child");
+
+            bool isAdded15 = testBSTree.AddKeyValue(1, "Level_4 Left_Child");
+            bool isAdded16 = testBSTree.AddKeyValue(3, "Level_4 Right_Child");
+            bool isAdded17 = testBSTree.AddKeyValue(5, "Level_4 Left_Child");
+            bool isAdded18 = testBSTree.AddKeyValue(7, "Level_4 Right_Child");
+            bool isAdded19 = testBSTree.AddKeyValue(9, "Level_4 Left_Child");
+            bool isAdded20 = testBSTree.AddKeyValue(11, "Level_4 Right_Child");
+            bool isAdded21 = testBSTree.AddKeyValue(13, "Level_4 Left_Child");
+            bool isAdded22 = testBSTree.AddKeyValue(15, "Level_4 Right_Child");
+            bool isAdded23 = testBSTree.AddKeyValue(17, "Level_4 Left_Child");
+            bool isAdded24 = testBSTree.AddKeyValue(19, "Level_4 Right_Child");
+            bool isAdded25 = testBSTree.AddKeyValue(21, "Level_4 Left_Child");
+            bool isAdded26 = testBSTree.AddKeyValue(23, "Level_4 Right_Child");
+            bool isAdded27 = testBSTree.AddKeyValue(25, "Level_4 Left_Child");
+            bool isAdded28 = testBSTree.AddKeyValue(27, "Level_4 Right_Child");
+            bool isAdded29 = testBSTree.AddKeyValue(29, "Level_4 Left_Child");
+            bool isAdded30 = testBSTree.AddKeyValue(31, "Level_4 Right_Child");
+
+            Assert.IsTrue(testBSTree.Count() == 31);
+            BSTFind<string> foundRoot = testBSTree.FindNodeByKey(16);
+
+            bool isDeleted = testBSTree.DeleteNodeByKey(18); // удаляем узел с двумя листами
+            BSTFind<string> catchRemovedNode = testBSTree.FindNodeByKey(18);
+                 
+            Assert.IsTrue(isDeleted); // удаление прошло успешно
+            Assert.IsFalse(catchRemovedNode.NodeHasKey); // удаленный узел не найден
+            Assert.IsTrue(testBSTree.Count() == 30); // количество узлов уменьшилось
+
+            bool isDeleted2 = testBSTree.DeleteNodeByKey(22); // удаляем узел с двумя потомками
+            BSTFind<string> catchRemovedNode2 = testBSTree.FindNodeByKey(22);
+
+            Assert.IsTrue(isDeleted2); // удаление прошло успешно
+            Assert.AreEqual(29, testBSTree.Count()); // количество узлов уменьшилось
+            Assert.IsFalse(catchRemovedNode2.NodeHasKey); // удаленный узел не найден
+
+            Assert.IsTrue(foundRoot.Node.RightChild.LeftChild.LeftChild.NodeKey == 19);
+            Assert.IsTrue(foundRoot.Node.RightChild.LeftChild.LeftChild.Parent.NodeKey == 20);
+            Assert.AreEqual(foundRoot.Node.RightChild.LeftChild.LeftChild.Parent, foundRoot.Node.RightChild.LeftChild);
+            Assert.IsTrue(foundRoot.Node.RightChild.LeftChild.LeftChild.LeftChild.NodeKey == 17);
+            Assert.IsNull(foundRoot.Node.RightChild.LeftChild.LeftChild.RightChild);
+            Assert.AreEqual(foundRoot.Node.RightChild.LeftChild.LeftChild.LeftChild.Parent, foundRoot.Node.RightChild.LeftChild.LeftChild);
+
+            testBSTree.RecursivePrint(foundRoot.Node);
+        }
     }
 }
