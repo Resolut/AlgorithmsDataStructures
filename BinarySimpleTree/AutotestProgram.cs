@@ -75,7 +75,7 @@ namespace AlgorithmsDataStructures2
 
         public bool AddKeyValue(int key, T val)
         {
-            // добавляем ключ-значение в дерево, если кроень не null
+            // добавляем ключ-значение в дерево, если корень не null
             if (Root != null)
             {
                 BSTFind<T> foundNode = FindNodeByKey(key);
@@ -123,14 +123,16 @@ namespace AlgorithmsDataStructures2
             BSTFind<T> foundNode = FindNodeByKey(key);
             if (foundNode.NodeHasKey)
             {
-                if (foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null) // удаляемый узел не имеет потомков
+                // удаляемый узел не имеет потомков
+                if (foundNode.Node.LeftChild == null && foundNode.Node.RightChild == null)
                 {
                     if (foundNode.Node.Parent.LeftChild != null && foundNode.Node.Parent.LeftChild.Equals(foundNode.Node))
                         foundNode.Node.Parent.LeftChild = null;
                     else if (foundNode.Node.Parent.RightChild != null && foundNode.Node.Parent.RightChild.Equals(foundNode.Node))
                         foundNode.Node.Parent.RightChild = null;
                 }
-                else if (foundNode.Node.LeftChild == null ^ foundNode.Node.RightChild == null) // удаляемый узел имеет только одного потомка
+                // удаляемый узел имеет только одного потомка
+                else if (foundNode.Node.LeftChild == null ^ foundNode.Node.RightChild == null)
                 {
                     if (foundNode.Node.LeftChild != null) // левый потомок привязываем к родителю удаленного узла
                     {
@@ -151,7 +153,8 @@ namespace AlgorithmsDataStructures2
                         foundNode.Node.RightChild.Parent = foundNode.Node.Parent;
                     }
                 }
-                else // удаляемый узел имеет двух потомков
+                // удаляемый узел имеет двух потомков
+                else
                 {
                     BSTNode<T> successorNode = FinMinMax(foundNode.Node.RightChild, false); // наименьший потомок, который больше удаляемого узла
 
@@ -161,13 +164,32 @@ namespace AlgorithmsDataStructures2
                         successorNode.RightChild.Parent = successorNode.Parent; // правому потомку назначаем родителя
                     }
                     else
-                        successorNode.Parent.LeftChild = null; // иначе удаляем лист 
+                    {
+                        if (successorNode.Parent.LeftChild == successorNode)
+                        {
+                            successorNode.Parent.LeftChild = null; // удаляем левый лист 
+                        }
+                        else
+                        {
+                            successorNode.Parent.RightChild = null; // удаляем правый лист 
+                        }
+                    }
+                    // преемник замещает удаленный узел
+                    if (foundNode.Node.Parent.RightChild == foundNode.Node)
+                        foundNode.Node.Parent.RightChild = successorNode; 
+                    else
+                        foundNode.Node.Parent.LeftChild = successorNode;
 
-                    foundNode.Node.Parent.RightChild = successorNode; // преемник взамен удаленного узла
-                    successorNode.Parent = foundNode.Node.Parent; // новый родитель преемника
+                    successorNode.Parent = foundNode.Node.Parent; // новый родитель для узла-преемника
+
                     successorNode.LeftChild = foundNode.Node.LeftChild; // левый потомок удаленного узла становится потомком узла-преемника
                     successorNode.RightChild = foundNode.Node.RightChild; // правый потомок удаленного узла становится потомком узла-преемника
-                    foundNode.Node.RightChild.Parent = successorNode; // новый родитель для потомка удаленного узла
+                    
+                    // связать потомков удаленного узла с новым родителем
+                    if (foundNode.Node.RightChild != null)
+                        foundNode.Node.RightChild.Parent = successorNode; 
+                    if (foundNode.Node.LeftChild != null)
+                        foundNode.Node.LeftChild.Parent = successorNode; 
                 }
 
                 return true;
@@ -186,8 +208,8 @@ namespace AlgorithmsDataStructures2
         {
             if (node != null)
             {
-                count = Recursive(node.LeftChild, count);
                 count++;
+                count = Recursive(node.LeftChild, count);
                 count = Recursive(node.RightChild, count);
             }
 
