@@ -213,16 +213,52 @@ namespace AlgorithmsDataStructures2
         }
 
         // вспомогательный метод для обхода дерева
-        public void RecursivePrint(BSTNode<T> node)
+        public void PrintNodes(List<BSTNode<T>> NodesList)
         {
-            if (node != null)
-            {
-                RecursivePrint(node.LeftChild);
-                Console.WriteLine(node.NodeKey);
-                RecursivePrint(node.RightChild);
-            }
+
+            foreach (var item in NodesList) Console.Write(item.NodeKey + " ");
+            Console.WriteLine();
 
             return;
         }
+        // вспомогательный метод для обхода дерева ширину
+        public List<BSTNode<T>> WideAllNodes()
+        {
+            return null;
+        }
+
+        // вспомогательный метод для обхода дерева в глубину
+        public List<BSTNode<T>> DeepAllNodes(BSTNode<T> FromNode, int orderType)
+        {
+            BSTNode<T> node = FromNode;
+            List<BSTNode<T>> Nodes = new List<BSTNode<T>>();
+
+            if (node != null)
+            {
+                switch (orderType)
+                {
+                    case 0: // in-Order
+                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        Nodes.Add(node);
+                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        break;
+                    case 1: // post-Order
+                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        Nodes.Add(node);
+                        break;
+                    case 2: // pre_odrder
+                        Nodes.Add(node);
+                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        break;
+                    default: return null;
+                }
+
+            }
+
+            return Nodes;
+        }
     }
+
 }
