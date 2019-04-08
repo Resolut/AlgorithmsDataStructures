@@ -352,7 +352,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsTrue(foundRoot.Node.RightChild.RightChild.NodeKey == 14);
             Assert.IsNull(foundRoot.Node.RightChild.RightChild.LeftChild);
             Assert.IsTrue(foundRoot.Node.RightChild.RightChild.RightChild.NodeKey == 15);
-            testBSTree.RecursivePrint(foundRoot.Node);
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node,0));
             Assert.AreEqual(14, testBSTree.Count());
         }
 
@@ -398,7 +398,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundRoot.Node.LeftChild.RightChild.RightChild);
             Assert.AreEqual(13, testBSTree.Count()); // количесвто узлов уменьшилось на 1
 
-            testBSTree.RecursivePrint(foundRoot.Node);
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
         }
 
         [TestMethod()]
@@ -432,7 +432,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsFalse(catchRemovedNode.NodeHasKey);
             Assert.AreEqual(14, testBSTree.Count());
 
-            testBSTree.RecursivePrint(foundRoot.Node);
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
         }
 
         [TestMethod()]
@@ -490,7 +490,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsTrue(isDeleted2); // удаление прошло успешно
             Assert.AreEqual(29, testBSTree.Count()); // количество узлов уменьшилось
             Assert.IsFalse(catchRemovedNode2.NodeHasKey); // удаленный узел не найден
-            Assert.IsTrue(foundRoot.Node.RightChild.NodeKey == 26);           
+            Assert.IsTrue(foundRoot.Node.RightChild.NodeKey == 26);
             Assert.AreEqual(foundRoot.Node.RightChild.Parent, foundRoot.Node);
             Assert.AreEqual(foundRoot.Node.RightChild, foundRoot.Node.RightChild.RightChild.Parent);
             Assert.IsTrue(foundRoot.Node.RightChild.RightChild.NodeKey == 28);
@@ -502,7 +502,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundChild.Node.LeftChild);
             Assert.IsNull(foundChild.Node.RightChild);
 
-            testBSTree.RecursivePrint(foundRoot.Node);
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
         }
 
         [TestMethod()]
@@ -549,7 +549,7 @@ namespace AlgorithmsDataStructures2.Tests
 
             bool isDeleted = testBSTree.DeleteNodeByKey(18); // удаляем узел с двумя листами
             BSTFind<string> catchRemovedNode = testBSTree.FindNodeByKey(18);
-                 
+
             Assert.IsTrue(isDeleted); // удаление прошло успешно
             Assert.IsFalse(catchRemovedNode.NodeHasKey); // удаленный узел не найден
             Assert.IsTrue(testBSTree.Count() == 30); // количество узлов уменьшилось
@@ -568,7 +568,27 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundRoot.Node.RightChild.LeftChild.LeftChild.RightChild);
             Assert.AreEqual(foundRoot.Node.RightChild.LeftChild.LeftChild.LeftChild.Parent, foundRoot.Node.RightChild.LeftChild.LeftChild);
 
-            testBSTree.RecursivePrint(foundRoot.Node);
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+        }
+
+        [TestMethod()]
+        public void DeepAllNodes()
+        {
+            BST<string> tree = new BST<string>(new BSTNode<string>(4, "Root", null));
+            tree.AddKeyValue(2, "Level1 Left_Child");
+            tree.AddKeyValue(6, "Level1 Right_Child");
+            tree.AddKeyValue(1, "Level2 Left_Child");
+            tree.AddKeyValue(3, "Level1 Right_Child");
+            tree.AddKeyValue(5, "Level1 Left_Child");
+            tree.AddKeyValue(7, "Level3 Right_Child");
+
+            BSTFind<string> foundRoot = tree.FindNodeByKey(4);
+            System.Console.Write("pre-order:     ");
+            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 2)); // pre-order
+            System.Console.Write("in-order:       ");
+            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 0)); // in-order
+            System.Console.Write("post-order:   ");
+            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 1)); // post-order
         }
     }
 }
