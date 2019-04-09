@@ -212,7 +212,7 @@ namespace AlgorithmsDataStructures2
             return count;
         }
 
-        // вспомогательный метод для обхода дерева
+        // вспомогательный метод для отображения(печати) всех ключей дерева
         public void PrintNodes(List<BSTNode<T>> NodesList)
         {
 
@@ -221,43 +221,104 @@ namespace AlgorithmsDataStructures2
 
             return;
         }
-        // вспомогательный метод для обхода дерева ширину
-        public List<BSTNode<T>> WideAllNodes()
+
+        // вспомогательный рекурсивный метод для обхода дерева в ширину
+        public List<BSTNode<T>> WideAllNodes(BSTNode<T> FromNode)
         {
-            return null;
+            BSTNode<T> node = FromNode;
+            List<BSTNode<T>> nodes = new List<BSTNode<T>> { node };
+
+            if (node.Parent != null) nodes.Remove(node);
+            List<BSTNode<T>> subnodes = new List<BSTNode<T>>();
+
+            if (node.LeftChild != null)
+                nodes.Add(node.LeftChild);
+            if (node.RightChild != null)
+                nodes.Add(node.RightChild);
+
+            node = node.LeftChild;
+            if (node != null)
+            {
+                nodes.AddRange(WideAllNodes(node));
+                node = node.Parent.RightChild;
+                if (node != null)
+                {
+                    nodes.AddRange(WideAllNodes(node));
+                }
+            }
+
+            return nodes;
+        }
+
+        // вспомогательный итеративный метод для обхода дерева в ширину
+        public List<BSTNode<T>> IterWideAllNodes(BSTNode<T> FromNode)
+        {
+            BSTNode<T> node = FromNode;
+            List<BSTNode<T>> nodes = new List<BSTNode<T>> { node };
+
+            BSTNode<T> left = node.LeftChild;
+            BSTNode<T> right = node.RightChild;
+            nodes.Add(left);
+            nodes.Add(right);
+            while (left != null && right != null)
+            {
+                // добавление поддерева потомков левого узла 
+                if (left.LeftChild != null)
+                    nodes.Add(left.LeftChild);
+                if (left.RightChild != null)
+                    nodes.Add(left.RightChild);
+                if (left.Parent.RightChild.LeftChild != null)
+                    nodes.Add(left.Parent.RightChild.LeftChild);
+                if (left.Parent.RightChild.RightChild != null)
+                    nodes.Add(left.Parent.RightChild.RightChild);
+
+                // добавление поддерева потомков правого узла 
+                if (right.LeftChild != null)
+                    nodes.Add(right.LeftChild);
+                if (right.RightChild != null)
+                    nodes.Add(right.RightChild);
+                if (right.Parent.RightChild.LeftChild != null)
+                    nodes.Add(right.Parent.RightChild.LeftChild);
+                if (right.Parent.RightChild.RightChild != null)
+                    nodes.Add(right.Parent.RightChild.RightChild);
+
+                left = left.LeftChild;
+                right = right.LeftChild;
+            }
+
+            return nodes;
         }
 
         // вспомогательный метод для обхода дерева в глубину
         public List<BSTNode<T>> DeepAllNodes(BSTNode<T> FromNode, int orderType)
         {
             BSTNode<T> node = FromNode;
-            List<BSTNode<T>> Nodes = new List<BSTNode<T>>();
+            List<BSTNode<T>> nodes = new List<BSTNode<T>>();
 
             if (node != null)
             {
                 switch (orderType)
                 {
                     case 0: // in-Order
-                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
-                        Nodes.Add(node);
-                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        nodes.Add(node);
+                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
                         break;
                     case 1: // post-Order
-                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
-                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
-                        Nodes.Add(node);
+                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.Add(node);
                         break;
                     case 2: // pre_odrder
-                        Nodes.Add(node);
-                        Nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
-                        Nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.Add(node);
+                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
                         break;
                     default: return null;
                 }
-
             }
 
-            return Nodes;
+            return nodes;
         }
     }
 
