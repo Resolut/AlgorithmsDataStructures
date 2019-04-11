@@ -352,7 +352,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsTrue(foundRoot.Node.RightChild.RightChild.NodeKey == 14);
             Assert.IsNull(foundRoot.Node.RightChild.RightChild.LeftChild);
             Assert.IsTrue(foundRoot.Node.RightChild.RightChild.RightChild.NodeKey == 15);
-            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(0));
             Assert.AreEqual(14, testBSTree.Count());
         }
 
@@ -398,7 +398,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundRoot.Node.LeftChild.RightChild.RightChild);
             Assert.AreEqual(13, testBSTree.Count()); // количесвто узлов уменьшилось на 1
 
-            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(0));
         }
 
         [TestMethod()]
@@ -432,7 +432,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsFalse(catchRemovedNode.NodeHasKey);
             Assert.AreEqual(14, testBSTree.Count());
 
-            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(0));
         }
 
         [TestMethod()]
@@ -502,7 +502,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundChild.Node.LeftChild);
             Assert.IsNull(foundChild.Node.RightChild);
 
-            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(0));
         }
 
         [TestMethod()]
@@ -568,7 +568,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsNull(foundRoot.Node.RightChild.LeftChild.LeftChild.RightChild);
             Assert.AreEqual(foundRoot.Node.RightChild.LeftChild.LeftChild.LeftChild.Parent, foundRoot.Node.RightChild.LeftChild.LeftChild);
 
-            testBSTree.PrintNodes(testBSTree.DeepAllNodes(foundRoot.Node, 0));
+            testBSTree.PrintNodes(testBSTree.DeepAllNodes(0));
         }
 
         [TestMethod()]
@@ -584,11 +584,11 @@ namespace AlgorithmsDataStructures2.Tests
 
             BSTFind<string> foundRoot = tree.FindNodeByKey(4);
             System.Console.Write("pre-order:     ");
-            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 2)); // pre-order
+            tree.PrintNodes(tree.DeepAllNodes(2)); // pre-order
             System.Console.Write("in-order:       ");
-            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 0)); // in-order
+            tree.PrintNodes(tree.DeepAllNodes(0)); // in-order
             System.Console.Write("post-order:   ");
-            tree.PrintNodes(tree.DeepAllNodes(foundRoot.Node, 1)); // post-order
+            tree.PrintNodes(tree.DeepAllNodes(1)); // post-order
         }
 
         [TestMethod()]
@@ -612,7 +612,7 @@ namespace AlgorithmsDataStructures2.Tests
             tree.AddKeyValue(15, "Level_4_8 Right_Child");
 
             BSTFind<string> foundRoot = tree.FindNodeByKey(8);
-            tree.PrintNodes(tree.WideAllNodes(foundRoot.Node));
+            tree.PrintNodes(tree.WideAllNodes());
         }
     }
 }
