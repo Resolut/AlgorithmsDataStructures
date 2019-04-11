@@ -223,9 +223,9 @@ namespace AlgorithmsDataStructures2
         }
 
         // вспомогательный итеративный метод для обхода дерева в ширину
-        public List<BSTNode<T>> WideAllNodes(BSTNode<T> FromNode)
+        public List<BSTNode<T>> WideAllNodes()
         {
-            BSTNode<T> node = FromNode;
+            BSTNode<T> node = Root;
             List<BSTNode<T>> tempQueue = new List<BSTNode<T>> { node }; // список для обхода узлов в порядке очереди
             List<BSTNode<T>> nodes = new List<BSTNode<T>>(); // итоговый список узлов
             while (tempQueue.Count != 0)
@@ -243,8 +243,14 @@ namespace AlgorithmsDataStructures2
             return nodes;
         }
 
-        // вспомогательный метод для обхода дерева в глубину
-        public List<BSTNode<T>> DeepAllNodes(BSTNode<T> FromNode, int orderType)
+        // метод-обёртка для вызова рекурсивного метода обхода в глубину
+        public List<BSTNode<T>> DeepAllNodes(int orderType)
+        {
+            return RecursiveDeep(Root, orderType);
+        }
+
+        // вспомогательный метод обхода в глубину 
+        private List<BSTNode<T>> RecursiveDeep(BSTNode<T> FromNode, int orderType)
         {
             BSTNode<T> node = FromNode;
             List<BSTNode<T>> nodes = new List<BSTNode<T>>();
@@ -254,19 +260,19 @@ namespace AlgorithmsDataStructures2
                 switch (orderType)
                 {
                     case 0: // in-Order
-                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
                         nodes.Add(node);
-                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
                         break;
                     case 1: // post-Order
-                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
-                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
                         nodes.Add(node);
                         break;
                     case 2: // pre_odrder
                         nodes.Add(node);
-                        nodes.AddRange(DeepAllNodes(node.LeftChild, orderType));
-                        nodes.AddRange(DeepAllNodes(node.RightChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
                         break;
                     default: return null;
                 }
