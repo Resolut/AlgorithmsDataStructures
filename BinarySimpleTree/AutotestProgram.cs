@@ -222,68 +222,22 @@ namespace AlgorithmsDataStructures2
             return;
         }
 
-        // вспомогательный рекурсивный метод для обхода дерева в ширину
+        // вспомогательный итеративный метод для обхода дерева в ширину
         public List<BSTNode<T>> WideAllNodes(BSTNode<T> FromNode)
         {
             BSTNode<T> node = FromNode;
-            List<BSTNode<T>> nodes = new List<BSTNode<T>> { node };
-
-            if (node.Parent != null) nodes.Remove(node);
-            List<BSTNode<T>> subnodes = new List<BSTNode<T>>();
-
-            if (node.LeftChild != null)
-                nodes.Add(node.LeftChild);
-            if (node.RightChild != null)
-                nodes.Add(node.RightChild);
-
-            node = node.LeftChild;
-            if (node != null)
+            List<BSTNode<T>> tempQueue = new List<BSTNode<T>> { node }; // список для обхода узлов в порядке очереди
+            List<BSTNode<T>> nodes = new List<BSTNode<T>>(); // итоговый список узлов
+            while (tempQueue.Count != 0)
             {
-                nodes.AddRange(WideAllNodes(node));
-                node = node.Parent.RightChild;
-                if (node != null)
-                {
-                    nodes.AddRange(WideAllNodes(node));
-                }
-            }
+                node = tempQueue[tempQueue.Count - 1];
+                nodes.Add(node);
+                tempQueue.RemoveAt(tempQueue.Count - 1);
 
-            return nodes;
-        }
-
-        // вспомогательный итеративный метод для обхода дерева в ширину
-        public List<BSTNode<T>> IterWideAllNodes(BSTNode<T> FromNode)
-        {
-            BSTNode<T> node = FromNode;
-            List<BSTNode<T>> nodes = new List<BSTNode<T>> { node };
-
-            BSTNode<T> left = node.LeftChild;
-            BSTNode<T> right = node.RightChild;
-            nodes.Add(left);
-            nodes.Add(right);
-            while (left != null && right != null)
-            {
-                // добавление поддерева потомков левого узла 
-                if (left.LeftChild != null)
-                    nodes.Add(left.LeftChild);
-                if (left.RightChild != null)
-                    nodes.Add(left.RightChild);
-                if (left.Parent.RightChild.LeftChild != null)
-                    nodes.Add(left.Parent.RightChild.LeftChild);
-                if (left.Parent.RightChild.RightChild != null)
-                    nodes.Add(left.Parent.RightChild.RightChild);
-
-                // добавление поддерева потомков правого узла 
-                if (right.LeftChild != null)
-                    nodes.Add(right.LeftChild);
-                if (right.RightChild != null)
-                    nodes.Add(right.RightChild);
-                if (right.Parent.RightChild.LeftChild != null)
-                    nodes.Add(right.Parent.RightChild.LeftChild);
-                if (right.Parent.RightChild.RightChild != null)
-                    nodes.Add(right.Parent.RightChild.RightChild);
-
-                left = left.LeftChild;
-                right = right.LeftChild;
+                if (node.LeftChild != null)
+                    tempQueue.Insert(0, node.LeftChild);
+                if (node.RightChild != null)
+                    tempQueue.Insert(0, node.RightChild);
             }
 
             return nodes;
