@@ -259,17 +259,17 @@ namespace AlgorithmsDataStructures2
             {
                 switch (orderType)
                 {
-                    case 0: // in-Order
+                    case 0: // in-order
                         nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
                         nodes.Add(node);
                         nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
                         break;
-                    case 1: // post-Order
+                    case 1: // post-order
                         nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
                         nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
                         nodes.Add(node);
                         break;
-                    case 2: // pre_odrder
+                    case 2: // pre-order
                         nodes.Add(node);
                         nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
                         nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
