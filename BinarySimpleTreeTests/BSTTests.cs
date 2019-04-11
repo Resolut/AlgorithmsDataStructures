@@ -574,13 +574,13 @@ namespace AlgorithmsDataStructures2.Tests
         [TestMethod()]
         public void DeepAllNodes()
         {
-            BST<string> tree = new BST<string>(new BSTNode<string>(4, "Root", null));
-            tree.AddKeyValue(2, "Level1 Left_Child");
-            tree.AddKeyValue(6, "Level1 Right_Child");
-            tree.AddKeyValue(1, "Level2 Left_Child");
-            tree.AddKeyValue(3, "Level1 Right_Child");
-            tree.AddKeyValue(5, "Level1 Left_Child");
-            tree.AddKeyValue(7, "Level3 Right_Child");
+            BST<string> tree = new BST<string>(new BSTNode<string>(4, "Level_1 Root", null));
+            tree.AddKeyValue(2, "Level_2_1 Left_Child");
+            tree.AddKeyValue(6, "Level_2_2 Right_Child");
+            tree.AddKeyValue(1, "Level_3_1 Left_Child");
+            tree.AddKeyValue(3, "Level_3_2 Right_Child");
+            tree.AddKeyValue(5, "Level_3_3 Left_Child");
+            tree.AddKeyValue(7, "Level_3_4 Right_Child");
 
             BSTFind<string> foundRoot = tree.FindNodeByKey(4);
             System.Console.Write("pre-order:     ");
@@ -594,22 +594,22 @@ namespace AlgorithmsDataStructures2.Tests
         [TestMethod()]
         public void WideAllNodes()
         {
-            BST<string> tree = new BST<string>(new BSTNode<string>(8, "Root", null));
+            BST<string> tree = new BST<string>(new BSTNode<string>(8, "Level_1 Root", null));
 
-            tree.AddKeyValue(4, "Level_1 Left_Child");
-            tree.AddKeyValue(12, "Level_1 Right_Child");
-            tree.AddKeyValue(2, "Level_2_1 Left_Child");
-            tree.AddKeyValue(6, "Level_2_1 Right_Child");
-            tree.AddKeyValue(10, "Level_2_2 Left_Child");
-            tree.AddKeyValue(14, "Level_2_2 Right_Child");
-            tree.AddKeyValue(1, "Level_3_1 Left_Child");
-            tree.AddKeyValue(3, "Level_3_1 Right_Child");
-            tree.AddKeyValue(5, "Level_3_2 Left_Child");
-            tree.AddKeyValue(7, "Level_3_2 Right_Child");
-            tree.AddKeyValue(9, "Level_3_3 Left_Child");
-            tree.AddKeyValue(11, "Level_3_3 Right_Child");
-            tree.AddKeyValue(13, "Level_3_4 Left_Child");
-            tree.AddKeyValue(15, "Level_3_4 Right_Child");
+            tree.AddKeyValue(4, "Level_2 Left_Child");
+            tree.AddKeyValue(12, "Level_2 Right_Child");
+            tree.AddKeyValue(2, "Level_3_1 Left_Child");
+            tree.AddKeyValue(6, "Level_3_1 Right_Child");
+            tree.AddKeyValue(10, "Level_3_2 Left_Child");
+            tree.AddKeyValue(14, "Level_3_2 Right_Child");
+            tree.AddKeyValue(1, "Level_4_1 Left_Child");
+            tree.AddKeyValue(3, "Level_4_1 Right_Child");
+            tree.AddKeyValue(5, "Level_4_2 Left_Child");
+            tree.AddKeyValue(7, "Level_4_2 Right_Child");
+            tree.AddKeyValue(9, "Level_4_3 Left_Child");
+            tree.AddKeyValue(11, "Level_4_3 Right_Child");
+            tree.AddKeyValue(13, "Level_4_4 Left_Child");
+            tree.AddKeyValue(15, "Level_4_4 Right_Child");
 
             BSTFind<string> foundRoot = tree.FindNodeByKey(8);
             tree.PrintNodes(tree.WideAllNodes(foundRoot.Node));
