@@ -614,29 +614,5 @@ namespace AlgorithmsDataStructures2.Tests
             BSTFind<string> foundRoot = tree.FindNodeByKey(8);
             tree.PrintNodes(tree.WideAllNodes(foundRoot.Node));
         }
-
-        [TestMethod()]
-        public void IterWideAllNodes()
-        {
-            BST<string> tree = new BST<string>(new BSTNode<string>(8, "Root", null));
-
-            tree.AddKeyValue(4, "Level_1 Left_Child");
-            tree.AddKeyValue(12, "Level_1 Right_Child");
-            tree.AddKeyValue(2, "Level_2_1 Left_Child");
-            tree.AddKeyValue(6, "Level_2_1 Right_Child");
-            tree.AddKeyValue(10, "Level_2_2 Left_Child");
-            tree.AddKeyValue(14, "Level_2_2 Right_Child");
-            tree.AddKeyValue(1, "Level_3_1 Left_Child");
-            tree.AddKeyValue(3, "Level_3_1 Right_Child");
-            tree.AddKeyValue(5, "Level_3_2 Left_Child");
-            tree.AddKeyValue(7, "Level_3_2 Right_Child");
-            tree.AddKeyValue(9, "Level_3_3 Left_Child");
-            tree.AddKeyValue(11, "Level_3_3 Right_Child");
-            tree.AddKeyValue(13, "Level_3_4 Left_Child");
-            tree.AddKeyValue(15, "Level_3_4 Right_Child");
-
-            BSTFind<string> foundRoot = tree.FindNodeByKey(8);
-            tree.PrintNodes(tree.IterWideAllNodes(foundRoot.Node));
-        }
     }
 }
