@@ -17,7 +17,8 @@ namespace AlgorithmsDataStructures2
         public int? FindKeyIndex(int key)
         {
             // ищем в массиве индекс ключа
-            if (Tree[0] == null) return null;
+            if (Tree[0] == null) return 0;
+
             int? currentKey = Tree[0];
             int index = 0;
 
@@ -46,18 +47,17 @@ namespace AlgorithmsDataStructures2
         public int AddKey(int key)
         {
             int? targetKeyIndex = FindKeyIndex(key);
-            // индекс добавленного/существующего ключа или -1 если не удалось
-            if (targetKeyIndex == null)
-                return -1;
 
-            else if (targetKeyIndex < 0)
+            if (targetKeyIndex == null)
+                return -1; // дерево заполнено полностью, вставка ключа невозможна
+
+            if (targetKeyIndex <= 0)
             {
-                Tree[-(int)targetKeyIndex] = key;
+                Tree[-(int)targetKeyIndex] = key; // добавление ключа в свободный слот
                 return (int)-targetKeyIndex;
             }
             else
-                return (int)targetKeyIndex;
+                return (int)targetKeyIndex; // индекс существующего ключа
         }
-
     }
 }
