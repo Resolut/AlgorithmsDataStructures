@@ -29,6 +29,7 @@ namespace AlgorithmsDataStructures2
                     index = 2 * index + 1; // двигаемся влево
                 else
                     index = 2 * index + 2; // двигаемся вправо
+
                 if (index < Tree.Length)  // проверка, не превышена ли макс. глубина дерева
                 {
                     currentKey = Tree[index];
@@ -39,14 +40,23 @@ namespace AlgorithmsDataStructures2
                 else break; // глубина превышена
             }
 
-            return null; // ключ не найден, дерево пройдено до макс. глубины
+            return null; // ключ не найден, слоты заполнены, дерево пройдено до макс. глубины
         }
 
         public int AddKey(int key)
         {
-            // добавляем ключ в массив
-            return -1;
+            int? targetKeyIndex = FindKeyIndex(key);
             // индекс добавленного/существующего ключа или -1 если не удалось
+            if (targetKeyIndex == null)
+                return -1;
+
+            else if (targetKeyIndex < 0)
+            {
+                Tree[-(int)targetKeyIndex] = key;
+                return (int)-targetKeyIndex;
+            }
+            else
+                return (int)targetKeyIndex;
         }
 
     }
