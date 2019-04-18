@@ -12,7 +12,7 @@ namespace AlgorithmsDataStructures2.Tests
             int? Slot = testTree.FindKeyIndex(4);
             int? expectedSlot = null;
 
-            Assert.IsTrue(testTree.Tree.Length == 7);
+            Assert.IsTrue(testTree.Tree.Length == 15);
             Assert.AreEqual(expectedSlot, Slot);
         }
 
@@ -25,7 +25,7 @@ namespace AlgorithmsDataStructures2.Tests
             int expectedIndex = 0;
             int? expectedIndex2 = -1;
 
-            Assert.IsTrue(testTree.Tree.Length == 7);
+            Assert.IsTrue(testTree.Tree.Length == 15);
             Assert.IsTrue(testTree.Tree[0] == 4);
             Assert.IsTrue(testTree.Tree[1] == null);
             Assert.AreEqual(expectedIndex, index);
@@ -39,7 +39,7 @@ namespace AlgorithmsDataStructures2.Tests
             int index = testTree.AddKey(4);
             int expectedIndex = 0;
 
-            Assert.IsTrue(testTree.Tree.Length == 7);
+            Assert.IsTrue(testTree.Tree.Length == 15);
             Assert.IsTrue(testTree.Tree[0] == 4);
             Assert.AreEqual(expectedIndex, index);
         }
@@ -47,7 +47,7 @@ namespace AlgorithmsDataStructures2.Tests
         [TestMethod()]
         public void AddKey_If_Tree_Has_Tree_Only()
         {
-            aBST testTree = new aBST(3);
+            aBST testTree = new aBST(2);
             int index = testTree.AddKey(4);
             int index2 = testTree.AddKey(2);
             int index3 = testTree.AddKey(6);
@@ -65,9 +65,9 @@ namespace AlgorithmsDataStructures2.Tests
         }
 
         [TestMethod()]
-        public void AddKey_If_3_Level_Tree_Is_Full()
+        public void AddKey_If_2_Level_Tree_Is_Full()
         {
-            aBST testTree = new aBST(3);
+            aBST testTree = new aBST(2);
             int index = testTree.AddKey(4);
             int index2 = testTree.AddKey(2);
             int index3 = testTree.AddKey(6);
@@ -108,9 +108,9 @@ namespace AlgorithmsDataStructures2.Tests
         }
 
         [TestMethod()]
-        public void AddKey_If_4_Level_Tree_Is_Full()
+        public void AddKey_If_3_Level_Tree_Is_Full()
         {
-            aBST testTree = new aBST(4);
+            aBST testTree = new aBST(3);
             int index1 = testTree.AddKey(8);
             int index2 = testTree.AddKey(4);
             int index3 = testTree.AddKey(12);
@@ -187,9 +187,9 @@ namespace AlgorithmsDataStructures2.Tests
         }
 
         [TestMethod()]
-        public void FindKey_If_4_Level_Tree_has_Empty_4_Level()
+        public void FindKey_If_3_Level_Tree_has_Empty_4_Level()
         {
-            aBST testTree = new aBST(4);
+            aBST testTree = new aBST(3);
             int index1 = testTree.AddKey(8);
             int index2 = testTree.AddKey(4);
             int index3 = testTree.AddKey(12);
