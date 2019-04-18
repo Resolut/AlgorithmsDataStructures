@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
@@ -62,8 +63,8 @@ namespace AlgorithmsDataStructures2
                 Tree[-(int)targetKeyIndex] = key; // добавление ключа в свободный слот
                 return (int)-targetKeyIndex;
             }
-            else
-                return (int)targetKeyIndex; // индекс существующего ключа
+
+            return (int)targetKeyIndex; // индекс существующего ключа
         }
     }
 }
