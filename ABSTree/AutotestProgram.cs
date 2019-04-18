@@ -17,7 +17,7 @@ namespace AlgorithmsDataStructures2
         public int? FindKeyIndex(int key)
         {
             // ищем в массиве индекс ключа
-            if (Tree[0] == null) return 0;
+            if (Tree[0] == null) return null;
 
             int? currentKey = Tree[0];
             int index = 0;
@@ -46,6 +46,12 @@ namespace AlgorithmsDataStructures2
 
         public int AddKey(int key)
         {
+            if (Tree[0] == null)
+            {
+                Tree[0] = key;
+                return 0;
+            }
+
             int? targetKeyIndex = FindKeyIndex(key);
 
             if (targetKeyIndex == null)
