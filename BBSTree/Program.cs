@@ -10,12 +10,13 @@ namespace BBSTree
     {
         static void Main(string[] args)
         {
-            int[] result = AlgorithmsDataStructures2.BalancedBST.GenerateBBSTArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
-
+            int[] result = AlgorithmsDataStructures2.BalancedBST.GenerateBBSTArray(new int[] { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 });
+            Console.WriteLine("Отсортированный входной массив:");
             foreach (var item in result)
             {
-                Console.WriteLine(item);
+                Console.Write(item + " ");
             }
+
             Console.ReadKey();
         }
     }
