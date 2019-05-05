@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleTree\SimpleTree.csproj">
+    <ProjectReference Include="..\SimpleTree\ST.csproj">
       <Project>{EB0A9B9A-95E6-4B62-817D-FA9D8BA34BE0}</Project>
-      <Name>SimpleTree</Name>
+      <Name>ST</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

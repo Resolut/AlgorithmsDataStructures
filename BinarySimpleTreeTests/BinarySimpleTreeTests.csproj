@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BinarySimpleTree\BinarySimpleTree.csproj">
+    <ProjectReference Include="..\BinarySimpleTree\BST.csproj">
       <Project>{F62D1110-6AB9-4DB9-9A4D-D48CE7A88D92}</Project>
-      <Name>BinarySimpleTree</Name>
+      <Name>BST</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

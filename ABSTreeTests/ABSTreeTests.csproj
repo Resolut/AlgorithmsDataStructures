@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ABSTree\ABSTree.csproj">
+    <ProjectReference Include="..\ABSTree\ABST.csproj">
       <Project>{4849A609-EFA6-4EB1-993A-60178069C0BC}</Project>
-      <Name>ABSTree</Name>
+      <Name>ABST</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
