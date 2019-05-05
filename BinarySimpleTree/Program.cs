@@ -1,4 +1,4 @@
-﻿namespace BinarySimpleTree
+﻿namespace BST
 {
     class Program
     {

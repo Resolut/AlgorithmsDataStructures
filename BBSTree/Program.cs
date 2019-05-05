@@ -1,7 +1,7 @@
 ﻿using System;
 using AlgorithmsDataStructures2;
 
-namespace BBSTree
+namespace BBSTgen
 {
     class Program
     {

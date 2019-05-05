@@ -1,4 +1,4 @@
-﻿namespace ABSTree
+﻿namespace ABST
 {
     class Program
     {
