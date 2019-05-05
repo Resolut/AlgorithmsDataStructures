@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AlgorithmsDataStructures2;
 
 namespace BBSTree
 {
@@ -10,14 +7,35 @@ namespace BBSTree
     {
         static void Main(string[] args)
         {
-            int[] result = AlgorithmsDataStructures2.BalancedBST.GenerateBBSTArray(new int[] { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 });
-            Console.WriteLine("Отсортированный входной массив:");
-            foreach (var item in result)
+            int[] result = BalancedBST.GenerateBBSTArray(new int[] {
+                    31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21,
+                    20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1
+            });
+            PrintArray(result);
+
+            result = BalancedBST.GenerateBBSTArray(new int[] {
+                15, 14, 13, 12, 11, 10, 9, 8,
+                7, 6, 5, 4, 3, 2, 1
+            });
+            PrintArray(result);
+
+            result = BalancedBST.GenerateBBSTArray(new int[] { 7, 6, 5, 4, 3, 2, 1 });
+            PrintArray(result);
+
+            result = BalancedBST.GenerateBBSTArray(new int[] { 3, 2, 1 });
+            PrintArray(result);
+
+            Console.ReadKey();
+        }
+        static void PrintArray(int[] array)
+        {
+            Console.WriteLine("Дерево в виде массива:");
+            foreach (var item in array)
             {
                 Console.Write(item + " ");
             }
-
-            Console.ReadKey();
+            Console.WriteLine();
         }
     }
 }
