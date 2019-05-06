@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4849A609-EFA6-4EB1-993A-60178069C0BC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ABSTree</RootNamespace>
-    <AssemblyName>ABSTree</AssemblyName>
+    <RootNamespace>ABST</RootNamespace>
+    <AssemblyName>ABST</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
