@@ -63,8 +63,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BinarySimpleTree\BST.csproj">
-      <Project>{F62D1110-6AB9-4DB9-9A4D-D48CE7A88D92}</Project>
+    <ProjectReference Include="..\..\BST\BST.csproj">
+      <Project>{d6fccc91-b407-4515-8841-1c09e210a40a}</Project>
       <Name>BST</Name>
     </ProjectReference>
   </ItemGroup>

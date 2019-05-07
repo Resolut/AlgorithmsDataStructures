@@ -63,8 +63,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleTree\ST.csproj">
-      <Project>{EB0A9B9A-95E6-4B62-817D-FA9D8BA34BE0}</Project>
+    <ProjectReference Include="..\..\ST\ST.csproj">
+      <Project>{0a239e35-2d72-4a75-9c35-0d554e1f51a2}</Project>
       <Name>ST</Name>
     </ProjectReference>
   </ItemGroup>
