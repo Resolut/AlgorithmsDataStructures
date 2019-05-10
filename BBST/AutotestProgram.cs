@@ -19,8 +19,6 @@ namespace AlgorithmsDataStructures2
             RightChild = null;
         }
     }
-
-
     public class BalancedBST
     {
         public BSTNode Root;
@@ -48,8 +46,11 @@ namespace AlgorithmsDataStructures2
 
         public bool IsBalanced(BSTNode root_node)
         {
+            // TODO написать код проверки баланса левого и правого поддеревьев
             return false; // сбалансировано ли дерево с корнем root_node
         }
+
+        // вспомогательный рекурсивный метод для наполнения массива структурой сбалансированного дерева 
         private void AddToArray(int[] arr, int index)
         {
             int middle = arr.Length / 2;        // центральный индекс массива
@@ -71,15 +72,17 @@ namespace AlgorithmsDataStructures2
 
         }
 
+        // вспомогательный рекурсивный метод для создания дерева из массива BSTArray
         private BSTNode AddNode(BSTNode parent, int index)
         {
-            // TODO: добавить условие выхода из рекурсии по превышению индекса массива
-            BSTNode node = new BSTNode(BSTArray[index], parent);
+            // TODO: каково условие выхода из рекурсии? 
+            BSTNode node = new BSTNode(BSTArray[index], parent); // создаём корневой узел дерева
             if (parent == null) node.Level = 1;
             else node.Level = parent.Level + 1;
 
             node.LeftChild = AddNode(node, 2 * index + 1);
             node.LeftChild.Level = node.LeftChild.Parent.Level + 1;
+
             node.RightChild = AddNode(node, 2 * index + 2);
             node.RightChild.Level = node.RightChild.Parent.Level + 1;
 
