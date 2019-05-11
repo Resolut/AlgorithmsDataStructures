@@ -23,7 +23,7 @@ namespace AlgorithmsDataStructures2
     {
         public BSTNode Root;
 
-        int[] BSTArray; // временный массив для ключей дерева
+        public int[] BSTArray; // временный массив для ключей дерева
 
         public BalancedBST()
         {
@@ -47,7 +47,27 @@ namespace AlgorithmsDataStructures2
         public bool IsBalanced(BSTNode root_node)
         {
             // TODO написать код проверки баланса левого и правого поддеревьев
-            return false; // сбалансировано ли дерево с корнем root_node
+            BSTNode node = root_node;
+
+            if (node != null)
+            {
+                int LeftLevel = 1, RightLevel = 1;
+                if (node.LeftChild != null)
+                {
+                    LeftLevel = CheckLevel(node.LeftChild, true);
+
+                }
+                if (node.RightChild != null)
+                {
+                    RightLevel = CheckLevel(node.RightChild, false);
+
+                }
+
+                if (Math.Abs(LeftLevel - RightLevel) > 1) return false;
+
+            }
+
+            return true;  // сбалансировано ли дерево с корнем root_node
         }
 
         // вспомогательный рекурсивный метод для наполнения массива структурой сбалансированного дерева 
@@ -75,18 +95,127 @@ namespace AlgorithmsDataStructures2
         // вспомогательный рекурсивный метод для создания дерева из массива BSTArray
         private BSTNode AddNode(BSTNode parent, int index)
         {
-            // TODO: каково условие выхода из рекурсии? 
+            if (index >= BSTArray.Length) return null; // выход из рекурсии
+
             BSTNode node = new BSTNode(BSTArray[index], parent); // создаём корневой узел дерева
+            node.Parent = parent;
             if (parent == null) node.Level = 1;
             else node.Level = parent.Level + 1;
 
             node.LeftChild = AddNode(node, 2 * index + 1);
-            node.LeftChild.Level = node.LeftChild.Parent.Level + 1;
+            if (node.LeftChild != null)
+            {
+                node.LeftChild.Level = node.LeftChild.Parent.Level + 1;
+            }
 
             node.RightChild = AddNode(node, 2 * index + 2);
-            node.RightChild.Level = node.RightChild.Parent.Level + 1;
+            if (node.RightChild != null)
+            {
+                node.RightChild.Level = node.RightChild.Parent.Level + 1;
+            }
 
             return node;
         }
+
+
+        // v-- методы взяты из BST для проверки дерева --v
+        // вспомогательный метод для отображения(печати) всех ключей дерева
+        public void PrintNodes(List<BSTNode> NodesList)
+        {
+
+            foreach (var item in NodesList)
+            {
+                Console.Write("node: {0} ", item.NodeKey);
+                Console.Write("level: {0} ", item.Level);
+                Console.Write("parent: {0} ", item.Parent == null ? "null" : item.Parent.NodeKey.ToString());
+                Console.Write("LeftChild: {0} ", item.LeftChild == null ? "null" : item.LeftChild.NodeKey.ToString());
+                Console.WriteLine("RightChild: {0}", item.RightChild == null ? "null" : item.RightChild.NodeKey.ToString());
+            }
+            Console.WriteLine();
+
+            return;
+        }
+
+        // вспомогательный итеративный метод для обхода дерева в ширину
+        public List<BSTNode> WideAllNodes()
+        {
+            BSTNode node = Root;
+            List<BSTNode> tempQueue = new List<BSTNode> { node }; // список для обхода узлов в порядке очереди
+            List<BSTNode> nodes = new List<BSTNode>(); // итоговый список узлов
+            while (tempQueue.Count != 0)
+            {
+                node = tempQueue[tempQueue.Count - 1];
+                nodes.Add(node);
+                tempQueue.RemoveAt(tempQueue.Count - 1);
+
+                if (node.LeftChild != null)
+                    tempQueue.Insert(0, node.LeftChild);
+                if (node.RightChild != null)
+                    tempQueue.Insert(0, node.RightChild);
+            }
+
+            return nodes;
+        }
+
+        // метод-обёртка для вызова рекурсивного метода обхода в глубину
+        public List<BSTNode> DeepAllNodes(int orderType)
+        {
+            return RecursiveDeep(Root, orderType);
+        }
+
+        // вспомогательный метод обхода в глубину 
+        private List<BSTNode> RecursiveDeep(BSTNode FromNode, int orderType)
+        {
+            BSTNode node = FromNode;
+            List<BSTNode> nodes = new List<BSTNode>();
+
+            if (node != null)
+            {
+                switch (orderType)
+                {
+                    case 0: // in-order
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
+                        nodes.Add(node);
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
+                        break;
+                    case 1: // post-order
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
+                        nodes.Add(node);
+                        break;
+                    case 2: // pre-order
+                        nodes.Add(node);
+                        nodes.AddRange(RecursiveDeep(node.LeftChild, orderType));
+                        nodes.AddRange(RecursiveDeep(node.RightChild, orderType));
+                        break;
+                    default: return null;
+                }
+            }
+
+            return nodes;
+        }
+
+        // вспомогательный метод
+        public int CheckLevel(BSTNode FromNode, bool LeftLevel)
+        {
+            BSTNode node = FromNode;
+            int Level = node.Level;
+            if (node != null)
+            {
+                if (LeftLevel)
+                {
+                    if (node.LeftChild != null)
+                        Level = CheckLevel(node.LeftChild, true);
+                }
+                else
+                {
+                    if (node.RightChild != null)
+                        Level = CheckLevel(node.RightChild, false);
+                }
+            }
+
+            return Level;
+        }
+
     }
 }
