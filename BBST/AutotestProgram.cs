@@ -51,20 +51,10 @@ namespace AlgorithmsDataStructures2
 
             if (node != null)
             {
-                int LeftLevel = 1, RightLevel = 1;
-                if (node.LeftChild != null)
-                {
-                    LeftLevel = CheckLevel(node.LeftChild, true);
-
-                }
-                if (node.RightChild != null)
-                {
-                    RightLevel = CheckLevel(node.RightChild, false);
-
-                }
+                int LeftLevel = CheckLevel(node.LeftChild, true);
+                int RightLevel = CheckLevel(node.RightChild, false);
 
                 if (Math.Abs(LeftLevel - RightLevel) > 1) return false;
-
             }
 
             return true;  // сбалансировано ли дерево с корнем root_node
@@ -200,6 +190,7 @@ namespace AlgorithmsDataStructures2
         {
             BSTNode node = FromNode;
             int Level = node.Level;
+
             if (node != null)
             {
                 if (LeftLevel)
