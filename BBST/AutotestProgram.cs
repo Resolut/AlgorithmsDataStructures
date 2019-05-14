@@ -46,7 +46,6 @@ namespace AlgorithmsDataStructures2
 
         public bool IsBalanced(BSTNode root_node)
         {
-            // TODO написать код проверки баланса левого и правого поддеревьев
             BSTNode node = root_node;
 
             if (node != null)
@@ -107,6 +106,27 @@ namespace AlgorithmsDataStructures2
             return node;
         }
 
+        // вспомогательный рекурсивный метод для проверки баланса поддеревьев узла
+        public int CheckLevel(BSTNode FromNode)
+        {
+            BSTNode node = FromNode;
+            int maxLevel = node.Level;
+
+            if (node != null)
+            {
+                int leftLevel, rightLevel;
+                if (node.LeftChild != null)
+                    leftLevel = CheckLevel(node.LeftChild);
+                else leftLevel = node.Level;
+
+                if (node.RightChild != null)
+                    rightLevel = CheckLevel(node.RightChild);
+                else rightLevel = node.Level;
+
+                maxLevel = leftLevel > rightLevel ? leftLevel : rightLevel;
+            }
+            return maxLevel;
+        }
 
         // v-- методы взяты из BST для проверки дерева --v
         // вспомогательный метод для отображения(печати) всех ключей дерева
@@ -183,29 +203,6 @@ namespace AlgorithmsDataStructures2
             }
 
             return nodes;
-        }
-
-        // вспомогательный метод
-        public int CheckLevel(BSTNode FromNode)
-        {
-            BSTNode node = FromNode;
-            int maxLevel = node.Level;
-            Console.WriteLine("узел:{0}, глубина:{1}", node.NodeKey, maxLevel);
-
-            if (node != null)
-            {
-                int leftLevel, rightLevel;
-                if (node.LeftChild != null)
-                    leftLevel = CheckLevel(node.LeftChild);
-                else leftLevel = node.Level;
-
-                if (node.RightChild != null)
-                    rightLevel = CheckLevel(node.RightChild);
-                else rightLevel = node.Level;
-
-                maxLevel = leftLevel > rightLevel ? leftLevel : rightLevel;
-            }
-            return maxLevel;
         }
 
     }
