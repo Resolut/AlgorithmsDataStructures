@@ -51,8 +51,8 @@ namespace AlgorithmsDataStructures2
 
             if (node != null)
             {
-                int LeftLevel = CheckLevel(node.LeftChild, true);
-                int RightLevel = CheckLevel(node.RightChild, false);
+                int LeftLevel = CheckLevel(node.LeftChild);
+                int RightLevel = CheckLevel(node.RightChild);
 
                 if (Math.Abs(LeftLevel - RightLevel) > 1) return false;
             }
@@ -77,8 +77,8 @@ namespace AlgorithmsDataStructures2
                 right[i] = arr[middle + i + 1]; // вычисление правой части массива
             }
 
-            AddToArray(left, 2 * index + 1);           // определяем левого наследника родительского узла
-            AddToArray(right, 2 * index + 2);          // определяем правого наследника родительского узла 
+            AddToArray(left, 2 * index + 1);    // определяем левого наследника родительского узла
+            AddToArray(right, 2 * index + 2);   // определяем правого наследника родительского узла 
 
         }
 
@@ -186,26 +186,26 @@ namespace AlgorithmsDataStructures2
         }
 
         // вспомогательный метод
-        public int CheckLevel(BSTNode FromNode, bool LeftLevel)
+        public int CheckLevel(BSTNode FromNode)
         {
             BSTNode node = FromNode;
-            int Level = node.Level;
+            int maxLevel = node.Level;
+            Console.WriteLine("узел:{0}, глубина:{1}", node.NodeKey, maxLevel);
 
             if (node != null)
             {
-                if (LeftLevel)
-                {
-                    if (node.LeftChild != null)
-                        Level = CheckLevel(node.LeftChild, true);
-                }
-                else
-                {
-                    if (node.RightChild != null)
-                        Level = CheckLevel(node.RightChild, false);
-                }
-            }
+                int leftLevel, rightLevel;
+                if (node.LeftChild != null)
+                    leftLevel = CheckLevel(node.LeftChild);
+                else leftLevel = node.Level;
 
-            return Level;
+                if (node.RightChild != null)
+                    rightLevel = CheckLevel(node.RightChild);
+                else rightLevel = node.Level;
+
+                maxLevel = leftLevel > rightLevel ? leftLevel : rightLevel;
+            }
+            return maxLevel;
         }
 
     }
