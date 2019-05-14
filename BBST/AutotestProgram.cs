@@ -107,7 +107,7 @@ namespace AlgorithmsDataStructures2
         }
 
         // вспомогательный рекурсивный метод для проверки баланса поддеревьев узла
-        public int CheckLevel(BSTNode FromNode)
+        private int CheckLevel(BSTNode FromNode)
         {
             BSTNode node = FromNode;
             int maxLevel = node.Level;
