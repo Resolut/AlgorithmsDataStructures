@@ -5,11 +5,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode
     {
-        public int NodeKey; // ключ узла
-        public BSTNode Parent; // родитель или null для корня
-        public BSTNode LeftChild; // левый потомок
-        public BSTNode RightChild; // правый потомок	
-        public int Level; // глубина узла
+        public int NodeKey;         // ключ узла
+        public BSTNode Parent;      // родитель или null для корня
+        public BSTNode LeftChild;   // левый потомок
+        public BSTNode RightChild;  // правый потомок	
+        public int Level;           // глубина узла
 
         public BSTNode(int key, BSTNode parent)
         {
@@ -32,16 +32,14 @@ namespace AlgorithmsDataStructures2
 
         public void CreateFromArray(int[] a)
         {
-            // создаём массив дерева BSTArray из заданного
-            BSTArray = new int[a.Length];
-            Array.Sort(a);  // сортируем исходный массив по возрастанию
-            AddToArray(a, 0);      // формируем массив со структурой сбалансированного дерева
+            BSTArray = new int[a.Length];   // создаём массив дерева BSTArray из заданного
+            Array.Sort(a);                  // сортируем исходный массив по возрастанию
+            AddToArray(a, 0);               // формируем массив со структурой сбалансированного дерева
         }
 
         public void GenerateTree()
         {
-            // создаём дерево с нуля из массива BSTArray
-            Root = AddNode(null, 0);
+            Root = AddNode(null, 0); // создаём дерево с нуля из массива BSTArray
         }
 
         public bool IsBalanced(BSTNode root_node)
@@ -50,13 +48,19 @@ namespace AlgorithmsDataStructures2
 
             if (node != null)
             {
-                int LeftLevel = CheckLevel(node.LeftChild);
-                int RightLevel = CheckLevel(node.RightChild);
+                int LeftLevel = node.Level;
+                int RightLevel = node.Level;
+
+                if (node.LeftChild != null)
+                    LeftLevel = MaxLevel(node.LeftChild);
+
+                if (node.RightChild != null)
+                    RightLevel = MaxLevel(node.RightChild);
 
                 if (Math.Abs(LeftLevel - RightLevel) > 1) return false;
             }
 
-            return true;  // сбалансировано ли дерево с корнем root_node
+            return true;
         }
 
         // вспомогательный рекурсивный метод для наполнения массива структурой сбалансированного дерева 
@@ -106,25 +110,26 @@ namespace AlgorithmsDataStructures2
             return node;
         }
 
-        // вспомогательный рекурсивный метод для проверки баланса поддеревьев узла
-        private int CheckLevel(BSTNode FromNode)
+        // вспомогательный рекурсивный метод для определения максимальной глубины в поддереве
+        private int MaxLevel(BSTNode FromNode)
         {
             BSTNode node = FromNode;
             int maxLevel = node.Level;
 
             if (node != null)
             {
-                int leftLevel, rightLevel;
+                int leftLevel = node.Level;
+                int rightLevel = node.Level;
+
                 if (node.LeftChild != null)
-                    leftLevel = CheckLevel(node.LeftChild);
-                else leftLevel = node.Level;
+                    leftLevel = MaxLevel(node.LeftChild);
 
                 if (node.RightChild != null)
-                    rightLevel = CheckLevel(node.RightChild);
-                else rightLevel = node.Level;
+                    rightLevel = MaxLevel(node.RightChild);
 
                 maxLevel = leftLevel > rightLevel ? leftLevel : rightLevel;
             }
+
             return maxLevel;
         }
 
