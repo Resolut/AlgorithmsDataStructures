@@ -48,5 +48,41 @@ namespace BinaryHeapTests
 
             Assert.AreEqual(maxKey, 16);
         }
+        [TestMethod]
+        public void GetMax_2_level_Tree_Another_InArr()
+        {
+            Heap heap = new Heap();
+            heap.MakeHeap(new int[] { 1, 16, 8 }, 1);
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+            int maxKey = heap.GetMax();
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            int maxKey2 = heap.GetMax();
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+            int maxKey3 = heap.GetMax();
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+            int maxKey4 = heap.GetMax();
+
+            Assert.AreEqual(maxKey, 16);
+            Assert.AreEqual(maxKey2, 8);
+            Assert.AreEqual(maxKey3, 1);
+            Assert.AreEqual(maxKey4, -1);
+        }
     }
 }
