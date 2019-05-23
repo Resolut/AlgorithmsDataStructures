@@ -59,30 +59,22 @@ namespace AlgorithmsDataStructures2
 
         private void SiftDown(int index)
         {
-            int left = index * 2 + 1;
-            int right = index * 2 + 2;
-
-            if (left < HeapSize)
+            while (true)
             {
-                if (HeapArray[index] < HeapArray[left])
-                {
-                    int temp = HeapArray[index];
-                    HeapArray[index] = HeapArray[left];
-                    HeapArray[left] = temp;
+                int maxIndex = index; // индекс для потомка
+                int left = index * 2 + 1;
+                int right = index * 2 + 2;
 
-                    SiftDown(left);
-                }
-            }
-            if (right < HeapSize)
-            {
-                if (HeapArray[index] < HeapArray[right])
-                {
-                    int temp = HeapArray[index];
-                    HeapArray[index] = HeapArray[right];
-                    HeapArray[right] = temp;
+                // определяем потомка с ключом больше, чем ключ родителя 
+                if (left < HeapSize && HeapArray[left] > HeapArray[maxIndex]) maxIndex = left;
+                if (right < HeapSize && HeapArray[right] > HeapArray[maxIndex]) maxIndex = right;
+                if (maxIndex == index) break;
 
-                    SiftDown(right);
-                }
+                int temp = HeapArray[index];
+                HeapArray[index] = HeapArray[maxIndex];
+                HeapArray[maxIndex] = temp;
+
+                index = maxIndex;
             }
         }
     }
