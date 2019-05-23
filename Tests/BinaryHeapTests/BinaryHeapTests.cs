@@ -28,6 +28,62 @@ namespace BinaryHeapTests
         }
 
         [TestMethod]
+        public void MakeHeap_4_level_Heap()
+        {
+            Heap heap = new Heap();
+            heap.MakeHeap(new int[] { 110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9 }, 3);
+
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.AreEqual(heap.HeapArray[0], 110);
+            Assert.IsTrue(heap.HeapSize == 15);
+        }
+
+        [TestMethod]
+        public void GetMax_4_level_Heap()
+        {
+            Heap heap = new Heap();
+            int[] inArr = { 110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9 };
+            heap.MakeHeap(inArr, 3);
+
+            Console.Write ("Входной массив:\t\t");
+            foreach (var item in inArr)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Console.Write("Сформированная Куча:\t");
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.AreEqual(heap.HeapArray[0], 110);
+            Assert.IsTrue(heap.HeapSize == 15);
+
+            int maxKey = heap.GetMax();
+            Console.Write("Перестроенная Куча:\t");
+            foreach (var item in heap.HeapArray)
+            {
+                Console.Write("{0} ", item);
+            }
+
+            Assert.AreEqual(maxKey, 110);
+            Assert.IsTrue(heap.HeapSize == 14);
+            Assert.AreEqual(heap.HeapArray[0], 90);
+            Assert.AreEqual(heap.HeapArray[1], 80);
+            Assert.AreEqual(heap.HeapArray[4], 65);
+            Assert.AreEqual(heap.HeapArray[9], 60);
+            Assert.AreEqual(heap.HeapArray[10], 9);
+        }
+
+        [TestMethod]
         public void GetMax_3_level_Heap()
         {
             Heap heap = new Heap();
