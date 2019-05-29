@@ -79,7 +79,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryHeapTests", "Tests\Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGraph", "SimpleGraph\SimpleGraph.csproj", "{70F35295-674D-4CC1-A120-5CAAC2D141AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGraphTests", "SimpleGraphTests\SimpleGraphTests.csproj", "{2E6F3140-7534-4545-B96B-CDA9FED048C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGraphTests", "Tests\SimpleGraphTests\SimpleGraphTests.csproj", "{2E6F3140-7534-4545-B96B-CDA9FED048C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
