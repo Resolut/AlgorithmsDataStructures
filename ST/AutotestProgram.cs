@@ -104,6 +104,13 @@ namespace AlgorithmsDataStructures2
             return Recursive(Root).FindAll(delegate (SimpleTreeNode<T> node) { return node.Children == null || node.Children.Count == 0; }).Count;
         }
 
+        public List<int> EvenTrees()
+        {
+            // рассчитать минимальное количество ребер которое нужно удалить
+            // чтобы получить лес с четными деревьями
+            return null;
+        }
+
         private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
         {
             SimpleTreeNode<T> node = targetNode;
@@ -126,6 +133,7 @@ namespace AlgorithmsDataStructures2
 
             return result;
         }
+
     }
 
 }
