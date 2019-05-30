@@ -40,7 +40,7 @@ namespace AlgorithmsDataStructures2
         public void RemoveVertex(int v)
         {
             // ваш код удаления вершины со всеми её рёбрами
-            if( v >= 0 && v < max_vertex && vertex[v] != null)
+            if (v >= 0 && v < max_vertex && vertex[v] != null)
             {
                 vertex[v] = null; // удаление вершины
                 int rows = vertex.GetUpperBound(0) + 1;
@@ -64,9 +64,9 @@ namespace AlgorithmsDataStructures2
         public void AddEdge(int v1, int v2)
         {
             // добавление ребра между вершинами v1 и v2
-            if(!IsEdge(v1,v2) && vertex[v1] != null && vertex[v2] != null)
+            if (!IsEdge(v1, v2) && vertex[v1] != null && vertex[v2] != null)
             {
-                if ((v1 >= 0 && v1 < max_vertex) && 
+                if ((v1 >= 0 && v1 < max_vertex) &&
                     (v2 >= 0 && v2 < max_vertex))
                 {
                     m_adjacency[v1, v2] = 1;
@@ -78,7 +78,7 @@ namespace AlgorithmsDataStructures2
         public void RemoveEdge(int v1, int v2)
         {
             // удаление ребра между вершинами v1 и v2
-            if (IsEdge(v1,v2))
+            if (IsEdge(v1, v2))
             {
                 if ((v1 >= 0 && v1 < max_vertex) &&
                     (v2 >= 0 && v2 < max_vertex))
