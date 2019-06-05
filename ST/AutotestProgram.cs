@@ -135,7 +135,6 @@ namespace AlgorithmsDataStructures2
 
                 previousLeafParrent = leaf.Parent;
             }
-            // отсортировать список связей  
 
             return edges;
         }
