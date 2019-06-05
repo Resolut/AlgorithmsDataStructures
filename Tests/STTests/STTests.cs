@@ -903,7 +903,7 @@ namespace AlgorithmsDataStructures2.Tests
         }
 
         [TestMethod]
-        public void EvenTrees()
+        public void EvenTrees_22_Nodes()
         {
             SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null)); // корень дерева
 
@@ -945,6 +945,79 @@ namespace AlgorithmsDataStructures2.Tests
 
             Assert.IsTrue(testTree.LeafCount() == 9);
             Assert.IsTrue(testTree.Count() == 22);
+            Assert.AreEqual(14, result.Count);
+
+        }
+
+        [TestMethod]
+        public void EvenTrees_10_Nodes()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null)); // корень дерева
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы 2 уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(6, null));
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null)); // узлы 3 уровня
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(7, null));
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(4, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(8, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(9, null)); // узлы 4 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(10, null));
+
+            List<int> result = testTree.EvenTrees();
+
+            foreach (var item in result)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.IsTrue(testTree.Count() == 10);
+            Assert.IsTrue(testTree.LeafCount() == 5);
+            Assert.AreEqual(4, result.Count);
+        }
+
+        [TestMethod]
+        public void EvenTrees_Root_Only()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null)); // корень дерева
+            List<int> result = testTree.EvenTrees();
+
+            foreach (var item in result)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.IsTrue(testTree.Count() == 1);
+            Assert.IsTrue(testTree.LeafCount() == 1);
+            Assert.IsTrue(result.Count == 0);
+        }
+
+        [TestMethod]
+        public void EvenTrees_Odd_Nodes()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null)); // корень дерева
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы 2 уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(6, null));
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null)); // узлы 3 уровня
+
+            List<int> result = testTree.EvenTrees();
+
+            foreach (var item in result)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.IsTrue(testTree.Count() == 5);
+            Assert.IsTrue(testTree.LeafCount() == 3);
+            Assert.IsTrue(result.Count == 0);
         }
     }
 }
