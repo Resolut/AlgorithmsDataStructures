@@ -65,10 +65,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public List<SimpleTreeNode<T>> GetAllNodes()
-        {
-            return Recursive(Root);
-        }
+        public List<SimpleTreeNode<T>> GetAllNodes() { return Recursive(Root); }
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
@@ -94,10 +91,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public int Count()
-        {
-            return GetAllNodes().Count;
-        }
+        public int Count() { return GetAllNodes().Count; }
 
         public int LeafCount()
         {
@@ -106,25 +100,44 @@ namespace AlgorithmsDataStructures2
 
         public List<int> EvenTrees()
         {
-            // TODO рассчитать максимальное количество ребер которое нужно удалить
-            // чтобы получить лес с четными деревьями
-
-            int uncheckNodesCounter = Count(); // счетчик оставшихся для проверки узлов
-            if (uncheckNodesCounter % 2 == 1) return null; // при нечетном количестве возвращаем пустой список
-            // создать список листов
+            if (Count() % 2 == 1) return new List<int>(); // при нечетном количестве возвращаем пустой список
+            // список листов
             List<SimpleTreeNode<T>> leafs = Recursive(Root).FindAll(
                 delegate (SimpleTreeNode<T> node) { return node.Children == null || node.Children.Count == 0; });
-            // начинать проход от каждого листа
-            SimpleTreeNode<T> leafParent = leafs[0].Parent;
-            while(leafParent != Root) //до тех пор пока родитель текущего узла не корень
+
+            List<int> edges = new List<int>(); // создаем список связей
+            SimpleTreeNode<T> previousLeafParrent = null; // используется для исключения повторного обхода от листьев с общим родителем 
+            foreach (var leaf in leafs)
             {
-                // считать количество узлов родителя
-                // возможны два варианта в каждом из них выделять отдельный лес
-                
+                if (previousLeafParrent != leaf.Parent) // пропуск обхода от листов - соседей 
+                {
+                    SimpleTreeNode<T> node = leaf.Parent; // проход от каждого листа
+                    while (node != Root)
+                    {
+                        int nodesCount = Recursive(node).Count; // считать количество узлов узла
+                        if (nodesCount % 2 == 0) // при чётном числе узлов сохраняем связь узла и его родителя в список
+                        {
+                            if (typeof(T) == typeof(int))
+                            {
+                                // проверка, содержится ли такая связь в списке
+                                if (!edges.Contains(Convert.ToInt32(node.Parent.NodeValue)) ||
+                                    !edges.Contains(Convert.ToInt32(node.NodeValue)))
+                                {
+                                    edges.Add(Convert.ToInt32(node.Parent.NodeValue));
+                                    edges.Add(Convert.ToInt32(node.NodeValue));
+                                }
+                            }
+                        }
+
+                        node = node.Parent; // переход к корню
+                    }
+                }
+
+                previousLeafParrent = leaf.Parent;
             }
-            
-            
-            return null;
+            // отсортировать список связей  
+
+            return edges;
         }
 
         private List<SimpleTreeNode<T>> Recursive(SimpleTreeNode<T> targetNode, T val = default(T), bool isFind = false)
