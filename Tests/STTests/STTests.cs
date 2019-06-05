@@ -901,5 +901,50 @@ namespace AlgorithmsDataStructures2.Tests
                 Console.WriteLine();
             }
         }
+
+        [TestMethod]
+        public void EvenTrees()
+        {
+            SimpleTree<int> testTree = new SimpleTree<int>(new SimpleTreeNode<int>(1, null)); // корень дерева
+
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(2, null)); // узлы 2 уровня
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(3, null));
+            testTree.AddChild(testTree.Root, new SimpleTreeNode<int>(4, null));
+
+            testTree.AddChild(testTree.Root.Children[0], new SimpleTreeNode<int>(5, null)); // узлы 3 уровня
+            testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(6, null));
+            testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(7, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(8, null)); // узлы 4 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0], new SimpleTreeNode<int>(9, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0], new SimpleTreeNode<int>(10, null)); // узлы 5 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[1], new SimpleTreeNode<int>(11, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0], new SimpleTreeNode<int>(12, null)); // узлы 6 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0], new SimpleTreeNode<int>(13, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[0], new SimpleTreeNode<int>(14, null)); // узлы 7 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1], new SimpleTreeNode<int>(15, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1], new SimpleTreeNode<int>(16, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1], new SimpleTreeNode<int>(17, null)); // узлы 8 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1], new SimpleTreeNode<int>(18, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1], new SimpleTreeNode<int>(19, null));
+
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1].Children[1], new SimpleTreeNode<int>(20, null)); // узлы 9 уровня
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1].Children[1], new SimpleTreeNode<int>(21, null));
+            testTree.AddChild(testTree.Root.Children[2].Children[0].Children[0].Children[0].Children[1].Children[1].Children[2], new SimpleTreeNode<int>(22, null));
+
+            List<int> result = testTree.EvenTrees();
+            foreach (var item in result)
+            {
+                Console.Write("{0} ", item);
+            }
+            Console.WriteLine();
+
+            Assert.IsTrue(testTree.LeafCount() == 9);
+            Assert.IsTrue(testTree.Count() == 22);
+        }
     }
 }
