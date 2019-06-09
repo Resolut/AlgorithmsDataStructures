@@ -441,5 +441,19 @@ namespace SimpleGraphTests
 
             Assert.IsNull(testGraph.vertex[0]); // вершина удалена
         }
+
+        [TestMethod]
+        public void DepthFirstSearch()
+        {
+            int size = 5;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(19);
+            testGraph.AddVertex(18);
+            testGraph.AddVertex(17);
+            testGraph.AddVertex(16);
+            testGraph.AddVertex(15);
+
+            // TODO добавить связи ребра
+        }
     }
 }
