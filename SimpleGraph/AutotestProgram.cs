@@ -34,9 +34,9 @@ namespace AlgorithmsDataStructures2
             Stack<Vertex<T>> localStack = new Stack<Vertex<T>>();   // очищаем стек
             foreach (var item in vertex) { item.Hit = false; }      // все вершины делаем непосещенными
 
-            Vertex<T> currentVertex = vertex[VFrom]; // текущая вершина в списке vertex
-            currentVertex.Hit = true;       // делаем вершину посещенной
-            localStack.Push(currentVertex); // добавляем текущую вершину в стек
+            Vertex<T> currentVertex = vertex[VFrom];    // текущая вершина в списке vertex
+            currentVertex.Hit = true;                   // делаем вершину посещенной
+            localStack.Push(currentVertex);             // добавляем текущую вершину в стек
                                                         // ищем в смежных вершинах VFrom вершину VTo
             while (true)
             {
