@@ -11,10 +11,10 @@ namespace SimpleGraphTests
         public void AddVertex_1v_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(5);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(5);
             testGraph.AddVertex(19);
 
-            foreach (Vertex item in testGraph.vertex)
+            foreach (Vertex<int> item in testGraph.vertex)
             {
                 if (item != null)
                     Console.Write(item.Value + ", ");
@@ -34,7 +34,7 @@ namespace SimpleGraphTests
         public void AddVertex_5v_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -63,7 +63,7 @@ namespace SimpleGraphTests
         public void AddVertex_6v_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -87,7 +87,7 @@ namespace SimpleGraphTests
         public void AddEdge_1e_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -127,7 +127,7 @@ namespace SimpleGraphTests
         public void AddEdge_5e_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -179,7 +179,7 @@ namespace SimpleGraphTests
         public void AddEdge_in_5v_Graph_If_v1_Is_not_Exists()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -209,7 +209,7 @@ namespace SimpleGraphTests
         public void AddEdge_1e_to_1v_and_Itself_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -248,7 +248,7 @@ namespace SimpleGraphTests
         public void RemoveEdge_between_1v_and_Itself_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -316,7 +316,7 @@ namespace SimpleGraphTests
         public void RemoveEdge_5e_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
@@ -390,7 +390,7 @@ namespace SimpleGraphTests
         public void RemoveVertex_1v_in_5v_Graph()
         {
             int size = 5;
-            SimpleGraph testGraph = new SimpleGraph(size);
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
 
             testGraph.AddVertex(19);
             testGraph.AddVertex(18);
