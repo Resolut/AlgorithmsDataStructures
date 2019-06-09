@@ -3,18 +3,20 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class Vertex
+    public class Vertex<T>
     {
-        public int Value;
-        public Vertex(int val)
+        public bool Hit;
+        public T Value;
+        public Vertex(T val)
         {
             Value = val;
+            Hit = false;
         }
     }
 
-    public class SimpleGraph
+    public class SimpleGraph<T>
     {
-        public Vertex[] vertex;
+        public Vertex<T>[] vertex;
         public int[,] m_adjacency;
         public int max_vertex;
 
@@ -22,21 +24,67 @@ namespace AlgorithmsDataStructures2
         {
             max_vertex = size;
             m_adjacency = new int[size, size];
-            vertex = new Vertex[size];
+            vertex = new Vertex<T>[size];
         }
 
-        public void AddVertex(int value)
+        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
+        {
+            List<Vertex<T>> path = new List<Vertex<T>>();           // путь из вершины VFrom в VTo
+            List<Vertex<T>> adjVertex = new List<Vertex<T>>();      // список смежных вершин
+            Stack<Vertex<T>> localStack = new Stack<Vertex<T>>();   // очищаем стек
+            foreach (var item in vertex) { item.Hit = false; }      // все вершины делаем непосещенными
+
+            Vertex<T> currentVertex = vertex[VFrom]; // текущая вершина в списке vertex
+            currentVertex.Hit = true;       // делаем вершину посещенной
+            localStack.Push(currentVertex); // добавляем текущую вершину в стек
+                                                        // ищем в смежных вершинах VFrom вершину VTo
+            while (true)
+            {
+                if (IsEdge(Array.IndexOf(vertex, currentVertex), VTo))
+                {
+                    localStack.Push(vertex[VTo]);
+                    path.AddRange(localStack);
+                    return path;
+                }
+                else
+                {
+                    // с каждым проходом число смежных непосещенных узлов будет меньше
+                    adjVertex.AddRange(Array.FindAll(vertex, (item) => 
+                        !item.Hit &&
+                        item != currentVertex &&
+                        IsEdge(Array.IndexOf(vertex,currentVertex), Array.IndexOf(vertex, item))));
+                    
+
+                    if (adjVertex.Count == 0)
+                    {
+                        localStack.Pop();
+                        if (localStack.Count == 0) return path;
+                        else
+                        {
+                            currentVertex = localStack.Peek();
+                            currentVertex.Hit = true;
+                        }
+                    }
+                    else
+                    {
+                        currentVertex = adjVertex[0];
+                        currentVertex.Hit = true;
+                        localStack.Push(currentVertex);
+                    }
+                }
+            }
+        }
+
+        public void AddVertex(T value)
         {
             // ваш код добавления новой вершины 
             // с значением value 
             // в свободную позицию массива vertex
             int index = Array.IndexOf(vertex, null);
             if (index != -1)
-                vertex[index] = new Vertex(value);
+                vertex[index] = new Vertex<T>(value);
         }
 
-        // здесь и далее, параметры v -- индекс вершины
-        // в списке  vertex
         public void RemoveVertex(int v)
         {
             // ваш код удаления вершины со всеми её рёбрами
