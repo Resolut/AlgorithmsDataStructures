@@ -27,6 +27,14 @@ namespace AlgorithmsDataStructures2
             vertex = new Vertex<T>[size];
         }
 
+        public List<Vertex<T>> BreadthFirstSearch(int VFrom, int VTo)
+        {
+            // узлы задаются позициями в списке vertex.
+            // возвращает список узлов -- путь из VFrom в VTo
+            // или пустой список, если пути нету
+            return null;
+        }
+
         public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
         {
             List<Vertex<T>> path = new List<Vertex<T>>();           // путь из вершины VFrom в VTo
