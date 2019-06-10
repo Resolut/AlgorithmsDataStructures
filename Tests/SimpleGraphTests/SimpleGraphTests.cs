@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AlgorithmsDataStructures2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -443,17 +444,162 @@ namespace SimpleGraphTests
         }
 
         [TestMethod]
-        public void DepthFirstSearch()
+        public void DepthFirstSearch_5_Vertex()
         {
             int size = 5;
             SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
-            testGraph.AddVertex(19);
+            testGraph.AddVertex(19); // добавляем вершины
             testGraph.AddVertex(18);
             testGraph.AddVertex(17);
             testGraph.AddVertex(16);
             testGraph.AddVertex(15);
 
-            // TODO добавить связи ребра
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(1, 3);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+
+            for (int i = 0; i < testGraph.m_adjacency.GetLength(0); i++)
+            {
+                for (int j = 0; j < testGraph.m_adjacency.GetLength(1); j++)
+                {
+                    Console.Write(testGraph.m_adjacency[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            List<Vertex<int>> vList = testGraph.DepthFirstSearch(1,4); // попытка построения пути из 1 (ключ 18) в 4 (ключ 15).
+
+            vList.ForEach((item) => Console.WriteLine(item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 3);
+            Assert.AreEqual(18, vList[0].Value);
+            Assert.AreEqual(19, vList[1].Value);
+            Assert.AreEqual(15, vList[2].Value);
+        }
+
+        [TestMethod]
+        public void DepthFirstSearch_5_Vertex_where_1v_has_not_Adj()
+        {
+            int size = 5;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(19); // добавляем вершины
+            testGraph.AddVertex(18);
+            testGraph.AddVertex(17);
+            testGraph.AddVertex(16);
+            testGraph.AddVertex(15);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(1, 3);
+            testGraph.AddEdge(3, 4);
+
+            for (int i = 0; i < testGraph.m_adjacency.GetLength(0); i++)
+            {
+                for (int j = 0; j < testGraph.m_adjacency.GetLength(1); j++)
+                {
+                    Console.Write(testGraph.m_adjacency[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            List<Vertex<int>> vList = testGraph.DepthFirstSearch(0, 2); // попытка построения пути из 0 (ключ 19) в 2 (ключ 17).
+            List<Vertex<int>> vList2 = testGraph.DepthFirstSearch(1, 2); // 1 (ключ 18) в 2 (ключ 17).
+            List<Vertex<int>> vList3 = testGraph.DepthFirstSearch(3, 2); // 3 (ключ 16) в 2 (ключ 17).
+            List<Vertex<int>> vList4 = testGraph.DepthFirstSearch(4, 2); // 4 (ключ 15) в 2 (ключ 17).
+
+            vList.ForEach((item) => Console.WriteLine(item.Value));
+            vList2.ForEach((item) => Console.WriteLine(item.Value));
+            vList3.ForEach((item) => Console.WriteLine(item.Value));
+            vList4.ForEach((item) => Console.WriteLine(item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsNotNull(vList2);
+            Assert.IsNotNull(vList3);
+            Assert.IsNotNull(vList4);
+            Assert.IsTrue(vList.Count == 0);
+            Assert.IsTrue(vList2.Count == 0);
+            Assert.IsTrue(vList3.Count == 0);
+            Assert.IsTrue(vList4.Count == 0);
+        }
+
+        [TestMethod]
+        public void DepthFirstSearch_7_Vertex_where_Suboptimal_Path()
+        {
+            int size = 7;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(10); // добавляем вершины
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(70); // вершина короткого пути
+            testGraph.AddVertex(60);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 5);
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+            testGraph.AddEdge(4, 6);
+            testGraph.AddEdge(5, 6);
+
+            for (int i = 0; i < testGraph.m_adjacency.GetLength(0); i++)
+            {
+                for (int j = 0; j < testGraph.m_adjacency.GetLength(1); j++)
+                {
+                    Console.Write(testGraph.m_adjacency[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            List<Vertex<int>> vList = testGraph.DepthFirstSearch(0, 6); // попытка построения пути из 0 (ключ 10) в 6 (ключ 60).
+
+            vList.ForEach((item) => Console.WriteLine(item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 6);
+        }
+
+        [TestMethod]
+        public void DepthFirstSearch_7_Vertex_where_Only_Path()
+        {
+            int size = 7;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(10); // добавляем вершины
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(70); 
+            testGraph.AddVertex(60);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 5);
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+            testGraph.AddEdge(5, 6);
+
+            for (int i = 0; i < testGraph.m_adjacency.GetLength(0); i++)
+            {
+                for (int j = 0; j < testGraph.m_adjacency.GetLength(1); j++)
+                {
+                    Console.Write(testGraph.m_adjacency[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            List<Vertex<int>> vList = testGraph.DepthFirstSearch(0, 6); // попытка построения пути из 0 (ключ 10) в 6 (ключ 60).
+
+            vList.ForEach((item) => Console.WriteLine(item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 3);
         }
     }
 }
