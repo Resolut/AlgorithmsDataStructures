@@ -44,16 +44,17 @@ namespace AlgorithmsDataStructures2
                 {
                     localStack.Push(vertex[VTo]);
                     path.AddRange(localStack);
+                    path.Reverse(); // путь из начальной вершины в конечную
                     return path;
                 }
                 else
                 {
                     // с каждым проходом число смежных непосещенных узлов будет меньше
+                    adjVertex = new List<Vertex<T>>();
                     adjVertex.AddRange(Array.FindAll(vertex, (item) => 
                         !item.Hit &&
                         item != currentVertex &&
                         IsEdge(Array.IndexOf(vertex,currentVertex), Array.IndexOf(vertex, item))));
-                    
 
                     if (adjVertex.Count == 0)
                     {
