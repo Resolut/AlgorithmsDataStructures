@@ -62,7 +62,23 @@ namespace AlgorithmsDataStructures2
                     if (adjVertex[0] == vertex[VTo])
                     {
                         path.Add(adjVertex[0]);
-                        // TODO перебрать список, оставив только путь
+
+                        Vertex<T> lastElem = path[path.Count - 1];
+                        int index = path.Count - 2; // индекс предпоследнего элемента
+                        List<Vertex<T>> tempList = new List<Vertex<T>> { lastElem };
+                        while (index >= 0)
+                        {
+                            if (IsEdge(Array.IndexOf(vertex, lastElem), Array.IndexOf(vertex, path[index])))
+                            {
+                                tempList.Add(path[index]);
+                                lastElem = path[index];
+                            }
+
+                            --index;
+                        }
+                        tempList.Reverse();
+                        path = tempList;
+
                         return path;
                     }
 
