@@ -29,10 +29,47 @@ namespace AlgorithmsDataStructures2
 
         public List<Vertex<T>> BreadthFirstSearch(int VFrom, int VTo)
         {
-            // узлы задаются позициями в списке vertex.
-            // возвращает список узлов -- путь из VFrom в VTo
-            // или пустой список, если пути нету
-            return null;
+            List<Vertex<T>> path = new List<Vertex<T>>();           // путь из вершины VFrom в VTo
+            List<Vertex<T>> adjVertex = new List<Vertex<T>>();      // список смежных вершин
+            Queue<Vertex<T>> tempQueue = new Queue<Vertex<T>>();    // очередь из смежных вершин
+            foreach (var item in vertex) { item.Hit = false; }      // все вершины делаем непосещенными
+
+            Vertex<T> currentVertex = vertex[VFrom];    // текущая вершина в списке vertex
+            currentVertex.Hit = true;
+            path.Add(currentVertex); // добавление начальной вершины
+            while (true)
+            {
+                // с каждым проходом число смежных непосещенных узлов будет меньше
+                adjVertex.Clear(); // сбрасываем список смежных вершин для текущего узла
+                adjVertex.AddRange(Array.FindAll(vertex, (item) =>
+                    !item.Hit &&
+                    item != currentVertex &&
+                    IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item))));
+
+                if (adjVertex.Count == 0)
+                {
+                    if (tempQueue.Count == 0)
+                    {
+                        path.Clear();
+                        return path;
+                    }
+
+                    currentVertex = tempQueue.Dequeue();
+                    path.Add(currentVertex);
+                }
+                else
+                {
+                    if (adjVertex[0] == vertex[VTo])
+                    {
+                        path.Add(adjVertex[0]);
+                        // TODO перебрать список, оставив только путь
+                        return path;
+                    }
+
+                    adjVertex[0].Hit = true;
+                    tempQueue.Enqueue(adjVertex[0]);
+                }
+            }
         }
 
         public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
@@ -58,11 +95,11 @@ namespace AlgorithmsDataStructures2
                 else
                 {
                     // с каждым проходом число смежных непосещенных узлов будет меньше
-                    adjVertex = new List<Vertex<T>>();
-                    adjVertex.AddRange(Array.FindAll(vertex, (item) => 
+                    adjVertex = new List<Vertex<T>>(); // сбрасываем список смежных вершин для текущего узла
+                    adjVertex.AddRange(Array.FindAll(vertex, (item) =>
                         !item.Hit &&
                         item != currentVertex &&
-                        IsEdge(Array.IndexOf(vertex,currentVertex), Array.IndexOf(vertex, item))));
+                        IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item))));
 
                     if (adjVertex.Count == 0)
                     {
