@@ -637,20 +637,137 @@ namespace SimpleGraphTests
             testGraph.AddEdge(8, 11);
             testGraph.AddEdge(9, 11);
 
-            //for (int i = 0; i < testGraph.m_adjacency.GetLength(0); i++)
-            //{
-            //    for (int j = 0; j < testGraph.m_adjacency.GetLength(1); j++)
-            //    {
-            //        Console.Write(testGraph.m_adjacency[i, j] + " ");
-            //    }
-            //    Console.WriteLine();
-            //}
-
             List<Vertex<int>> vList = testGraph.BreadthFirstSearch(0, 8); // попытка построения пути из 0 (0) в 8 (80).
             vList.ForEach((item) => Console.Write(" {0}", item.Value));
 
             Assert.IsNotNull(vList);
-            //Assert.IsTrue(vList.Count == 9);
+            Assert.IsTrue(vList.Count == 4);
+        }
+
+        [TestMethod]
+        public void BreadthFirstSearch_9_Vertex_where_3_Path()
+        {
+            int size = 9;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+
+            testGraph.AddEdge(1, 4);
+            testGraph.AddEdge(2, 5);
+            testGraph.AddEdge(3, 6);
+
+            testGraph.AddEdge(4, 7);
+            testGraph.AddEdge(5, 7);
+            testGraph.AddEdge(5, 8);
+
+            testGraph.AddEdge(6, 8);
+
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(0, 5); // попытка построения пути из 0 (0) в 5 (50).
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 3);
+        }
+
+        [TestMethod]
+        public void BreadthFirstSearch_10_Vertex_Where_Path_is_not_Exists()
+        {
+            int size = 10;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+
+            testGraph.AddVertex(90); // ребро без связей
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+
+            testGraph.AddEdge(1, 4);
+            testGraph.AddEdge(2, 5);
+            testGraph.AddEdge(3, 6);
+
+            testGraph.AddEdge(4, 7);
+            testGraph.AddEdge(5, 7);
+            testGraph.AddEdge(5, 8);
+
+            testGraph.AddEdge(6, 8);
+
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(0, 9); // попытка построения пути из 0 (0) в  9 (90).
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 0);
+        }
+
+        [TestMethod]
+        public void BreadthFirstSearch_5_Vertex_Where_path_has_not_Adj()
+        {
+            int size = 5;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(0, 2); // попытка построения пути из 0 (0) в 2 (20).
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 3);
+        }
+
+        [TestMethod]
+        public void BreadthFirstSearch_5_Vertex_Where_path_has_2v()
+        {
+            int size = 5;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(0, 4); // попытка построения пути из 0 (0) в 4 (40).
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 2);
         }
     }
 }
