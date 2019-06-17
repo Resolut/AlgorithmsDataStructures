@@ -769,5 +769,104 @@ namespace SimpleGraphTests
             Assert.IsNotNull(vList);
             Assert.IsTrue(vList.Count == 2);
         }
+
+        [TestMethod]
+        public void BreadthFirstSearch_13_Vertex_20_Edges()
+        {
+            int size = 13;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+            testGraph.AddVertex(90);
+            testGraph.AddVertex(100);
+            testGraph.AddVertex(110);
+            testGraph.AddVertex(120);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(1, 4);
+            testGraph.AddEdge(1, 5);
+
+            testGraph.AddEdge(1, 6);
+            testGraph.AddEdge(2, 6);
+            testGraph.AddEdge(3, 6);
+            testGraph.AddEdge(3, 7);
+            testGraph.AddEdge(3, 8);
+
+            testGraph.AddEdge(4, 10);
+            testGraph.AddEdge(5, 10);
+            testGraph.AddEdge(6, 10);
+            testGraph.AddEdge(6, 9);
+            testGraph.AddEdge(6, 12);
+
+            testGraph.AddEdge(7, 12);
+            testGraph.AddEdge(8, 12);
+            testGraph.AddEdge(9, 11);
+            testGraph.AddEdge(10, 11);
+            testGraph.AddEdge(11, 12);
+
+            //List<Vertex<int>> vList = testGraph.BreadthFirstSearch(3, 10); // попытка построения пути из 30 в 100.
+            //List<Vertex<int>> vList = testGraph.BreadthFirstSearch(9, 12); // попытка построения пути из 90 в 120.
+            //List<Vertex<int>> vList = testGraph.BreadthFirstSearch(9, 11); // попытка построения пути из 90 в 110.
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(12, 5); // попытка построения пути из 120 в 50.
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 4);
+        }
+
+        [TestMethod]
+        public void BreadthFirstSearch_12_Vertex_14_Edges()
+        {
+            int size = 12;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+            testGraph.AddVertex(90);
+            testGraph.AddVertex(100);
+            testGraph.AddVertex(110);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(1, 4);
+            testGraph.AddEdge(2, 4);
+
+            testGraph.AddEdge(2, 6);
+            testGraph.AddEdge(3, 6);
+            testGraph.AddEdge(4, 5);
+            testGraph.AddEdge(5, 6);
+
+            testGraph.AddEdge(7, 8);
+            testGraph.AddEdge(7, 10);
+            testGraph.AddEdge(8, 9);
+            testGraph.AddEdge(10, 11);
+            testGraph.AddEdge(9, 11);
+
+            List<Vertex<int>> vList = testGraph.BreadthFirstSearch(7, 9); // попытка построения пути из 70 в 90.
+            List<Vertex<int>> vList2 = testGraph.BreadthFirstSearch(4, 3); // попытка построения пути из 40 в 30.
+            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+            Console.WriteLine();
+            vList2.ForEach((item) => Console.Write(" {0}", item.Value));
+
+            Assert.IsNotNull(vList);
+            Assert.IsTrue(vList.Count == 3);
+            Assert.IsTrue(vList2.Count == 4);
+        }
     }
 }
