@@ -65,10 +65,10 @@ namespace AlgorithmsDataStructures2
                     {
                         path.Add(adjVertex[0]);
                         Vertex<T> lastVertex = path[path.Count - 1]; // последняя вершина в пути
-                        List<Vertex<T>> tempList = new List<Vertex<T>> { lastVertex }; // кратчайший путь от VTo до VFrom
+                        List<Vertex<T>> tempList = new List<Vertex<T>> { lastVertex }; // кратчайший путь VTo -> VFrom
 
-                        // определяем кратчайший путь фильтруя вершины из списка path
-                        int currentIndex = path.Count - 1; // индекс  вершины
+                        // определяем кратчайший путь, фильтруя вершины из списка path
+                        int currentIndex = path.Count - 1; // индекс вершины
                         int startIndex = 0;
                         while (currentIndex > startIndex)
                         {
@@ -82,7 +82,7 @@ namespace AlgorithmsDataStructures2
                                 ++startIndex;
                         }
 
-                        tempList.Reverse();
+                        tempList.Reverse(); // VFrom -> VTo
                         path = tempList;
 
                         return path;
