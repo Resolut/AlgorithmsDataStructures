@@ -897,17 +897,19 @@ namespace SimpleGraphTests
             testGraph.AddEdge(4, 5);
 
             List<Vertex<int>> vList = testGraph.BreadthFirstSearch(3, 5); // попытка построения пути из 30 в 50.
-            Console.WriteLine("Путь 3 -> 5: ");
-            vList.ForEach((item) => Console.Write(" {0}", item.Value));
+            //Console.WriteLine("Путь 3 -> 5: ");
+            //vList.ForEach((item) => Console.Write(" {0}", item.Value));
 
             List<Vertex<int>> vList2 = testGraph.BreadthFirstSearch(2, 5); // попытка построения пути из 20 в 50.
-            Console.WriteLine("Путь 2 -> 5: ");
-            vList2.ForEach((item) => Console.Write(" {0}", item.Value));
+            //Console.WriteLine("Путь 2 -> 5: ");
+            //vList2.ForEach((item) => Console.Write(" {0}", item.Value));
 
             Assert.IsNotNull(vList);
             Assert.IsNotNull(vList2);
             Assert.IsTrue(vList.Count == 3);
             Assert.IsTrue(vList2.Count == 4);
+
+            testGraph.WeakVertices();
         }
     }
 }
