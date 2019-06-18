@@ -46,7 +46,7 @@ namespace AlgorithmsDataStructures2
                 adjVertex.AddRange(Array.FindAll(vertex, (item) =>
                     !item.Hit &&
                     item != currentVertex &&
-                    IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item)))); 
+                    IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item))));
 
                 if (adjVertex.Count == 0)
                 {
@@ -141,6 +141,27 @@ namespace AlgorithmsDataStructures2
                     }
                 }
             }
+        }
+
+        public List<Vertex<T>> WeakVertices()
+        {
+            List<Vertex<T>> WeakVertList = new List<Vertex<T>>(); // список вершин не входящих в треугольники
+            List<Vertex<T>> adjVertex = new List<Vertex<T>>(); // сбрасываем список смежных вершин для текущего узла
+
+            foreach (var currentVert in vertex)
+            {
+                adjVertex.Clear();
+                adjVertex.AddRange(Array.FindAll(vertex, (item) =>
+                item != currentVert && IsEdge(Array.IndexOf(vertex, currentVert), Array.IndexOf(vertex, item))));
+
+                if (adjVertex.Count < 2) WeakVertList.Add(currentVert);
+                //Console.Write("{0} :  ", currentVert.Value);
+                //adjVertex.ForEach((item) => Console.Write("{0} ", item.Value));
+                //Console.WriteLine();
+                // TODO 
+            }
+
+            return WeakVertList;
         }
 
         public void AddVertex(T value)
