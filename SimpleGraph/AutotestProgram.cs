@@ -31,30 +31,32 @@ namespace AlgorithmsDataStructures2
         {
             List<Vertex<T>> path = new List<Vertex<T>>();           // путь из вершины VFrom в VTo
             List<Vertex<T>> adjVertex = new List<Vertex<T>>();      // список смежных вершин
-            Queue<Vertex<T>> tempQueue = new Queue<Vertex<T>>();    // очередь из смежных вершин
-            foreach (var item in vertex) { item.Hit = false; }      // все вершины делаем непосещенными
+            Queue<Vertex<T>> adjVQueue = new Queue<Vertex<T>>();    // очередь из смежных вершин
+            foreach (var item in vertex) { item.Hit = false; }      // все вершины делаем непосещёнными
 
             Vertex<T> currentVertex = vertex[VFrom];    // текущая вершина в списке vertex
             currentVertex.Hit = true;
             path.Add(currentVertex); // добавление начальной вершины
+
             while (true)
             {
-                // с каждым проходом число смежных непосещенных узлов будет меньше
                 adjVertex.Clear(); // сбрасываем список смежных вершин для текущего узла
+                // формируем список непосещенных смежных вершин
+                // с каждым проходом число смежных непосещенных узлов будет меньше
                 adjVertex.AddRange(Array.FindAll(vertex, (item) =>
                     !item.Hit &&
                     item != currentVertex &&
-                    IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item))));
+                    IsEdge(Array.IndexOf(vertex, currentVertex), Array.IndexOf(vertex, item)))); 
 
                 if (adjVertex.Count == 0)
                 {
-                    if (tempQueue.Count == 0)
+                    if (adjVQueue.Count == 0)
                     {
                         path.Clear();
                         return path;
                     }
 
-                    currentVertex = tempQueue.Dequeue();
+                    currentVertex = adjVQueue.Dequeue();
                     path.Add(currentVertex);
                 }
                 else
@@ -62,20 +64,24 @@ namespace AlgorithmsDataStructures2
                     if (adjVertex[0] == vertex[VTo])
                     {
                         path.Add(adjVertex[0]);
+                        Vertex<T> lastVertex = path[path.Count - 1]; // последняя вершина в пути
+                        List<Vertex<T>> tempList = new List<Vertex<T>> { lastVertex }; // кратчайший путь от VTo до VFrom
 
-                        Vertex<T> lastElem = path[path.Count - 1];
-                        int index = path.Count - 2; // индекс предпоследнего элемента
-                        List<Vertex<T>> tempList = new List<Vertex<T>> { lastElem };
-                        while (index >= 0)
+                        // определяем кратчайший путь фильтруя вершины из списка path
+                        int currentIndex = path.Count - 1; // индекс  вершины
+                        int startIndex = 0;
+                        while (currentIndex > startIndex)
                         {
-                            if (IsEdge(Array.IndexOf(vertex, lastElem), Array.IndexOf(vertex, path[index])))
+                            if (IsEdge(Array.IndexOf(vertex, path[currentIndex]), Array.IndexOf(vertex, path[startIndex])))
                             {
-                                tempList.Add(path[index]);
-                                lastElem = path[index];
+                                tempList.Add(path[startIndex]);
+                                currentIndex = startIndex;
+                                startIndex = 0;
                             }
-
-                            --index;
+                            else
+                                ++startIndex;
                         }
+
                         tempList.Reverse();
                         path = tempList;
 
@@ -83,7 +89,7 @@ namespace AlgorithmsDataStructures2
                     }
 
                     adjVertex[0].Hit = true;
-                    tempQueue.Enqueue(adjVertex[0]);
+                    adjVQueue.Enqueue(adjVertex[0]);
                 }
             }
         }
