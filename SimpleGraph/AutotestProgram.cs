@@ -145,20 +145,35 @@ namespace AlgorithmsDataStructures2
 
         public List<Vertex<T>> WeakVertices()
         {
-            List<Vertex<T>> WeakVertList = new List<Vertex<T>>(); // список вершин не входящих в треугольники
-            List<Vertex<T>> adjVertex = new List<Vertex<T>>(); // сбрасываем список смежных вершин для текущего узла
+            List<Vertex<T>> WeakVertList = new List<Vertex<T>>();   // список вершин, не входящих в треугольники
+            List<Vertex<T>> adjVertex = new List<Vertex<T>>();      // сбрасываем список смежных вершин для текущего узла
 
             foreach (var currentVert in vertex)
             {
                 adjVertex.Clear();
                 adjVertex.AddRange(Array.FindAll(vertex, (item) =>
-                item != currentVert && IsEdge(Array.IndexOf(vertex, currentVert), Array.IndexOf(vertex, item))));
+                item != currentVert && 
+                IsEdge(Array.IndexOf(vertex, currentVert), Array.IndexOf(vertex, item))));
 
                 if (adjVertex.Count < 2) WeakVertList.Add(currentVert);
-                //Console.Write("{0} :  ", currentVert.Value);
-                //adjVertex.ForEach((item) => Console.Write("{0} ", item.Value));
-                //Console.WriteLine();
-                // TODO 
+                else
+                {
+                    bool isFreeVert = true; // флаг вершины, не входящей в треугольник
+
+                    for (int i = 0; i < adjVertex.Count; i++)
+                    {
+                        for (int j = i + 1; j < adjVertex.Count; j++)
+                        {
+                            if (IsEdge(Array.IndexOf(vertex, adjVertex[i]), Array.IndexOf(vertex, adjVertex[j])))
+                            {
+                                isFreeVert = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (isFreeVert) WeakVertList.Add(currentVert);
+                }
             }
 
             return WeakVertList;
