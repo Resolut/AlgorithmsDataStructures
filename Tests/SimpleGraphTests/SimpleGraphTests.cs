@@ -400,7 +400,7 @@ namespace SimpleGraphTests
             testGraph.AddVertex(15);
 
             testGraph.AddEdge(0, 0); // добавление ребёр между вершинами
-            testGraph.AddEdge(0, 1); 
+            testGraph.AddEdge(0, 1);
             testGraph.AddEdge(0, 2);
             testGraph.AddEdge(0, 3);
             testGraph.AddEdge(2, 1);
@@ -471,7 +471,7 @@ namespace SimpleGraphTests
                 Console.WriteLine();
             }
 
-            List<Vertex<int>> vList = testGraph.DepthFirstSearch(1,4); // попытка построения пути из 1 (ключ 18) в 4 (ключ 15).
+            List<Vertex<int>> vList = testGraph.DepthFirstSearch(1, 4); // попытка построения пути из 1 (ключ 18) в 4 (ключ 15).
 
             vList.ForEach((item) => Console.WriteLine(item.Value));
 
@@ -575,7 +575,7 @@ namespace SimpleGraphTests
             testGraph.AddVertex(30);
             testGraph.AddVertex(40);
             testGraph.AddVertex(50);
-            testGraph.AddVertex(70); 
+            testGraph.AddVertex(70);
             testGraph.AddVertex(60);
 
             testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
@@ -908,8 +908,246 @@ namespace SimpleGraphTests
             Assert.IsNotNull(vList2);
             Assert.IsTrue(vList.Count == 3);
             Assert.IsTrue(vList2.Count == 4);
+        }
 
-            testGraph.WeakVertices();
+        [TestMethod]
+        public void WeakVertices_in_9v_where_2v_Is_Weak()
+        {
+
+            int size = 9;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(1, 5);
+            testGraph.AddEdge(2, 5);
+            testGraph.AddEdge(2, 6);
+
+            testGraph.AddEdge(3, 4);
+            testGraph.AddEdge(4, 5);
+            testGraph.AddEdge(5, 6);
+            testGraph.AddEdge(3, 7);
+            testGraph.AddEdge(4, 7);
+            testGraph.AddEdge(6, 8);
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 2;
+            int actualCount = WeakList.Count;
+
+            WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.IsTrue(WeakList[0].Value == 10);
+            Assert.IsTrue(WeakList[1].Value == 80);
+        }
+
+        [TestMethod]
+        public void WeakVertices_in_3v_where_All_Is_Weak()
+        {
+
+            int size = 3;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 3;
+            int actualCount = WeakList.Count;
+
+            WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.IsTrue(WeakList[0].Value == 0);
+            Assert.IsTrue(WeakList[1].Value == 10);
+            Assert.IsTrue(WeakList[2].Value == 20);
+        }
+
+        [TestMethod]
+        public void WeakVertices_in_3v_where_Graph_Is_Triangle()
+        {
+
+            int size = 3;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(1, 2);
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 0;
+            int actualCount = WeakList.Count;
+            if (WeakList.Count != 0)
+                WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+            else
+                Console.WriteLine("[]");
+
+            Assert.IsNotNull(WeakList);
+            Assert.AreEqual(expectedCount, actualCount);
+        }
+
+        [TestMethod]
+        public void WeakVertices_in_5v_where_2v_Is_Weak()
+        {
+
+            int size = 5;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(70);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(3, 4);
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 2;
+            int actualCount = WeakList.Count;
+            if (WeakList.Count != 0)
+                WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+            else
+                Console.WriteLine("[]");
+
+            Assert.IsNotNull(WeakList);
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.IsTrue(WeakList[0].Value == 10);
+            Assert.IsTrue(WeakList[1].Value == 30);
+        }
+
+        [TestMethod]
+        public void WeakVertices_in_7v_where_All_Is_Adj()
+        {
+
+            int size = 7;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 2);
+            testGraph.AddEdge(0, 3);
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(0, 5);
+            testGraph.AddEdge(0, 6);
+
+            testGraph.AddEdge(1, 2);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(3, 4);
+            testGraph.AddEdge(4, 5);
+            testGraph.AddEdge(5, 6);
+            testGraph.AddEdge(1, 6);
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 0;
+            int actualCount = WeakList.Count;
+
+            if (WeakList.Count != 0)
+                WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+            else
+                Console.WriteLine("[]");
+
+            Assert.IsNotNull(WeakList);
+            Assert.AreEqual(expectedCount, actualCount);
+        }
+
+        [TestMethod]
+        public void WeakVertices_15v_where_7v_Is_Weak()
+        {
+
+            int size = 15;
+            SimpleGraph<int> testGraph = new SimpleGraph<int>(size);
+            testGraph.AddVertex(0); // добавляем вершины
+            testGraph.AddVertex(10);
+            testGraph.AddVertex(20);
+            testGraph.AddVertex(30);
+            testGraph.AddVertex(40);
+
+            testGraph.AddVertex(50);
+            testGraph.AddVertex(60);
+            testGraph.AddVertex(70);
+            testGraph.AddVertex(80);
+            testGraph.AddVertex(90);
+
+            testGraph.AddVertex(100);
+            testGraph.AddVertex(110);
+            testGraph.AddVertex(120);
+            testGraph.AddVertex(130);
+            testGraph.AddVertex(140);
+
+            testGraph.AddEdge(0, 1); // добавление рёбер между вершинами
+            testGraph.AddEdge(0, 4);
+            testGraph.AddEdge(1, 4);
+            testGraph.AddEdge(2, 3);
+            testGraph.AddEdge(2, 5);
+            testGraph.AddEdge(4, 6);
+
+            testGraph.AddEdge(6, 7);
+            testGraph.AddEdge(5, 7);
+            testGraph.AddEdge(5, 8);
+            testGraph.AddEdge(5, 9);
+            testGraph.AddEdge(7, 8);
+            testGraph.AddEdge(8, 9);
+
+            testGraph.AddEdge(9, 10);
+            testGraph.AddEdge(7, 11);
+            testGraph.AddEdge(8, 11);
+            testGraph.AddEdge(9, 11);
+            testGraph.AddEdge(10, 12);
+            testGraph.AddEdge(11, 14);
+
+            testGraph.AddEdge(13, 14);
+
+
+            List<Vertex<int>> WeakList = testGraph.WeakVertices();
+
+            int expectedCount = 7;
+            int actualCount = WeakList.Count;
+
+            if (WeakList.Count != 0)
+                WeakList.ForEach((item) => Console.Write("{0} ", item.Value));
+            else
+                Console.WriteLine("[]");
+
+            Assert.IsNotNull(WeakList);
+            Assert.AreEqual(expectedCount, actualCount);
+            Assert.IsTrue(WeakList[0].Value == 20);
+            Assert.IsTrue(WeakList[1].Value == 30);
+            Assert.IsTrue(WeakList[2].Value == 60);
+            Assert.IsTrue(WeakList[3].Value == 100);
+            Assert.IsTrue(WeakList[4].Value == 120);
+            Assert.IsTrue(WeakList[5].Value == 130);
+            Assert.IsTrue(WeakList[6].Value == 140);
+
         }
     }
 }
