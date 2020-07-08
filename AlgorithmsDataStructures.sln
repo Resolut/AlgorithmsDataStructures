@@ -83,7 +83,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlgorithmsDataStructures.Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseSortingTypes", "BaseSortingTypes\BaseSortingTypes.csproj", "{F96DDE14-D5C5-499B-9B8E-1B0805BCD2FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseSortingTypesTests1", "BaseSortingTypesTests1\BaseSortingTypesTests1.csproj", "{31F8251C-FD6D-4EDF-930F-320A7F7098E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseSortingTypesTests", "Tests\BaseSortingTypesTests\BaseSortingTypesTests.csproj", "{31F8251C-FD6D-4EDF-930F-320A7F7098E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
