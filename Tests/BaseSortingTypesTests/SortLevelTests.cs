@@ -13,7 +13,7 @@ namespace SortSpace.Tests
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
-            SortLevel.SelectionSortStep(ref testArr, 0);
+            SortLevel.SelectionSortStep(testArr, 0);
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();
@@ -31,7 +31,7 @@ namespace SortSpace.Tests
         {
             int[] testArr = { };
 
-            SortLevel.SelectionSortStep(ref testArr, 0);
+            SortLevel.SelectionSortStep(testArr, 0);
 
             Assert.IsNotNull(testArr);
             Assert.IsTrue(testArr.Length == 0);
@@ -43,7 +43,7 @@ namespace SortSpace.Tests
         {
             int[] testArr = { 19 };
 
-            SortLevel.SelectionSortStep(ref testArr, 0);
+            SortLevel.SelectionSortStep(testArr, 0);
 
             int expected = 19;
 
@@ -59,7 +59,7 @@ namespace SortSpace.Tests
         {
             int[] testArr = { 21, 19 };
 
-            SortLevel.SelectionSortStep(ref testArr, 0);
+            SortLevel.SelectionSortStep(testArr, 0);
 
             Assert.IsNotNull(testArr);
             Assert.IsTrue(testArr.Length == 2);
@@ -80,7 +80,7 @@ namespace SortSpace.Tests
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
-            bool res = SortLevel.BubbleSortStep(ref testArr);
+            bool res = SortLevel.BubbleSortStep(testArr);
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();
@@ -100,7 +100,7 @@ namespace SortSpace.Tests
         {
             int[] testArr = { };
 
-            bool res = SortLevel.BubbleSortStep(ref testArr);
+            bool res = SortLevel.BubbleSortStep(testArr);
 
             Assert.IsNotNull(testArr);
             Assert.IsTrue(res);
@@ -112,7 +112,7 @@ namespace SortSpace.Tests
         {
             int[] testArr = { 19 };
 
-            bool res = SortLevel.BubbleSortStep(ref testArr);
+            bool res = SortLevel.BubbleSortStep(testArr);
 
             int expected = 19;
 
@@ -129,7 +129,7 @@ namespace SortSpace.Tests
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
-            bool res = SortLevel.BubbleSortStep(ref testArr);
+            bool res = SortLevel.BubbleSortStep(testArr);
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();

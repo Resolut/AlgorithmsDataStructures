@@ -5,7 +5,7 @@ namespace SortSpace
 {
     public static class SortLevel
     {
-        public static void SelectionSortStep(ref int[] array, int i)
+        public static void SelectionSortStep(int[] array, int i)
         {
             if (array.Length <= 1) return;
 
@@ -26,7 +26,7 @@ namespace SortSpace
             }
         }
 
-        public static bool BubbleSortStep(ref int[] array)
+        public static bool BubbleSortStep(int[] array)
         {
             bool unShuffled = true;
             if (array.Length <= 1) return unShuffled;
