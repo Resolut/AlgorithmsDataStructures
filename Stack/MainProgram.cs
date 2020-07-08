@@ -64,12 +64,12 @@ namespace Stack
 
     class MainProgram
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string postfixExpr = "8 2 + 5 * 9 + =";
             int total = CalculatePostfixExpr(postfixExpr);
 
-            Console.WriteLine($"{postfixExpr} {total}");
+            Console.WriteLine(postfixExpr + " " + total);
 
             Console.ReadKey();
         }
@@ -110,7 +110,7 @@ namespace Stack
                 int operand1;
                 int operand2;
 
-                switch (stack1.Peek().GetValue())
+                switch (Convert.ToChar(stack1.Peek().GetValue()))
                 {
                     case '+':
                         stack1.Pop();
