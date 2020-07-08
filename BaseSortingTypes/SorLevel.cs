@@ -45,11 +45,22 @@ namespace SortSpace
             return unShuffled;
         }
 
-        public static void InsertionSortStep(int[] array, int step, int i)
+        public static void InsertionSortStep(int[] array, int step, int index)
         {
             if (array.Length <= 1) return;
 
-            // TODO реализовать первый проход сортировки вставками
+            for (int i = index; i < array.Length-1; i += step)
+            {
+                for (int j = i; j >= 0 && (j + step < array.Length); j -= step) 
+                {
+                    if (array[j] > array[j + step]) 
+                    {
+                        int tmp = array[j];
+                        array[j] = array[j + step];
+                        array[j + step] = tmp;
+                    }
+                }
+            }
         }
     }
 }
