@@ -28,7 +28,21 @@ namespace SortSpace
 
         public static bool BubbleSortStep(ref int[] array)
         {
-            return false;
+            bool isSwap = true;
+            if (array.Length <= 1) return true;
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    int tmp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = tmp;
+                    isSwap = false;
+                }
+            }
+
+
+            return isSwap == true;
         }
     }
 }
