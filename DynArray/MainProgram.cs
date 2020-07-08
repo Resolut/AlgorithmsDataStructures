@@ -137,12 +137,10 @@ namespace DynArray
 
     class MainProgram
     {
-        static void Main(string[] args)
+        static void Main()
         {
             DynArray testDynArr = new DynArray();
-            int item = 0;
-
-            for (item = 1; item < 18; item++)
+            for (int item = 1; item < 18; item++)
             {
                 testDynArr.AppEnd(item);
             }
@@ -152,11 +150,11 @@ namespace DynArray
 
             for (int i = 0; i < 2; i++)
             {
-                Console.WriteLine($"Перед удалением\nЕмкость буфера: {testDynArr.GetCapacity()}");
-                Console.WriteLine($"Количество элементов: {testDynArr.GetCount()}");
+                Console.WriteLine("Перед удалением\nЕмкость буфера: " + testDynArr.GetCapacity());
+                Console.WriteLine("Количество элементов: "+ testDynArr.GetCount());
                 testDynArr.Delete(3);
-                Console.WriteLine($"После удаления\nЕмкость буфера: {testDynArr.GetCapacity()}");
-                Console.WriteLine($"Количество элементов: {testDynArr.GetCount()}");
+                Console.WriteLine("После удаления\nЕмкость буфера: " + testDynArr.GetCapacity());
+                Console.WriteLine("Количество элементов: " + testDynArr.GetCount());
                 testDynArr.Print();
                 Console.WriteLine("===============================================");
             }
