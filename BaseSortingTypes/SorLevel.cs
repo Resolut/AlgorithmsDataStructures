@@ -62,5 +62,11 @@ namespace SortSpace
                 }
             }
         }
+
+        public static List<int> KnuthSequence(int array_size) 
+        {
+            // TODO реализовать генерацию последовательности
+            return new List<int> { }; 
+        }
     }
 }
