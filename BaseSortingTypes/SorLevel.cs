@@ -65,7 +65,6 @@ namespace SortSpace
 
         public static List<int> KnuthSequence(int array_size) 
         {
-            
             List<int> seqList = new List<int> {};
             if (array_size >= 0 && array_size <= 1)
                 seqList.Add(1);
