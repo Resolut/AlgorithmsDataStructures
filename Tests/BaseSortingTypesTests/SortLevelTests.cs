@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace SortSpace.Tests
 {
@@ -308,6 +309,129 @@ namespace SortSpace.Tests
             Assert.IsNotNull(testArr);
             Assert.IsTrue(testArr.Length == 1);
             Assert.AreEqual(expected, testArr[0]);
+        }
+
+        [TestMethod()]
+        public void RecTest()
+        {
+            int ret5 = SortLevel.Rec(5);
+            int ret4 = SortLevel.Rec(4);
+            int ret3 = SortLevel.Rec(3);
+            int ret2 = SortLevel.Rec(2);
+            int ret1 = SortLevel.Rec(1);
+            int ret0 = SortLevel.Rec(0);
+
+            int expected5 = 364;
+            int expected4 = 121;
+            int expected3 = 40;
+            int expected2 = 13;
+            int expected1 = 4; 
+            int expected0 = 1;
+
+            Assert.AreEqual(expected5, ret5);
+            Assert.AreEqual(expected4, ret4);
+            Assert.AreEqual(expected3, ret3);
+            Assert.AreEqual(expected2, ret2);
+            Assert.AreEqual(expected1, ret1);
+            Assert.AreEqual(expected0, ret0);
+        }
+
+        [TestMethod()]
+        public void KnuthSequenceTest_0_1()
+        {
+            List<int> ret_0 = SortLevel.KnuthSequence(0);
+            List<int> ret_1 = SortLevel.KnuthSequence(1);
+            
+            List<int> expectedList_1 = new List<int> { 1 };
+            
+            int expectedCount = 1;
+            
+            int actualCount_0 = ret_0.Count;
+            int actualCount_1 = ret_1.Count;
+
+            Assert.AreEqual(expectedCount, actualCount_0);
+            Assert.AreEqual(expectedCount, actualCount_1);
+
+            for (int i = 0; i < ret_0.Count; i++)
+            {
+                Assert.AreEqual(expectedList_1[i], ret_0[i]);
+            }
+
+            for (int i = 0; i < ret_1.Count; i++)
+            {
+                Assert.AreEqual(expectedList_1[i], ret_1[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void KnuthSequenceTest_2_3_4() 
+        {
+            List<int> ret1_2 = SortLevel.KnuthSequence(2);
+            List<int> ret1_3 = SortLevel.KnuthSequence(3);
+            List<int> ret1_4 = SortLevel.KnuthSequence(4);
+            
+            List<int> expectedList_1 = new List<int> { 1 };
+
+            int expectedCount = 1;
+            int actualCount2 = ret1_2.Count;
+            int actualCount3 = ret1_3.Count;
+            int actualCount4 = ret1_4.Count;
+
+            Assert.AreEqual(expectedCount, actualCount2);
+            Assert.AreEqual(expectedCount, actualCount3);
+            Assert.AreEqual(expectedCount, actualCount4);
+
+            for (int i = 0; i < ret1_2.Count; i++)
+            {
+                Assert.AreEqual(expectedList_1[i], ret1_2[i]);
+            }
+
+            for (int i = 0; i < ret1_3.Count; i++)
+            {
+                Assert.AreEqual(expectedList_1[i], ret1_3[i]);
+            }
+
+            for (int i = 0; i < ret1_4.Count; i++)
+            {
+                Assert.AreEqual(expectedList_1[i], ret1_4[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void KnuthSequenceTest_13_14_15()
+        {
+            List<int> ret1_1 = SortLevel.KnuthSequence(13);
+            List<int> ret1_2 = SortLevel.KnuthSequence(14);
+            List<int> ret1_3= SortLevel.KnuthSequence(15);
+            
+            List<int> expectedList = new List<int> { 4, 1 };
+            List<int> expectedList2 = new List<int> { 13, 4, 1 };
+
+            int expectedCount = 2;
+            int expectedCount2 = 3;
+
+            int actualCount1 = ret1_1.Count;
+            int actualCount2 = ret1_2.Count;
+            int actualCount3 = ret1_3.Count;
+            
+            Assert.AreEqual(expectedCount, actualCount1);
+            Assert.AreEqual(expectedCount2, actualCount2);
+            Assert.AreEqual(expectedCount2, actualCount3);
+
+            for (int i = 0; i < ret1_1.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], ret1_1[i]);
+            }
+
+            for (int i = 0; i < ret1_2.Count; i++)
+            {
+                Assert.AreEqual(expectedList2[i], ret1_2[i]);
+            }
+
+            for (int i = 0; i < ret1_3.Count; i++)
+            {
+                Assert.AreEqual(expectedList2[i], ret1_3[i]);
+            }
         }
     }
 }
