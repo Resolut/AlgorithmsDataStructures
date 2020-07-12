@@ -314,12 +314,12 @@ namespace SortSpace.Tests
         [TestMethod()]
         public void RecTest()
         {
-            int ret5 = SortLevel.Rec(5);
-            int ret4 = SortLevel.Rec(4);
-            int ret3 = SortLevel.Rec(3);
-            int ret2 = SortLevel.Rec(2);
-            int ret1 = SortLevel.Rec(1);
-            int ret0 = SortLevel.Rec(0);
+            int ret5 = SortLevel.KnuthRec(5);
+            int ret4 = SortLevel.KnuthRec(4);
+            int ret3 = SortLevel.KnuthRec(3);
+            int ret2 = SortLevel.KnuthRec(2);
+            int ret1 = SortLevel.KnuthRec(1);
+            int ret0 = SortLevel.KnuthRec(0);
 
             int expected5 = 364;
             int expected4 = 121;
