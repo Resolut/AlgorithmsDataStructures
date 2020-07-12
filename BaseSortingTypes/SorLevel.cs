@@ -65,8 +65,28 @@ namespace SortSpace
 
         public static List<int> KnuthSequence(int array_size) 
         {
-            // TODO реализовать генерацию последовательности
-            return new List<int> { }; 
+            
+            List<int> seqList = new List<int> {  };
+            if (array_size >= 0 && array_size <= 1)
+                seqList.Add(1);
+
+            for (int index = 0; array_size > Rec(index); index++) 
+            {
+                seqList.Insert(0, Rec(index));
+            }
+
+            Console.Write("list :");
+            foreach (int item in seqList)
+                Console.Write(item + " ");
+            Console.WriteLine();
+
+            return seqList; 
+        }
+
+        public static int Rec(int step) 
+        {
+            if (step == 0) return 1;
+            return 3 * Rec(step - 1) + 1;
         }
     }
 }
