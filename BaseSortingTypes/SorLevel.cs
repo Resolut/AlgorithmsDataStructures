@@ -66,7 +66,7 @@ namespace SortSpace
         public static List<int> KnuthSequence(int array_size) 
         {
             
-            List<int> seqList = new List<int> {  };
+            List<int> seqList = new List<int> {};
             if (array_size >= 0 && array_size <= 1)
                 seqList.Add(1);
 
@@ -74,11 +74,6 @@ namespace SortSpace
             {
                 seqList.Insert(0, Rec(index));
             }
-
-            Console.Write("list :");
-            foreach (int item in seqList)
-                Console.Write(item + " ");
-            Console.WriteLine();
 
             return seqList; 
         }
