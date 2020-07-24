@@ -85,7 +85,43 @@ namespace SortSpace
 
         public static int ArrayChunk(int[] M) 
         {
-            return 0;
+            while (true) 
+            {
+                int N = M[M.Length / 2];
+                int N_i = M.Length / 2;
+                int i1 = 0;
+                int i2 = M.Length - 1;
+             
+                while (true) 
+                {
+                    while (M[i1] < N)
+                       ++i1;
+                    while (M[i2] > N)
+                        --i2;
+
+                    if(i1 == i2 - 1 && M[i1] > M[i2]) 
+                    {
+                        int temp = M[i1];
+                        M[i1] = M[i2];
+                        M[i2] = temp;
+                        break;
+                    }
+                
+                    if (i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2])) 
+                    {
+                        return N_i;
+                    }
+
+                    int temp1 = M[i1];
+                    M[i1] = M[i2];
+                    M[i2] = temp1;
+
+                    if (M[i1] == N)
+                        N_i = i1;
+                    if (M[i2] == N)
+                        N_i = i2;
+                }
+            }
         }
     }
 }
