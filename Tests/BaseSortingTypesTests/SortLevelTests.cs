@@ -507,5 +507,51 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedList2[i], ret1_3[i]);
             }
         }
+
+        [TestMethod()]
+        public void ArrayChunkTest_1()
+        {
+
+            int[] array = { 7, 5, 6, 4, 3, 1, 2 };
+            
+            int expectedIndex = 3;
+            int[] expectedArray = { 2, 1, 3, 4, 6, 5, 7 };
+
+            int actualIndex = SortLevel.ArrayChunk(array);
+            int[] actualArray = array;
+
+            Assert.AreEqual(expectedIndex, actualIndex);
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(expectedArray[i], array[i]);
+            }
+
+            Array.ForEach(actualArray, (item) => Console.Write(item + " "));
+            Console.WriteLine();
+        }
+
+        [TestMethod()]
+        public void ArrayChunkTest_2()
+        {
+
+            int[] array = { 8, 6, 7, 5, 4};
+
+            int expectedIndex = 2;
+            int[] expectedArray = { 4, 5, 6, 7, 8 };
+
+            int actualIndex = SortLevel.ArrayChunk(array);
+            int[] actualArray = array;
+
+            Assert.AreEqual(expectedIndex, actualIndex);
+
+            Array.ForEach(actualArray, (item) => Console.Write(item + " "));
+            Console.WriteLine();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(expectedArray[i], array[i]);
+            }
+        }
     }
 }
