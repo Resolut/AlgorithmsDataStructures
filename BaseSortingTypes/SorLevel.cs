@@ -82,5 +82,10 @@ namespace SortSpace
             if (step == 0) return 1;
             return 3 * KnuthRec(step - 1) + 1;
         }
+
+        public static int ArrayChunk(int[] M) 
+        {
+            return 0;
+        }
     }
 }
