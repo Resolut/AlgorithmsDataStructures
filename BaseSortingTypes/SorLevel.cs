@@ -123,5 +123,9 @@ namespace SortSpace
                 }
             }
         }
+
+        public static void QuickSort(int[] array, int left, int right) 
+        {
+        }
     }
 }
