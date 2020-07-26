@@ -124,14 +124,57 @@ namespace SortSpace
             }
         }
 
+        public static int ArrayChunk(int[] M, int left, int right)
+        {
+            while (true)
+            {
+                int N = M[(left + right) / 2];
+                int N_i = (left + right) / 2;
+                int i1 = left;
+                int i2 = right;
+
+                while (true)
+                {
+                    while (M[i1] < N)
+                        ++i1;
+                    while (M[i2] > N)
+                        --i2;
+
+                    if (i1 == i2 - 1 && M[i1] > M[i2])
+                    {
+                        int temp = M[i1];
+                        M[i1] = M[i2];
+                        M[i2] = temp;
+                        break;
+                    }
+
+                    if (i1 == i2 || (i1 == i2 - 1 && M[i1] < M[i2]))
+                    {
+                        return N_i;
+                    }
+
+                    int temp1 = M[i1];
+                    M[i1] = M[i2];
+                    M[i2] = temp1;
+
+                    if (M[i1] == N)
+                        N_i = i1;
+                    if (M[i2] == N)
+                        N_i = i2;
+                }
+            }
+        }
+
         public static void QuickSort(int[] array, int left, int right) 
         {
-            if (left != right) 
+            if (left < right)
             {
-                int N = ArrayChunk(array);
-                QuickSort(array, left, N - 1);
+                int N = ArrayChunk(array, left, right);
+
+                QuickSort(array, left, N-1);
                 QuickSort(array, N + 1, right);
             }
+            return;
         }
     }
 }
