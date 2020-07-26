@@ -553,5 +553,45 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedArray[i], array[i]);
             }
         }
+
+        [TestMethod()]
+        public void QuickSortTest()
+        {
+
+            int[] array = { 19, 13, 6, 7, 5, 4, 2, 1, 3 };
+
+            int[] expectedArray = { 1, 2, 3, 4, 5, 6, 7, 13, 19 };
+
+            SortLevel.QuickSort(array, 0, array.Length - 1);
+            int[] actualArray = array;
+
+            Array.ForEach(actualArray, (item) => Console.Write(item + " "));
+            Console.WriteLine();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(expectedArray[i], array[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void QuickSortTest_2()
+        {
+
+            int[] array = { 19, 13, 6, 7, 5 };
+
+            int[] expectedArray = { 5, 6, 7, 13, 19 };
+
+            SortLevel.QuickSort(array, 0, array.Length-1);
+            int[] actualArray = array;
+
+            Array.ForEach(actualArray, (item) => Console.Write(item + " "));
+            Console.WriteLine();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(expectedArray[i], array[i]);
+            }
+        }
     }
 }
