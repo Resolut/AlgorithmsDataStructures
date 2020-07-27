@@ -176,5 +176,10 @@ namespace SortSpace
             }
             return;
         }
+
+        public static void QuickSortTailOptimization(int[] array, int left, int right) 
+        {
+        
+        }
     }
 }
