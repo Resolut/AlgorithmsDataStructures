@@ -174,7 +174,6 @@ namespace SortSpace
                 QuickSort(array, left, N-1);
                 QuickSort(array, N + 1, right);
             }
-            return;
         }
 
         public static void QuickSortTailOptimization(int[] array, int left, int right) 
