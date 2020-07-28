@@ -170,7 +170,7 @@ namespace SortSpace
             if (left < right)
             {
                 int N = ArrayChunk(array, left, right);
-
+                
                 QuickSort(array, left, N-1);
                 QuickSort(array, N + 1, right);
             }
@@ -178,7 +178,22 @@ namespace SortSpace
 
         public static void QuickSortTailOptimization(int[] array, int left, int right) 
         {
-        
+            int begin = left;
+            int end = right;
+
+            if (left < right) 
+            {
+                int N = ArrayChunk(array, begin, end);
+                if (left < end)
+                {
+                    QuickSortTailOptimization(array, begin, N-1);
+                }
+
+                if (right > begin)
+                {
+                    QuickSortTailOptimization(array, N + 1, end);
+                }
+            }
         }
     }
 }
