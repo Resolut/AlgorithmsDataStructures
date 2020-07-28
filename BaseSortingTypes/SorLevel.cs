@@ -195,5 +195,17 @@ namespace SortSpace
                 }
             }
         }
+
+        public static List<int> KthOrderStatisticsStep(int[] Array, int L, int R, int k) 
+        {
+            int N = ArrayChunk(Array, L, R);
+
+            if (N < k) 
+                L = N + 1;
+            else if (N > k) 
+                R = N - 1;
+                   
+            return new List<int> { L, R };
+        }
     }
 }
