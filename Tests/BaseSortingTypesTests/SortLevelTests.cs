@@ -672,5 +672,34 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedArray[i], array[i]);
             }
         }
+
+        [TestMethod()]
+        public void KthOrderStatisticsStepTest()
+        {
+
+            int[] array = { 19, 13, 6, 7, 5 };
+
+            int[] expectedArray = { 5, 6, 7, 13, 19 };
+            List<int> expectedList = new List<int> { 0, 1};
+
+            List<int> actualList = SortLevel.KthOrderStatisticsStep(array, 0, array.Length - 1, 1);
+            int[] actualArray = array;
+
+            Array.ForEach(actualArray, (item) => Console.Write(item + " "));
+            Console.WriteLine();
+
+            actualList.ForEach(item => Console.Write(item + " "));
+            Console.WriteLine();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Assert.AreEqual(expectedArray[i], array[i]);
+            }
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
     }
 }
