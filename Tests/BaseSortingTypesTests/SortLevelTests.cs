@@ -701,5 +701,116 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedList[i], actualList[i]);
             }
         }
+
+
+        [TestMethod()]
+        public void MergeSortTest_1()
+        {
+
+            List<int> array = new List<int> { 19 };
+
+            List<int> expectedList = new List<int> { 19 };
+            int expectedCount = 1;
+
+            List<int> actualList = SortLevel.MergeSort(array);
+
+            Assert.AreEqual(expectedCount, actualList.Count);
+
+            Console.Write("\nИтоговый массив: ");
+            actualList.ForEach(item => Console.Write(item + " "));
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void MergeSortTest_2()
+        {
+
+            List<int> array = new List<int> { 21, 19 };
+
+            List<int> expectedList = new List<int> { 19, 21 };
+            int expectedCount = 2;
+
+            List<int> actualList = SortLevel.MergeSort(array);
+
+            Assert.AreEqual(expectedCount, actualList.Count);
+
+            Console.Write("\nИтоговый массив: ");
+            actualList.ForEach(item => Console.Write(item + " "));
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void MergeSortTest_3()
+        {
+
+            List<int> array = new List<int> { 19, 1, 10 };
+
+            List<int> expectedList = new List<int> { 1, 10, 19 };
+            int expectedCount = 3;
+
+            List<int> actualList = SortLevel.MergeSort(array);
+
+            Assert.AreEqual(expectedCount, actualList.Count);
+
+            Console.Write("\nИтоговый массив: ");
+            actualList.ForEach(item => Console.Write(item + " "));
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void MergeSortTest_5()
+        {
+
+            List<int> array = new List<int> { 19, 13, 6, 7, 5 };
+
+            List<int> expectedList = new List<int> { 5, 6, 7, 13, 19};
+            int expectedCount = 5;
+            
+            List<int> actualList = SortLevel.MergeSort(array);
+
+            Assert.AreEqual(expectedCount, actualList.Count);
+            
+            Console.Write("\nИтоговый массив: ");
+            actualList.ForEach(item => Console.Write(item + " "));
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
+
+        [TestMethod()]
+        public void MergeSortTest_10()
+        {
+
+            List<int> array = new List<int> { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+
+            List<int> expectedList = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int expectedCount = 10;
+
+            List<int> actualList = SortLevel.MergeSort(array);
+
+            Assert.AreEqual(expectedCount, actualList.Count);
+
+            Console.Write("\nИтоговый массив: ");
+            actualList.ForEach(item => Console.Write(item + " "));
+
+            for (int i = 0; i < actualList.Count; i++)
+            {
+                Assert.AreEqual(expectedList[i], actualList[i]);
+            }
+        }
     }
 }
