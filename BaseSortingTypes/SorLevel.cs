@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SortSpace
 {
@@ -208,9 +209,39 @@ namespace SortSpace
             return new List<int> { L, R };
         }
 
-        public static List<int> MergeSort(List<int> array) 
+        public static List<int> MergeSort(List<int> list) 
         {
-            return new List<int> { };
+            if (list.Count == 1) 
+                return list;
+
+            List<int> left = list.GetRange(0, list.Count / 2);
+            List<int> right = list.GetRange(list.Count / 2, list.Count - list.Count / 2);
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+
+            List<int> res = new List<int> { };
+
+            while (left.Count > 0 && right.Count > 0 ) 
+            {
+                if (left.First() < right.First())
+                {
+                    res.Add(left.First());
+                    left.RemoveAt(0);
+                }
+                else 
+                {
+                    res.Add(right.First());
+                    right.RemoveAt(0);
+                }
+            }
+
+            if (left.Count > 0)
+                left.ForEach(item => res.Add(item));
+            else
+                right.ForEach(item => res.Add(item));
+
+            return res ;
         }
     }
 }
