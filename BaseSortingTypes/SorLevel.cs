@@ -207,5 +207,10 @@ namespace SortSpace
                    
             return new List<int> { L, R };
         }
+
+        public static List<int> MergeSort(List<int> array) 
+        {
+            return new List<int> { };
+        }
     }
 }
