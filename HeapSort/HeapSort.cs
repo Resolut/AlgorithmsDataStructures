@@ -80,7 +80,7 @@ namespace HeapSort
 
     public class HeapSort
     {
-        Heap HeapObject;
+        public Heap HeapObject;
 
         public HeapSort(int[] array) 
         {
