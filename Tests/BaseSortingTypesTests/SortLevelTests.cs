@@ -812,5 +812,18 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedList[i], actualList[i]);
             }
         }
+
+        [TestMethod]
+        public void HeapSort_is_Empty()
+        {
+            HeapSort heap = new HeapSort(new int[]{ 19 });
+
+            int maxKey = heap.GetNextMax();
+            int maxFromEmptyHeap = heap.GetNextMax();
+
+            Assert.AreEqual(19, maxKey );
+            Assert.AreEqual(-1, maxFromEmptyHeap);
+            Assert.IsTrue(heap.HeapObject.HeapSize == 0);
+        }
     }
 }
