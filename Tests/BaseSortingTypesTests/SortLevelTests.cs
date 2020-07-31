@@ -830,22 +830,20 @@ namespace SortSpace.Tests
         public void HeapSort_GetNextMax_7()
         {
             HeapSort heap = new HeapSort(new int[] { 6, 5, 2, 3, 1, 7, 4 });
-            Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
-            Console.WriteLine();
 
             for (int i = 7; i >= 0; i--)
             {
                 Assert.AreEqual(i, heap.HeapObject.HeapSize );
                 Assert.AreEqual(i, heap.HeapObject.HeapArray[0]);
             
+                Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
                 int maxKey = heap.GetNextMax();
                 if (i != 0)
                     Assert.AreEqual(i, maxKey);
                 else
                     Assert.AreEqual(-1, maxKey);
     
-                Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
-                Console.WriteLine();
+                Console.WriteLine("Max = " + maxKey);
             }
         }
     }
