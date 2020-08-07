@@ -85,10 +85,10 @@ namespace SortSpace
 
         public HeapSort(int[] array) 
         {
-            int depth = (int)Math.Log(array.Length + 1, 2) - 1;
+            int depth = (int)Math.Log(array.Length, 2);
+            Console.WriteLine("depth=" + depth);
             HeapObject = new Heap();
-            HeapObject.MakeHeap(new int[] { }, depth);
-            Array.ForEach(array, item => HeapObject.Add(item));
+            HeapObject.MakeHeap(array, depth);
         }
 
         public int GetNextMax() { return HeapObject.GetMax(); }
