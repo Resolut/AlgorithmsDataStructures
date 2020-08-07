@@ -86,7 +86,6 @@ namespace SortSpace
         public HeapSort(int[] array) 
         {
             int depth = (int)Math.Log(array.Length, 2);
-            Console.WriteLine("depth=" + depth);
             HeapObject = new Heap();
             HeapObject.MakeHeap(array, depth);
         }
