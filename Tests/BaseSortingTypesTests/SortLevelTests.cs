@@ -846,5 +846,50 @@ namespace SortSpace.Tests
                 Console.WriteLine("Max = " + maxKey);
             }
         }
+
+        [TestMethod]
+        public void HeapSort_GetNextMax_4()
+        {
+            HeapSort heap = new HeapSort(new int[] { 1, 4, 2, 3 });
+            Console.WriteLine(heap.HeapObject.HeapSize);
+
+            for (int i = 4; i >= 0; i--)
+            {
+                Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
+                Assert.AreEqual(i, heap.HeapObject.HeapSize);
+                Assert.AreEqual(i, heap.HeapObject.HeapArray[0]);
+
+                int maxKey = heap.GetNextMax();
+                if (i != 0)
+                    Assert.AreEqual(i, maxKey);
+                else
+                    Assert.AreEqual(-1, maxKey);
+
+                Console.WriteLine("Max = " + maxKey);
+            }
+        }
+
+        [TestMethod]
+        public void HeapSort_GetNextMax_4_One_More()
+        {
+            HeapSort heap = new HeapSort(new int[] { 5, 8, 6, 3 });
+            Console.WriteLine(heap.HeapObject.HeapSize);
+            int[] expectedArray = {0, 3, 5, 6, 8}; 
+            for (int i = 4; i >= 0; i--)
+            {
+                Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
+                Assert.AreEqual(i, heap.HeapObject.HeapSize);
+                Assert.AreEqual(expectedArray[i], heap.HeapObject.HeapArray[0]);
+
+                int maxKey = heap.GetNextMax();
+                
+                if (i != 0)
+                    Assert.AreEqual(expectedArray[i], maxKey);
+                else
+                    Assert.AreEqual(-1, maxKey);
+
+                Console.WriteLine("Max = " + maxKey);
+            }
+        }
     }
 }
