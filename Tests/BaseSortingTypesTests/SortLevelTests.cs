@@ -990,5 +990,31 @@ namespace SortSpace.Tests
             Assert.AreEqual(expectedSize, ksortObj.items.Length);
             Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
         }
+
+        [TestMethod]
+        public void KSort_Index_if_str_0_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+             int index = ksortObj.Index("k67");
+            
+            int expectedSize = 800;
+            Assert.AreEqual(-1, index);
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+
+        [TestMethod]
+        public void KSort_Index_if_str_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+            int index = ksortObj.Index("some string");
+
+            int expectedSize = 800;
+            Assert.AreEqual(-1, index);
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
     }
 }
