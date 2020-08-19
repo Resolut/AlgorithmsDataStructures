@@ -891,5 +891,104 @@ namespace SortSpace.Tests
                 Console.WriteLine("Max = " + maxKey);
             }
         }
+
+        [TestMethod]
+        public void KSort_Add_3_in_Head_and_in_Tail()
+        {
+            KSort  ksortObj = new KSort();
+
+            ksortObj.Add("a00");
+            ksortObj.Add("a01");
+            ksortObj.Add("a02");
+
+            ksortObj.Add("h97");
+            ksortObj.Add("h98");
+            ksortObj.Add("h99");
+
+            int expectedSize = 800;
+
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+
+        [TestMethod]
+        public void KSort_Add_10_in_Head()
+        {
+            KSort ksortObj = new KSort();
+
+            List<bool> results = new List<bool> { };
+            results.Add(ksortObj.Add("a09"));
+            results.Add(ksortObj.Add("a07"));
+            results.Add(ksortObj.Add("a02"));
+            results.Add(ksortObj.Add("a03"));
+            results.Add(ksortObj.Add("a01"));
+            results.Add(ksortObj.Add("a08"));
+            results.Add(ksortObj.Add("a06"));
+            results.Add(ksortObj.Add("a05"));
+            results.Add(ksortObj.Add("a00"));
+            results.Add(ksortObj.Add("a04"));
+            
+            int expectedSize = 800;
+            Assert.IsTrue(results.TrueForAll(item => item == true));
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+
+        [TestMethod]
+        public void KSort_Add_1_if_str_0_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+            List<bool> results = new List<bool> { };
+            results.Add(ksortObj.Add("j26"));
+
+            int expectedSize = 800;
+            Assert.IsFalse(results.TrueForAll(item => item == true));
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+        
+        [TestMethod]
+        public void KSort_Add_1_if_str_1_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+            List<bool> results = new List<bool> { };
+            results.Add(ksortObj.Add("de6"));
+
+            int expectedSize = 800;
+            Assert.IsFalse(results.TrueForAll(item => item == true));
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+
+        [TestMethod]
+        public void KSort_Add_1_if_str_2_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+            List<bool> results = new List<bool> { };
+            results.Add(ksortObj.Add("d6z"));
+
+            int expectedSize = 800;
+            Assert.IsFalse(results.TrueForAll(item => item == true));
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
+
+        [TestMethod]
+        public void KSort_Add_1_if_second_str_is_incorrect()
+        {
+            KSort ksortObj = new KSort();
+
+            List<bool> results = new List<bool> { };
+            results.Add(ksortObj.Add("d67"));
+            results.Add(ksortObj.Add("d6s"));
+
+            int expectedSize = 800;
+            Assert.IsFalse(results.TrueForAll(item => item == true));
+            Assert.AreEqual(expectedSize, ksortObj.items.Length);
+            Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
+        }
     }
 }
