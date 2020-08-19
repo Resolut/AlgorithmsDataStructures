@@ -14,6 +14,9 @@ namespace SortSpace
 
         public int Index(string s)
         {
+            if (s == null || s == "")
+                return -1;
+
             string pattern = "abcdefgh";
             int bigDigit;
 
