@@ -3,47 +3,47 @@ using System.Collections.Generic;
 
 namespace SortSpace
 {
-    class KSort
+    public class KSort
     {
-        string[] items;
+        public string[] items;
         public KSort()
         {
             int maxSize = 800;
             items = new string[maxSize];
         }
 
-        public int Index(string str)
+        public int Index(string s)
         {
             string pattern = "abcdefgh";
             int bigDigit;
 
-            if (pattern.Contains(str[0].ToString()))
-                bigDigit = pattern.IndexOf(str[0]) * 100;
+            if (pattern.Contains(s[0].ToString()))
+                bigDigit = pattern.IndexOf(s[0]) * 100;
             else
                 return -1;
 
             int midDigit;
 
-            if (!int.TryParse(str[1].ToString(), out midDigit))
+            if (!int.TryParse(s[1].ToString(), out midDigit))
                 return -1;
 
             midDigit *= 10;
 
             int smallDigit;
 
-            if (!int.TryParse(str[2].ToString(), out smallDigit))
+            if (!int.TryParse(s[2].ToString(), out smallDigit))
                 return -1;
 
             return bigDigit + midDigit + smallDigit;
         }
 
-        public bool Add(string str)
+        public bool Add(string s)
         {
-            int index = Index(str);
+            int index = Index(s);
             if (index == -1)
                 return false;
 
-            items[index] = str;
+            items[index] = s;
 
             return true;
         }
