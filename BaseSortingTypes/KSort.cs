@@ -1,28 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SortSpace
 {
     class KSort
     {
         string[] items;
-        public KSort() 
+        public KSort()
         {
             int maxSize = 800;
             items = new string[maxSize];
         }
 
-        public int Index(string str) 
+        public int Index(string str)
         {
             string pattern = "abcdefgh";
-            int bigDigit; 
-            
-            if (pattern.Contains(str[0]))
+            int bigDigit;
+
+            if (pattern.Contains(str[0].ToString()))
                 bigDigit = pattern.IndexOf(str[0]) * 100;
-            else 
+            else
                 return -1;
 
             int midDigit;
