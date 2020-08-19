@@ -14,7 +14,7 @@ namespace SortSpace
 
         public int Index(string s)
         {
-            if (s == null || s == "")
+            if (s == null || s == "" || s.Length > 3)
                 return -1;
 
             string pattern = "abcdefgh";
