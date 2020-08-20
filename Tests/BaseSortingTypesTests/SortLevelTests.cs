@@ -1016,5 +1016,230 @@ namespace SortSpace.Tests
             Assert.AreEqual(expectedSize, ksortObj.items.Length);
             Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void BinarySearch_Array_is_Null()
+        {   
+            BinarySearch bSObj = new BinarySearch(null);
+            Assert.Fail("Должно быть брошено исключение ArgumentNullException.");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void BinarySearch_Array_is_Empty()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { });
+            Assert.Fail("Должно быть брошено исключение ArgumentException");
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_One_Elemnt_and_Target_the_Same()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 3 });
+            int target = 3;
+
+            bSObj.Step(target);
+            int expectedResult = 1;
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_One_Elemnt_and_Target_Is_Different_and_Greather()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 3 });
+            int target = 15;
+
+            bSObj.Step(target);
+            int expectedResult = -1;
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_One_Elemnt_and_Target_Is_Different_and_Less()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 3 });
+            int target = 1;
+
+            bSObj.Step(target);
+            int expectedResult = -1;
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_2_Elemnts_and_Target_is_In_Array_on_the_right()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 3, 15 });
+            int target = 15;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_2_Elemnts_and_Target_is_In_Array_on_the_left()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17 });
+            int target = 2;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_3_Elemnts_and_Target_is_In_Array_on_the_right()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 });
+            int target = 42;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_3_Elemnts_and_Target_is_In_Array_on_the_left()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 });
+            int target = 2;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_Last_In_Array_on_the_left()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 , 51, 60});
+            int target = 2;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_Last_In_Array_on_the_right()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 ,51, 60});
+            int target = 60;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_Array_on_the_left()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
+            int target = 0;
+            int expectedResult = -1;
+
+            while (bSObj.GetResult() != -1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_Array_on_the_right()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
+            int target = 100;
+            int expectedResult = -1;
+
+            while (bSObj.GetResult() != -1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_7_Elemnts_and_Target_is_NOT_In_left_part()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
+            int target = 55;
+            int expectedResult = -1;
+
+            while (bSObj.GetResult() != -1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_right_part()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
+            int target = 4;
+            int expectedResult = -1;
+
+            while (bSObj.GetResult() != -1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
     }
 }
