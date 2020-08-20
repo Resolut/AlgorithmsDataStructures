@@ -13,9 +13,14 @@ namespace SortSpace
         {
             try 
             {
-                if(array == null || array.Length == 0) 
+                if(array == null) 
                 {
-                    throw new Exception("Ссылка на массив null или массив не содержит элементов.");
+                    throw new ArgumentNullException("Передан null в качестве аргумента!");
+                }
+
+                if(array.Length == 0) 
+                {
+                    throw new ArgumentException("Переданный массив не содержит элементов");
                 }
 
                 this.array = array;
@@ -23,7 +28,11 @@ namespace SortSpace
                 left = 0;
                 right = array.Length - 1;
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+            catch (ArgumentException ex) 
             {
                 Console.WriteLine("Ошибка: " + ex.Message);
             }
