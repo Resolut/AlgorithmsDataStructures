@@ -8,15 +8,19 @@ namespace SortSpace
 {
     public class BinarySearch
     {
-        public int Left;
-        public int Right;
+        public int left;
+        public int right;
+        private int findFlag;
         public BinarySearch(int[] array) 
         {
+            findFlag = 0;
+            left = 0;
+            right = array.Length - 1;
         }
 
         public int GetResult() 
         {
-            return 0;
+            return findFlag;
         }
 
         public void Step(int N) 
