@@ -5,10 +5,10 @@ namespace SortSpace
 {
     public class BinarySearch
     {
-        public int[] array;
-        public int left;
-        public int right;
-        private int findFlag;
+        public int[] Array;
+        public int Left;
+        public int Right;
+        private int FindFlag;
         public BinarySearch(int[] array) 
         {
             try 
@@ -23,10 +23,10 @@ namespace SortSpace
                     throw new ArgumentException("Parameter cannot be null or empty.");
                 }
 
-                this.array = array;
-                findFlag = 0;
-                left = 0;
-                right = array.Length - 1;
+                this.Array = array;
+                FindFlag = 0;
+                Left = 0;
+                Right = array.Length - 1;
             }
             catch 
             {
@@ -37,28 +37,28 @@ namespace SortSpace
 
         public int GetResult() 
         {
-            return findFlag;
+            return FindFlag;
         }
 
         public void Step(int N)
         {
-            if (findFlag != 0)
+            if (FindFlag != 0)
                 return;
 
-            int mid = (left + right) / 2;
+            int mid = (Left + Right) / 2;
 
-            if (array[mid] == N) 
+            if (Array[mid] == N) 
             { 
-                findFlag = 1;
+                FindFlag = 1;
                 return; 
             }
-            else if (N < array[mid])
-                right = mid - 1;
+            else if (N < Array[mid])
+                Right = mid - 1;
             else 
-                left = mid + 1;
+                Left = mid + 1;
 
-            if (left > right)
-                findFlag = -1;
+            if (Left > Right)
+                FindFlag = -1;
         }
     }
 }
