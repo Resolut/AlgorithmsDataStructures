@@ -9,24 +9,24 @@ namespace SortSpace
         public int Left;
         public int Right;
         private int FindFlag;
-        public BinarySearch(int[] array) 
+        public BinarySearch(int[] Аrray) 
         {
             try 
             {
-                if(array == null) 
+                if(Аrray == null) 
                 {
                     throw new ArgumentNullException("Передан null в качестве аргумента.");
                 }
 
-                if(array.Length == 0) 
+                if(Аrray.Length == 0) 
                 {
                     throw new ArgumentException("Parameter cannot be null or empty.");
                 }
 
-                this.Array = array;
+                this.Array = Аrray;
                 FindFlag = 0;
                 Left = 0;
-                Right = array.Length - 1;
+                Right = Аrray.Length - 1;
             }
             catch 
             {
