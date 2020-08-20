@@ -15,12 +15,12 @@ namespace SortSpace
             {
                 if(array == null) 
                 {
-                    throw new ArgumentNullException("Передан null в качестве аргумента!");
+                    throw new ArgumentNullException("Передан null в качестве аргумента.");
                 }
 
                 if(array.Length == 0) 
                 {
-                    throw new ArgumentException("Переданный массив не содержит элементов");
+                    throw new ArgumentException("Parameter cannot be null or empty.");
                 }
 
                 this.array = array;
@@ -28,13 +28,10 @@ namespace SortSpace
                 left = 0;
                 right = array.Length - 1;
             }
-            catch (ArgumentNullException ex)
+            catch 
             {
-                Console.WriteLine("Ошибка: " + ex.Message);
-            }
-            catch (ArgumentException ex) 
-            {
-                Console.WriteLine("Ошибка: " + ex.Message);
+                Console.WriteLine("Возникло исключение");
+                throw;
             }
         }
 
@@ -43,21 +40,24 @@ namespace SortSpace
             return findFlag;
         }
 
-        public void Step(int N) 
+        public void Step(int N)
         {
             if (findFlag != 0)
                 return;
 
             int mid = (left + right) / 2;
-            
-            if (array[mid] == N)
+
+            if (array[mid] == N) 
+            { 
                 findFlag = 1;
+                return; 
+            }
             else if (N < array[mid])
                 right = mid - 1;
             else 
                 left = mid + 1;
 
-            if (left == right)
+            if (left > right)
                 findFlag = -1;
         }
     }
