@@ -47,7 +47,7 @@ namespace HashTable
 
         public int HashFun(string value)
         {
-            return familyHashFun[0](value, p1 , p2, p3); // Вызываеем хэш-функцию с набором подготовленных и случайно выбранных параметров 
+            return familyHashFun[0](value, p1, p2, p3); // Вызываеем хэш-функцию с набором подготовленных и случайно выбранных параметров 
         }
 
         public int SeekSlot(string value)

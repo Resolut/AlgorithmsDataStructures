@@ -863,7 +863,7 @@ namespace AlgorithmsDataStructures2.Tests
             testTree.AddChild(testTree.Root.Children[1], new SimpleTreeNode<int>(8, null));
             testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(9, null));
             testTree.AddChild(testTree.Root.Children[2], new SimpleTreeNode<int>(10, null));
-                       
+
             testTree.MoveNode(testTree.Root.Children[2], new SimpleTreeNode<int>(10, testTree.Root.Children[2])); // попытка перемещения узла
 
             int expectedNodesCount = 10;

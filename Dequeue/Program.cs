@@ -54,7 +54,7 @@ namespace Dequeue
 
         public int Size()
         {
-            return items.Count; 
+            return items.Count;
         }
     }
 
@@ -72,9 +72,9 @@ namespace Dequeue
             visitors.AddTail("f2");
             visitors.AddTail("f3");
             visitors.AddTail("f4");
-            while (visitors.Size()> 0)
+            while (visitors.Size() > 0)
             {
-                Console.WriteLine(visitors.RemoveFront() + " "); 
+                Console.WriteLine(visitors.RemoveFront() + " ");
             }
 
             Console.ReadKey();
@@ -88,7 +88,7 @@ namespace Dequeue
 
             for (int i = 0; i < str.Length; i++)
             {
-                 checkDeq.AddFront(str[i]);
+                checkDeq.AddFront(str[i]);
             }
 
             while (checkDeq.Size() > 1)

@@ -108,7 +108,7 @@ namespace AlgorithmsDataStructures.Tests
             set2.Put(9);
 
             PowerSet<int> interSet = testSet.Intersection(set2);
- 
+
             Assert.IsTrue(interSet.Size() == 2);
             Assert.IsTrue(interSet.Get(3));
             Assert.IsTrue(interSet.Get(4));

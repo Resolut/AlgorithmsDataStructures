@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
@@ -18,7 +17,7 @@ namespace AlgorithmsDataStructures
         /// <returns>количество элементов во множестве</returns>
         public int Size()
         {
-           return items.Count;
+            return items.Count;
         }
         /// <summary>
         /// производит добавление элемента в текущее множество, не допуская добавление дубликатов во множество
@@ -129,7 +128,7 @@ namespace AlgorithmsDataStructures
         /// <returns>возвращает true если set2 есть подмножество текущего элемента, иначе false</returns>
         public bool IsSubset(PowerSet<T> set2)
         {
-            foreach (T item in set2.items) 
+            foreach (T item in set2.items)
             {
                 // провекра, что все элементы второго множества присутствуют в первом
                 if (!Get(item)) return false;

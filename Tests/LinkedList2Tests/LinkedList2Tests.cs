@@ -1,5 +1,4 @@
-﻿using LinkedList2;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace LinkedList2.Tests

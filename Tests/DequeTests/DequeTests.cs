@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Dequeue;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dequeue.Tests
 {
@@ -30,7 +24,7 @@ namespace Dequeue.Tests
             testDeq.AddFront(0);
             testDeq.AddFront(1);
             testDeq.AddTail(2);
-        
+
             int expectedLength = 3;
             int actualLength = testDeq.Size();
 

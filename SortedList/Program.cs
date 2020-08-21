@@ -142,7 +142,7 @@ namespace OrderedList
                     node = node.next;
                 }
             }
-            else 
+            else
             {
                 // вставка в пустой список
                 head = nodeToInsert;
@@ -275,8 +275,8 @@ namespace OrderedList
             ascList.Add(1);
             ascList.Add(1);
             ascList.Add(1);
-            Console.WriteLine(ascList.PrintList()); 
-            
+            Console.WriteLine(ascList.PrintList());
+
             //OrderedList<int> descList = new OrderedList<int>(false);
             //OrderedList<string> strList = new OrderedList<string>(true);
             //OrderedList<string> str2List = new OrderedList<string>(false);

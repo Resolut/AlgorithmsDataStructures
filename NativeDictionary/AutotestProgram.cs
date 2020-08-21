@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AlgorithmsDataStructures
+﻿namespace AlgorithmsDataStructures
 {
 
     public class NativeDictionary<T>
@@ -46,7 +43,7 @@ namespace AlgorithmsDataStructures
         {
             // записываем значение ключа по хэш-функции
             slots[HashFun(key)] = key;
-            
+
             // гарантированно записываем 
             // значение value по ключу key
             values[HashFun(key)] = value;

@@ -1,6 +1,6 @@
-﻿using System;
-using AlgorithmsDataStructures2;
+﻿using AlgorithmsDataStructures2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace BinaryHeapTests
 {
@@ -50,7 +50,7 @@ namespace BinaryHeapTests
             int[] inArr = { 110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9 };
             heap.MakeHeap(inArr, 3);
 
-            Console.Write ("Входной массив:\t\t");
+            Console.Write("Входной массив:\t\t");
             foreach (var item in inArr)
             {
                 Console.Write("{0} ", item);

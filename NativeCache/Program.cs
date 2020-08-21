@@ -83,7 +83,7 @@ namespace NativeCache
         {
             return Array.IndexOf(hits, hits.Min()); // индекс слота с минимальным числом обращений
         }
-        
+
     }
 
     class Program
@@ -93,7 +93,7 @@ namespace NativeCache
             NativeCache<string> testCache = new NativeCache<string>(10);
 
             // Формируем уникальные пары ключ - значение по размеру таблицы
-            for (int i = 0; i < testCache.size; i++) 
+            for (int i = 0; i < testCache.size; i++)
             {
                 string key = "Key0" + i;
                 string value = "" + (char)(i + 33);
@@ -135,7 +135,7 @@ namespace NativeCache
             testCache.Put("Key47", "B"); // Добавляяем новый ключ
 
             Console.WriteLine("Таблица после записи 2й новой пары ключ \\ значение :");
-            
+
             testCache.Print(); // Ключ с минимальным числом обращений (Key01) перезаписан 
 
             testCache.Get("Key47"); // увеличиваем число обращений по ключу Key47 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
@@ -15,7 +14,7 @@ namespace AlgorithmsDataStructures2
 
             return arrayBST;
         }
-        
+
         private static void Add(int[] arr, int index)
         {
             int middle = arr.Length / 2;        // центральный индекс массива
@@ -24,7 +23,7 @@ namespace AlgorithmsDataStructures2
             if (arr.Length == 1) return;        // выход из рекурсии
 
             int[] left = new int[middle];       // левый подмассив
-            int[] right = new int [middle];     // правый подмассив
+            int[] right = new int[middle];     // правый подмассив
 
             for (int i = 0; i < middle; i++)
             {

@@ -152,7 +152,7 @@ namespace AlgorithmsDataStructures2
             {
                 adjVertex.Clear();
                 adjVertex.AddRange(Array.FindAll(vertex, (item) =>
-                item != currentVert && 
+                item != currentVert &&
                 IsEdge(Array.IndexOf(vertex, currentVert), Array.IndexOf(vertex, item))));
 
                 if (adjVertex.Count < 2) WeakVertList.Add(currentVert);

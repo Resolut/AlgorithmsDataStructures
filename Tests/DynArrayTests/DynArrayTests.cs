@@ -10,7 +10,7 @@ namespace DynArray.Tests
         public void AppEndTest_if_Buffer_Is_not_Resized()
         {
             DynArray testDynArr = new DynArray();
-            
+
             for (int item = 1; item < 4; item++)
             {
                 testDynArr.AppEnd(item);
@@ -27,10 +27,10 @@ namespace DynArray.Tests
         public void AppEndTest_if_Buffer_Changed()
         {
             DynArray testDynArr = new DynArray();
-            
+
             for (int item = 1; item < 19; item++)
             {
-                testDynArr.AppEnd(item); 
+                testDynArr.AppEnd(item);
             }
 
             int expected = 18;
@@ -61,7 +61,7 @@ namespace DynArray.Tests
 
             int expectedCount = 4;
             string expectedItem = "19";
-            int actualCount = testDynArr.GetCount(); 
+            int actualCount = testDynArr.GetCount();
             string actualItem = testDynArr.GetItem(1).ToString();
 
             Assert.AreEqual(expectedCount, actualCount);    // проверка, что количество элементов изменилось
@@ -73,7 +73,7 @@ namespace DynArray.Tests
         public void InsertTest_if_Buffer_Changed()
         {
             DynArray testDynArr = new DynArray();
-           
+
             for (int item = 1; item < 17; item++)
             {
                 testDynArr.AppEnd(item);
@@ -133,7 +133,7 @@ namespace DynArray.Tests
             Assert.AreEqual(expectedCount, actualCount);        // проверка, что количество элементов изменилось
             Assert.AreEqual(expectedCapacity, actualCapacity);  // проверка, что ёмкость буфер не изменилась
 
-            for(int i = 0; i < testDynArr.GetCount() ; i++)
+            for (int i = 0; i < testDynArr.GetCount(); i++)
             {
                 Assert.IsFalse(testDynArr.GetItem(i).ToString() == "2"); // проверка, что удаленный элемент отсутствует
             }

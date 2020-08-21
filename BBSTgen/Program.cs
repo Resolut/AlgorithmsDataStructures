@@ -1,5 +1,5 @@
-﻿using System;
-using AlgorithmsDataStructures2;
+﻿using AlgorithmsDataStructures2;
+using System;
 
 namespace BBSTgen
 {

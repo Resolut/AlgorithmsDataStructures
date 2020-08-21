@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Diagnostics;
 
 namespace AlgorithmsDataStructures.Tests
 {
@@ -399,7 +398,7 @@ namespace AlgorithmsDataStructures.Tests
 
 
             int actualSlot1 = hTable.Put(value1);
-            Console.WriteLine("ActualSlot1: {0}",actualSlot1);
+            Console.WriteLine("ActualSlot1: {0}", actualSlot1);
             Assert.AreEqual(value1, hTable.slots[0]);
 
             int actualSlot2 = hTable.Put(value2);
@@ -704,7 +703,7 @@ namespace AlgorithmsDataStructures.Tests
 
             for (int i = 0; i < hTable.size; i++)
             {
-                string value = ""+(char)(i +33);
+                string value = "" + (char)(i + 33);
                 hTable.Put(value);
             }
 
@@ -716,7 +715,7 @@ namespace AlgorithmsDataStructures.Tests
                     Console.WriteLine(@"slot [{0}] = {1}", i, hTable.slots[i]);
 
                 Assert.IsNotNull(hTable.slots[i]);
-                
+
             }
         }
     }

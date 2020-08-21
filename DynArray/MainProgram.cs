@@ -151,7 +151,7 @@ namespace DynArray
             for (int i = 0; i < 2; i++)
             {
                 Console.WriteLine("Перед удалением\nЕмкость буфера: " + testDynArr.GetCapacity());
-                Console.WriteLine("Количество элементов: "+ testDynArr.GetCount());
+                Console.WriteLine("Количество элементов: " + testDynArr.GetCount());
                 testDynArr.Delete(3);
                 Console.WriteLine("После удаления\nЕмкость буфера: " + testDynArr.GetCapacity());
                 Console.WriteLine("Количество элементов: " + testDynArr.GetCount());

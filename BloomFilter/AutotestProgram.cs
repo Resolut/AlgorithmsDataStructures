@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections;
-using System;
-using System.IO;
 
 namespace AlgorithmsDataStructures
 {
@@ -39,7 +37,7 @@ namespace AlgorithmsDataStructures
             {
                 code = (code * MULTIPLIER + (int)str1[i]) % filter_len;
             }
-            
+
             return code;
         }
 

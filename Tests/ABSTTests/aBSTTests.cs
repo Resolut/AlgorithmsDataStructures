@@ -96,7 +96,7 @@ namespace AlgorithmsDataStructures2.Tests
             Assert.IsTrue(testTree.Tree[4] == 3);
             Assert.IsTrue(testTree.Tree[5] == 5);
             Assert.IsTrue(testTree.Tree[6] == 7);
-    
+
             Assert.AreEqual(expectedIndex, index);
             Assert.AreEqual(expectedIndex2, index2);
             Assert.AreEqual(expectedIndex3, index3);
@@ -206,7 +206,7 @@ namespace AlgorithmsDataStructures2.Tests
             int? index13 = testTree.FindKeyIndex(11);
             int? index14 = testTree.FindKeyIndex(13);
             int? index15 = testTree.FindKeyIndex(15);
-                        
+
             int expectedAddedIndex1 = 0;
             int expectedAddedIndex2 = 1;
             int expectedAddedIndex3 = 2;

@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AlgorithmsDataStructures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlgorithmsDataStructures.Tests
 {
@@ -89,7 +84,7 @@ namespace AlgorithmsDataStructures.Tests
 
             Console.WriteLine("=== LOG ===");
 
-            
+
             Console.WriteLine("{0}\n{1}\n{2}\n{3}\n{4}",
                                 clients.HashFun(names[0]),
                                 clients.HashFun(names[1]),

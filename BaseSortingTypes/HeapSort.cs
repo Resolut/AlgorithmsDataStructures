@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
 
 namespace SortSpace
 {
@@ -83,7 +81,7 @@ namespace SortSpace
     {
         public Heap HeapObject;
 
-        public HeapSort(int[] array) 
+        public HeapSort(int[] array)
         {
             int depth = (int)Math.Log(array.Length, 2);
             HeapObject = new Heap();

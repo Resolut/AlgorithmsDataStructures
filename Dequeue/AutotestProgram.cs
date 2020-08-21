@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
@@ -60,7 +59,7 @@ namespace AlgorithmsDataStructures
 
         public int size()
         {   // размер очереди
-            return items.Count; 
+            return items.Count;
         }
     }
 

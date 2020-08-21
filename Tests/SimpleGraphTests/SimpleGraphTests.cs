@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AlgorithmsDataStructures2;
+﻿using AlgorithmsDataStructures2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace SimpleGraphTests
 {

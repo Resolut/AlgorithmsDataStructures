@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
     public class Queue<T>
     {
         LinkedList<T> items;
-       
+
         public Queue()
         {
             items = new LinkedList<T>();
@@ -28,7 +27,7 @@ namespace AlgorithmsDataStructures
                 return lastItem;
             }
 
-            return default(T); 
+            return default(T);
         }
 
         public int Size()
