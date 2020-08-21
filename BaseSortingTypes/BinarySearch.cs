@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SortSpace
 {
@@ -9,16 +8,16 @@ namespace SortSpace
         public int Left;
         public int Right;
         private int FindFlag;
-        public BinarySearch(int[] Аrray) 
+        public BinarySearch(int[] Аrray)
         {
-            try 
+            try
             {
-                if(Аrray == null) 
+                if (Аrray == null)
                 {
                     throw new ArgumentNullException("Передан null в качестве аргумента.");
                 }
 
-                if(Аrray.Length == 0) 
+                if (Аrray.Length == 0)
                 {
                     throw new ArgumentException("Parameter cannot be null or empty.");
                 }
@@ -28,14 +27,14 @@ namespace SortSpace
                 Left = 0;
                 Right = Аrray.Length - 1;
             }
-            catch 
+            catch
             {
                 Console.WriteLine("Возникло исключение");
                 throw;
             }
         }
 
-        public int GetResult() 
+        public int GetResult()
         {
             return FindFlag;
         }
@@ -46,19 +45,26 @@ namespace SortSpace
                 return;
 
             int mid = (Left + Right) / 2;
-
-            if (Array[mid] == N) 
-            { 
+            if (Array[mid] == N)
+            {
                 FindFlag = 1;
-                return; 
             }
-            else if (N < Array[mid])
-                Right = mid - 1;
-            else 
-                Left = mid + 1;
 
-            if (Left > Right)
-                FindFlag = -1;
+            if (N < Array[mid])
+                Right = mid - 1;
+            else if (N > Array[mid])
+                Left = mid + 1;
+            
+            mid = (Left + Right) / 2;
+            if (Array[mid] == N)
+            {
+                FindFlag = 1;
+            }
+            else if (Left >= Right)
+            {
+                if (FindFlag != 1)
+                    FindFlag = -1;
+            }
         }
     }
 }
