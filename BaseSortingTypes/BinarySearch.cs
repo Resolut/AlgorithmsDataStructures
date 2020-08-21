@@ -45,6 +45,7 @@ namespace SortSpace
                 return;
 
             int mid = (Left + Right) / 2;
+
             if (Array[mid] == N)
             {
                 FindFlag = 1;
@@ -56,6 +57,7 @@ namespace SortSpace
                 Left = mid + 1;
             
             mid = (Left + Right) / 2;
+
             if (Array[mid] == N)
             {
                 FindFlag = 1;
