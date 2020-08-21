@@ -86,8 +86,8 @@ namespace SortSpace.Tests
                 Console.Write(item + " ");
             Console.WriteLine();
 
-            int[] expectedSortedArr = new int[] {3, 1, 2, 4 };
-            
+            int[] expectedSortedArr = new int[] { 3, 1, 2, 4 };
+
             Assert.IsFalse(res);
 
             for (int i = 0; i < testArr.Length; i++)
@@ -160,7 +160,7 @@ namespace SortSpace.Tests
             Console.WriteLine();
 
             int[] expectedSortedArr = new int[] { 2, 3, 4 };
-            
+
             for (int i = 0; i < testArr.Length; i++)
             {
                 Assert.AreEqual(expectedSortedArr[i], testArr[i]);
@@ -171,7 +171,7 @@ namespace SortSpace.Tests
         public void InsertionSortStepTest_if_Array_Has_7_Elements()
         {
             int[] testArr = { 7, 6, 5, 4, 3, 2, 1 };
-            
+
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
@@ -181,7 +181,7 @@ namespace SortSpace.Tests
                 Console.Write(item + " ");
             Console.WriteLine();
 
-            int[] expectedSortedArr = new int[] {1, 2, 3, 4, 5, 6, 7};
+            int[] expectedSortedArr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
 
             for (int i = 0; i < testArr.Length; i++)
             {
@@ -198,7 +198,7 @@ namespace SortSpace.Tests
             Console.WriteLine();
 
             SortLevel.InsertionSortStep(testArr, 3, 0);
-            
+
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();
@@ -215,15 +215,15 @@ namespace SortSpace.Tests
         public void InsertionSortStepTest_if_Array_Has_Step_2()
         {
             int[] testArr = { 7, 6, 5, 4, 3, 2, 1 };
-            
+
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
             int step = 2;
             int startIndex = 0;
-            
+
             SortLevel.InsertionSortStep(testArr, step, startIndex);
-            
+
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();
@@ -240,15 +240,15 @@ namespace SortSpace.Tests
         public void InsertionSortStepTest_if_Array_Has_Step_3_startIndex_1()
         {
             int[] testArr = { 1, 6, 5, 4, 3, 2, 7 };
-            
+
             Array.ForEach(testArr, (item) => Console.Write(item + " "));
             Console.WriteLine();
 
             int step = 3;
             int startIndex = 1;
-            
+
             SortLevel.InsertionSortStep(testArr, step, startIndex);
-            
+
             foreach (int item in testArr)
                 Console.Write(item + " ");
             Console.WriteLine();
@@ -325,7 +325,7 @@ namespace SortSpace.Tests
             int expected4 = 121;
             int expected3 = 40;
             int expected2 = 13;
-            int expected1 = 4; 
+            int expected1 = 4;
             int expected0 = 1;
 
             Assert.AreEqual(expected5, ret5);
@@ -341,11 +341,11 @@ namespace SortSpace.Tests
         {
             List<int> ret_0 = SortLevel.KnuthSequence(0);
             List<int> ret_1 = SortLevel.KnuthSequence(1);
-            
+
             List<int> expectedList_1 = new List<int> { 1 };
-            
+
             int expectedCount = 1;
-            
+
             int actualCount_0 = ret_0.Count;
             int actualCount_1 = ret_1.Count;
 
@@ -364,12 +364,12 @@ namespace SortSpace.Tests
         }
 
         [TestMethod()]
-        public void KnuthSequenceTest_2_3_4() 
+        public void KnuthSequenceTest_2_3_4()
         {
             List<int> ret1_2 = SortLevel.KnuthSequence(2);
             List<int> ret1_3 = SortLevel.KnuthSequence(3);
             List<int> ret1_4 = SortLevel.KnuthSequence(4);
-            
+
             List<int> expectedList_1 = new List<int> { 1 };
 
             int expectedCount = 1;
@@ -470,14 +470,14 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedList[i], ret_12[i]);
             }
         }
-        
+
         [TestMethod()]
         public void KnuthSequenceTest_13_14_15()
         {
             List<int> ret1_1 = SortLevel.KnuthSequence(13);
             List<int> ret1_2 = SortLevel.KnuthSequence(14);
-            List<int> ret1_3= SortLevel.KnuthSequence(15);
-            
+            List<int> ret1_3 = SortLevel.KnuthSequence(15);
+
             List<int> expectedList = new List<int> { 4, 1 };
             List<int> expectedList2 = new List<int> { 13, 4, 1 };
 
@@ -487,7 +487,7 @@ namespace SortSpace.Tests
             int actualCount1 = ret1_1.Count;
             int actualCount2 = ret1_2.Count;
             int actualCount3 = ret1_3.Count;
-            
+
             Assert.AreEqual(expectedCount, actualCount1);
             Assert.AreEqual(expectedCount2, actualCount2);
             Assert.AreEqual(expectedCount2, actualCount3);
@@ -513,7 +513,7 @@ namespace SortSpace.Tests
         {
 
             int[] array = { 7, 5, 6, 4, 3, 1, 2 };
-            
+
             int expectedIndex = 3;
             int[] expectedArray = { 2, 1, 3, 4, 6, 5, 7 };
 
@@ -535,7 +535,7 @@ namespace SortSpace.Tests
         public void ArrayChunkTest_2()
         {
 
-            int[] array = { 8, 6, 7, 5, 4};
+            int[] array = { 8, 6, 7, 5, 4 };
 
             int expectedIndex = 2;
             int[] expectedArray = { 4, 5, 6, 7, 8 };
@@ -582,7 +582,7 @@ namespace SortSpace.Tests
 
             int[] expectedArray = { 5, 6, 7, 13, 19 };
 
-            SortLevel.QuickSort(array, 0, array.Length-1);
+            SortLevel.QuickSort(array, 0, array.Length - 1);
             int[] actualArray = array;
 
             Array.ForEach(actualArray, (item) => Console.Write(item + " "));
@@ -595,7 +595,7 @@ namespace SortSpace.Tests
         }
 
         [TestMethod()]
-        public void QuickSortTailOptimizationTest() 
+        public void QuickSortTailOptimizationTest()
         {
             int[] array = { 19, 13, 6, 7, 5 };
 
@@ -680,7 +680,7 @@ namespace SortSpace.Tests
             int[] array = { 19, 13, 6, 7, 5 };
 
             int[] expectedArray = { 5, 6, 7, 13, 19 };
-            List<int> expectedList = new List<int> { 0, 1};
+            List<int> expectedList = new List<int> { 0, 1 };
 
             List<int> actualList = SortLevel.KthOrderStatisticsStep(array, 0, array.Length - 1, 1);
             int[] actualArray = array;
@@ -775,13 +775,13 @@ namespace SortSpace.Tests
 
             List<int> array = new List<int> { 19, 13, 6, 7, 5 };
 
-            List<int> expectedList = new List<int> { 5, 6, 7, 13, 19};
+            List<int> expectedList = new List<int> { 5, 6, 7, 13, 19 };
             int expectedCount = 5;
-            
+
             List<int> actualList = SortLevel.MergeSort(array);
 
             Assert.AreEqual(expectedCount, actualList.Count);
-            
+
             Console.Write("\nИтоговый массив: ");
             actualList.ForEach(item => Console.Write(item + " "));
 
@@ -816,12 +816,12 @@ namespace SortSpace.Tests
         [TestMethod]
         public void HeapSort_is_Empty()
         {
-            HeapSort heap = new HeapSort(new int[]{ 19 });
+            HeapSort heap = new HeapSort(new int[] { 19 });
 
             int maxKey = heap.GetNextMax();
             int maxFromEmptyHeap = heap.GetNextMax();
 
-            Assert.AreEqual(19, maxKey );
+            Assert.AreEqual(19, maxKey);
             Assert.AreEqual(-1, maxFromEmptyHeap);
             Assert.IsTrue(heap.HeapObject.HeapSize == 0);
         }
@@ -833,16 +833,16 @@ namespace SortSpace.Tests
 
             for (int i = 7; i >= 0; i--)
             {
-                Assert.AreEqual(i, heap.HeapObject.HeapSize );
+                Assert.AreEqual(i, heap.HeapObject.HeapSize);
                 Assert.AreEqual(i, heap.HeapObject.HeapArray[0]);
-            
+
                 Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
                 int maxKey = heap.GetNextMax();
                 if (i != 0)
                     Assert.AreEqual(i, maxKey);
                 else
                     Assert.AreEqual(-1, maxKey);
-    
+
                 Console.WriteLine("Max = " + maxKey);
             }
         }
@@ -874,7 +874,7 @@ namespace SortSpace.Tests
         {
             HeapSort heap = new HeapSort(new int[] { 5, 8, 6, 3 });
             Console.WriteLine(heap.HeapObject.HeapSize);
-            int[] expectedArray = {0, 3, 5, 6, 8}; 
+            int[] expectedArray = { 0, 3, 5, 6, 8 };
             for (int i = 4; i >= 0; i--)
             {
                 Array.ForEach(heap.HeapObject.HeapArray, item => Console.Write(item + " "));
@@ -882,7 +882,7 @@ namespace SortSpace.Tests
                 Assert.AreEqual(expectedArray[i], heap.HeapObject.HeapArray[0]);
 
                 int maxKey = heap.GetNextMax();
-                
+
                 if (i != 0)
                     Assert.AreEqual(expectedArray[i], maxKey);
                 else
@@ -895,7 +895,7 @@ namespace SortSpace.Tests
         [TestMethod]
         public void KSort_Add_3_in_Head_and_in_Tail()
         {
-            KSort  ksortObj = new KSort();
+            KSort ksortObj = new KSort();
 
             ksortObj.Add("a00");
             ksortObj.Add("a01");
@@ -927,7 +927,7 @@ namespace SortSpace.Tests
             results.Add(ksortObj.Add("a05"));
             results.Add(ksortObj.Add("a00"));
             results.Add(ksortObj.Add("a04"));
-            
+
             int expectedSize = 800;
             Assert.IsTrue(results.TrueForAll(item => item == true));
             Assert.AreEqual(expectedSize, ksortObj.items.Length);
@@ -947,7 +947,7 @@ namespace SortSpace.Tests
             Assert.AreEqual(expectedSize, ksortObj.items.Length);
             Array.ForEach(ksortObj.items, item => Console.Write((item == null ? "NULL" : item) + " "));
         }
-        
+
         [TestMethod]
         public void KSort_Add_1_if_str_1_is_incorrect()
         {
@@ -996,8 +996,8 @@ namespace SortSpace.Tests
         {
             KSort ksortObj = new KSort();
 
-             int index = ksortObj.Index("k67");
-            
+            int index = ksortObj.Index("k67");
+
             int expectedSize = 800;
             Assert.AreEqual(-1, index);
             Assert.AreEqual(expectedSize, ksortObj.items.Length);
@@ -1020,7 +1020,7 @@ namespace SortSpace.Tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void BinarySearch_Array_is_Null()
-        {   
+        {
             BinarySearch bSObj = new BinarySearch(null);
             Assert.Fail("Должно быть брошено исключение ArgumentNullException.");
         }
@@ -1143,7 +1143,7 @@ namespace SortSpace.Tests
         [TestMethod]
         public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_Last_In_Array_on_the_left()
         {
-            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 , 51, 60});
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
             int target = 2;
             int expectedResult = 1;
 
@@ -1160,7 +1160,7 @@ namespace SortSpace.Tests
         [TestMethod]
         public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_Last_In_Array_on_the_right()
         {
-            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42 ,51, 60});
+            BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
             int target = 60;
             int expectedResult = 1;
 
@@ -1236,6 +1236,29 @@ namespace SortSpace.Tests
             {
                 bSObj.Step(target);
                 Console.WriteLine(bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_100_Elemnts_and_Target_is_in()
+        {
+            int[] array = new int[99];
+            for (int i = 0; i < 99; i++)
+            {
+                array[i] = i + 1;
+            }
+
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 49;
+            int expectedResult = 1;
+
+            while (bSObj.GetResult() != 1)
+            {
+                bSObj.Step(target);
+                //Console.WriteLine("GetResult() = " + bSObj.GetResult());
             }
             int result = bSObj.GetResult();
 
