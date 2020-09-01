@@ -47,26 +47,22 @@ namespace SortSpace
             int mid = (Left + Right) / 2;
 
             if (Array[mid] == N)
-            {
                 FindFlag = 1;
-            }
 
             if (N < Array[mid])
                 Right = mid - 1;
             else if (N > Array[mid])
                 Left = mid + 1;
-            
+
             mid = (Left + Right) / 2;
+            if ((Right < 0 || Left >= Array.Length) ||
+            (Right - Left <=1 && Array[Left] != N && Array[Right] != N))
+            {
+                FindFlag = -1;
+            }
 
             if (Array[mid] == N)
-            {
                 FindFlag = 1;
-            }
-            else if (Left >= Right)
-            {
-                if (FindFlag != 1)
-                    FindFlag = -1;
-            }
         }
     }
 }
