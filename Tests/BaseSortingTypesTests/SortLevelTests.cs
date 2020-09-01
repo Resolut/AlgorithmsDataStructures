@@ -1209,7 +1209,7 @@ namespace SortSpace.Tests
         }
 
         [TestMethod]
-        public void BinarySearch_Array_Contains_7_Elemnts_and_Target_is_NOT_In_left_part()
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_right_part()
         {
             BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
             int target = 55;
@@ -1226,7 +1226,7 @@ namespace SortSpace.Tests
         }
 
         [TestMethod]
-        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_right_part()
+        public void BinarySearch_Array_Contains_5_Elemnts_and_Target_is_NOT_In_left_part()
         {
             BinarySearch bSObj = new BinarySearch(new int[] { 2, 17, 42, 51, 60 });
             int target = 4;
@@ -1259,6 +1259,23 @@ namespace SortSpace.Tests
             {
                 bSObj.Step(target);
                 //Console.WriteLine("GetResult() = " + bSObj.GetResult());
+            }
+            int result = bSObj.GetResult();
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void BinarySearch_Array_Contains_10Elemnts_and_Target_is_NOT_In_left_part()
+        {
+            BinarySearch bSObj = new BinarySearch(new int[] { 0, 2, 4, 8, 10, 12, 14, 16, 18, 20 });
+            int target = 5;
+            int expectedResult = -1;
+
+            while (bSObj.GetResult() != -1)
+            {
+                bSObj.Step(target);
+                Console.WriteLine(bSObj.GetResult());
             }
             int result = bSObj.GetResult();
 
