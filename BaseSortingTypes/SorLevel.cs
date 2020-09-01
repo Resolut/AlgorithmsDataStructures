@@ -242,5 +242,11 @@ namespace SortSpace
 
             return res;
         }
+
+        public static bool GallopingSearch(int[] array, int N)
+        {
+            // TODO реализация алгоритма
+            return false;
+        }
     }
 }
