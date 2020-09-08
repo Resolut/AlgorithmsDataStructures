@@ -1281,5 +1281,217 @@ namespace SortSpace.Tests
 
             Assert.AreEqual(expectedResult, result);
         }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_10Elemnts_and_Target_is_on_the_right()
+        {
+            int[] array = new int[] { 0, 2, 4, 8, 10, 12, 14, 16, 18, 20 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 20;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_10Elemnts_and_Target_is_on_the_left()
+        {
+            int[] array = new int[] { 0, 2, 4, 8, 10, 12, 14, 16, 18, 20 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 0;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_10_Elemnts_and_Target_is_NOT_in_array_on_the_rigth()
+        {
+            int[] array = new int[] { 0, 2, 4, 8, 10, 12, 14, 16, 18, 20 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 25;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_10_Elemnts_and_Target_is_NOT_in_on_the_left()
+        {
+            int[] array = new int[] { 0, 2, 4, 8, 10, 12, 14, 16, 18, 20 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = -2;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_3_Elemnts_and_Target_is_on_the_right()
+        {
+            int[] array = new int[] { 0, 4, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 8;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_3_Elemnts_and_Target_is_on_the_left()
+        {
+            int[] array = new int[] { 0, 4, 8};
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 0;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_3_Elemnts_and_Target_is_NOT_in_array_on_the_rigth()
+        {
+            int[] array = new int[] { 0, 4, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 10;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_3_Elemnts_and_Target_is_NOT_in_on_the_left()
+        {
+            int[] array = new int[] { 0, 4, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = -2;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_2_Elemnts_and_Target_is_on_the_right()
+        {
+            int[] array = new int[] { 0, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 8;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_2_Elemnts_and_Target_is_on_the_left()
+        {
+            int[] array = new int[] { 0, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 0;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_2_Elemnts_and_Target_is_NOT_in_array_on_the_rigth()
+        {
+            int[] array = new int[] { 0, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 10;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_2_Elemnts_and_Target_is_NOT_in_on_the_left()
+        {
+            int[] array = new int[] { 0, 8 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = -2;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_1_Elemnts_and_Target_is_NOT_in()
+        {
+            int[] array = new int[] { 19 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 2;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void GaloopingSearch_Array_Contains_1_Elemnts_and_Target_is_The_Same()
+        {
+            int[] array = new int[] { 19 };
+            BinarySearch bSObj = new BinarySearch(array);
+            int target = 19;
+            bool expectedResult = true;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GaloopingSearch_Array_is_Empty()
+        {
+            int[] array = new int[] { };
+            BinarySearch bSObj = new BinarySearch(array);
+            Assert.Fail("Должно быть брошено исключение ArgumentException");
+            int target = 0;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GaloopingSearch_Array_is_Null()
+        {
+            int[] array = null;
+            BinarySearch bSObj = new BinarySearch(array);
+            Assert.Fail("Должно быть брошено исключение ArgumentException");
+            int target = 0;
+            bool expectedResult = false;
+
+            bool result = SortLevel.GallopingSearch(array, target);
+
+            Assert.AreEqual(expectedResult, result);
+        }
     }
 }
