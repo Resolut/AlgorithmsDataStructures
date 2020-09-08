@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SortSpace
@@ -245,8 +246,103 @@ namespace SortSpace
 
         public static bool GallopingSearch(int[] array, int N)
         {
-            // TODO реализация алгоритма
-            return false;
+            if (array == null || array.Length == 0)
+                return false;
+
+            int i = 1;
+            int index = Convert.ToInt32(Math.Pow(2, i)) - 2;
+
+            while (array[index] <= N && index < array.Length - 1)
+            {
+                if (array[index] == N)
+                    return true;
+                
+                if (array[index] < N)
+                {
+                    ++i;
+                    index = Convert.ToInt32(Math.Pow(2, i)) - 2;
+                    
+                    if (index >= array.Length - 1)
+                        index = array.Length - 1;
+                }
+            }
+
+            BinarySearch bs = new BinarySearch(array)
+            {
+                Right = index,
+                Left = Convert.ToInt32(Math.Pow(2, i - 1)) - 2 + 1
+            };
+
+            while (bs.GetResult() == 0)
+            {
+                bs.Step(N);
+            }
+
+            return bs.GetResult() == 1;
+        }
+    }
+
+    public class BinarySearch
+    {
+        public int[] Array;
+        public int Left;
+        public int Right;
+        private int FindFlag;
+        public BinarySearch(int[] Аrray)
+        {
+            try
+            {
+                if (Аrray == null)
+                {
+                    throw new ArgumentNullException("Передан null в качестве аргумента.");
+                }
+
+                if (Аrray.Length == 0)
+                {
+                    throw new ArgumentException("Parameter cannot be null or empty.");
+                }
+
+                this.Array = Аrray;
+                FindFlag = 0;
+                Left = 0;
+                Right = Аrray.Length - 1;
+            }
+            catch
+            {
+                Console.WriteLine("Возникло исключение");
+                throw;
+            }
+        }
+
+        public int GetResult()
+        {
+            return FindFlag;
+        }
+
+        public void Step(int N)
+        {
+            if (FindFlag != 0)
+                return;
+
+            int mid = (Left + Right) / 2;
+
+            if (Array[mid] == N)
+                FindFlag = 1;
+
+            if (N < Array[mid])
+                Right = mid - 1;
+            else if (N > Array[mid])
+                Left = mid + 1;
+
+            mid = (Left + Right) / 2;
+            if ((Right < 0 || Left >= Array.Length) ||
+            (Right - Left <= 1 && Array[Left] != N && Array[Right] != N))
+            {
+                FindFlag = -1;
+            }
+
+            if (Array[mid] == N)
+                FindFlag = 1;
         }
     }
 }
